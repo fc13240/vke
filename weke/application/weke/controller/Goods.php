@@ -36,6 +36,8 @@ class Goods extends Common
         $goodsList = [];
         //返回数据
         return [
+            'status' => '1',
+            'message' => '请求成功',
             'goodsTypeNow' => $goods_type,   //当前分类id
             'allGoodsType' => $goodsTypeAll,
             'goodsList'    => $goodsList

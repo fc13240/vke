@@ -6,6 +6,8 @@
  * Time: 16:30
  */
 namespace app\weke\controller;
+header("Access-Control-Allow-Origin: *");
+
 
 class Index
 {
@@ -14,21 +16,21 @@ class Index
     public function index()
     {
         //判断缓存
-        $indexBanner = cache('index_banner');
+        $indexBanner = cache('index_banner',null);
         if(empty($indexBanner)){
             //查询首页banner图   1、首页banner
             $indexBanner = model('Banner')->getBannerList(1);
             cache('index_banner',$indexBanner);
         }
+
         //商品分类
-        $goodsType = cache('goods_type',null);
+        //$goodsType = cache('goods_type');
         if(empty($goodsType)){
             //查询商品分类名称
-            $goodsType = model('cate_type')->getGoodsType();
+            $goodsType = model('CateType')->getGoodsType();
             cache('goods_type',$goodsType);
         }
         //商品列表(调用淘宝客api接口)
-
         $goods = [];
         return [
             'status' => '1',

@@ -6,6 +6,7 @@
  * Time: 17:21
  */
 namespace app\weke\model;
+use app\weke\controller\Common;
 use think\Model;
 class MemberSign extends Model
 {
@@ -25,7 +26,7 @@ class MemberSign extends Model
 
 
         //1查询签到每次赠送的元宝
-        $task = db("sign_acer")->where(array("id"=>1))->value("reward_yb");
+        $task = db("sign_acer")->where(array("id"=>1))->value("reward_acer");
 
 
         //判断是否是登录后第一次签到
@@ -65,6 +66,8 @@ class MemberSign extends Model
         return $result;
     }
 
+
+
     /**
      * 签到
      * $user_id 用户id
@@ -74,8 +77,8 @@ class MemberSign extends Model
     {
 
         //查询当天是否已签到
-        $time1 = strtotime(date("Y-m-d")."00:00:00");
-        $time2 = strtotime(date("Y-m-d")."23:59:59");
+        $time1 = date("Y-m-d")." 00:00:00";
+        $time2 = date("Y-m-d")." 23:59:59";
         $today_sign = db("member_sign")
             ->where(array("member_id"=>$user_id,"sign_time"=>array("between",array($time1,$time2))))
             ->find();
@@ -89,15 +92,15 @@ class MemberSign extends Model
 
         //当前时间
         $now = time();
-
+        $nowDay = date('Y-m-d H:i:s',time());
         //根据user_id查询签到表
         $sign_notes = db("member_sign")
-            ->where("user_id",$user_id)
+            ->where("member_id",$user_id)
             ->order("sign_time","desc")
             ->find();
 
-        //1查询签到每次赠送的优宝币
-        $task = db("sign_acer")->where('id',1)->value("reward_yb");
+        //1查询签到每次赠送的元宝
+        $task = db("sign_acer")->where('id',1)->value("reward_acer");
 
 
         //判断是否是登录后第一次签到
@@ -105,30 +108,30 @@ class MemberSign extends Model
             //第一次签到
             $data = array(
                 "member_id"   => $user_id, //会员id
-                "sign_time" => $now, //签到时间
-                "sign_acer"    => $task, //签到赠送的元宝数量
-                "continue_sign_days"=>1, //连续签到天数
+                "sign_time" => $nowDay, //签到时间
+                "sign_acer"    => $task?$task:0, //签到赠送的元宝数量
+                "continue_days"=>1, //连续签到天数
                 "sign_days"  =>  1
             );
             $res = db("member_sign")->insert($data);
 
-            //记录优宝币记录表
+            //记录元宝记录表
             $memInfo = db("member")
-                ->where(['member_id',$user_id])
+                ->where('member_id',$user_id)
                 ->value('member_acer');
-            $before = $memInfo['member_acer'];
-            $end    = $memInfo['member_acer']+$data['sign_acer'];
+            $before = $memInfo;
+            $end    = $memInfo+$data['sign_acer'];
             $param = [
                 'member_id' => $user_id,      //用户ID
                 'type'  => 1,       //收入/支出 1-收入 2-支出
-                'number' => $data['ubaobi'],      //交易数量
-                'before' => $before,  //交易前多少优宝币
-                'after' => $end,  //交易后多少优宝币
+                'number' => $data['sign_acer'],      //交易数量
+                'before' => $before,  //交易前多少元宝
+                'after' => $end,  //交易后多少元宝
                 'class'   => 1,    //交易类型 1
                 'msg'       => '签到赠送元宝',        //交易描述
                 ];
             $this->com_add_Ubb_Log($param);
-            //更新会员表会员的U宝币
+            //更新会员表会员的元宝
             db("member")
                 ->where(array('member_id'=>$user_id))
                 ->setInc("member_acer",$data['sign_acer']);
@@ -169,19 +172,26 @@ class MemberSign extends Model
             //添加签到记录
             $data = array(
                 "member_id"   => $user_id,
-                "sign_time" => $now,
+                "sign_time" => $nowDay,
                 "sign_acer"    => $task+$continue_yb,
                 "continue_days"=> $continue_days+1
             );
             $res = db("sign_notes")->insert($data);
+            $common = new Common;
+            $user_info = $common -> user_info;
 
-            //记录优宝币记录表
+            $memInfo = db("member")
+                ->where('member_id',$user_id)
+                ->value('member_acer');
+            $before = $memInfo;
+            $end    = $memInfo+$data['sign_acer'];
+            //记录元宝记录表
             $param=array(
                 'member_id' => $user_id,
                 'type'  => 1,
-                'number' => $data['ubaobi'],
-                'before' => $this->user_info['member_acer'],
-                'after' => $this->user_info['member_acer']+$data['sign_acer'],
+                'number' => $data['sign_acer'],
+                'before' => $before,
+                'after' => $end,
                 'class'   => 2,
                 'msg'       => "签到奖励元宝",
             );
@@ -225,7 +235,7 @@ class MemberSign extends Model
      * */
     public function com_add_Ubb_Log($param){
         $param['add_time'] = date("Y-m-d H:i:s",time());
-        $res = dn('sign_notes')->insert($param);
+        $res = db('acer_notes')->insert($param);
         if($res){
             return true;
         }else{

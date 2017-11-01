@@ -138,7 +138,7 @@ class Ucenter extends Common
      */
     public function doSign()
     {
-        $user_id = $this->user_id;
+        $user_id = $this->user_id = 1;
         if(empty($user_id)){
             return [
                 'status' => '0',

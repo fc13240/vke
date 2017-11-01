@@ -9,7 +9,7 @@ namespace app\weke\controller;
 use think\Controller;
 class Common extends Controller
 {
-    public $user_id = "";
+    public $user_id = 1;
     public $user_info = [];
     public $action_name;
     public $controller_name;
@@ -17,9 +17,10 @@ class Common extends Controller
     {
         //控制器初始化
 
-        $this->controller_name = CONTROLLER_NAME;
-        $this->action_name = ACTION_NAME;
-        if($_SESSION['user_id']>0){
+        /*$this->controller_name = CONTROLLER_NAME;
+        $this->action_name = ACTION_NAME;*/
+        $userId = session('user_id');
+        if($userId>0){
             $user_info = db("member")->where(array("member_id"=>$_SESSION['user_id'], "is_del"=>2))->find();
             if($user_info){
                 $this->user_info = $user_info;
