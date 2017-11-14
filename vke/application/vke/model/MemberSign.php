@@ -16,8 +16,8 @@ class MemberSign extends Model
      */
     public function com_get_sign_ubb($user_id)
     {
-        $time1 = strtotime(date("Y-m-d")." 00:00:00");
-        $time2 = strtotime(date("Y-m-d")." 23:59:59");
+        $time1 = date("Y-m-d")." 00:00:00";
+        $time2 = date("Y-m-d")." 23:59:59";
         //根据user_id查询签到表
         $sign_notes = db("sign_notes")
             ->where(array("member_id"=>$user_id))
@@ -76,7 +76,7 @@ class MemberSign extends Model
         //查询当天是否已签到
         $time1 = date("Y-m-d")." 00:00:00";
         $time2 = date("Y-m-d")." 23:59:59";
-        $today_sign = db("member_sign")
+        $today_sign = db("sign_notes")
             ->where(array("member_id"=>$user_id,"sign_time"=>array("between",array($time1,$time2))))
             ->find();
         if($today_sign){

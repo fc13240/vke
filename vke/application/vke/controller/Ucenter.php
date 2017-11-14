@@ -31,20 +31,23 @@ class Ucenter extends Common
         //判断该用户是否有未读消息
         $has_message = model('Message')->hasMessage($user_id);
 
+        $message_count = model('Message')->getMessageCount($user_id);
+
         $result = [
             'data' =>[
                 'head_image' => $user_info['wechat_head_image'],
                 'user_name'  => $user_info['wechat_nickname'],
                 'user_acer'  => $user_info['member_acer'],
+                'message_count' => $message_count
             ]
         ];
-        if($has_message){
-            $result['data']['message'] = 1;
-        }
+//        if($has_message){
+//            $result['data']['message'] = 1;
+//        }
         if($is_first == 1){
             //首次登录补充个人信息提示语
             $mark = "请点击头像完善个人资料";
-            $data['data']['mark'] = $mark;
+            $result['data']['mark'] = $mark;
         }
         Member::where('member_id',$user_id)->update(['is_first_login'=>2]);
         return resultArray($result);
@@ -63,7 +66,8 @@ class Ucenter extends Common
         $product_list = [];
         foreach($productList as $key => $value){
             $time = substr($value['time'],0,10);
-            $product_list[$time][] = $value;
+            $product_list[$time]['object'][] = $value;
+            $product_list[$time]['date'] = $time;
         }
 
             $result = [
@@ -72,6 +76,28 @@ class Ucenter extends Common
                 ]
             ];
             return resultArray($result);
+    }
+
+    /**
+     * 清空我的足迹
+     */
+    public function delPrint()
+    {
+        $user_id = $this->user_id;
+        $map['member_id'] = $user_id;
+        $result_del = model('MemberFootprint')->where($map)->delete();
+        if($result_del){
+           $result = [
+               'data' => [
+                   'message' => '操作成功'
+               ]
+           ];
+        }else{
+            $result = [
+                'error' => '操作失败'
+            ];
+        }
+        return resultArray($result);
     }
 
     /**

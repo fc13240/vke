@@ -48,6 +48,8 @@ function resultArray($array)
     ]);
 }
 
+
+
 /**
  * 直接返回退出
  */
@@ -119,7 +121,26 @@ function auto_validate($class,$data,$scene='')
     }
 }
 
+/**
+ * 将元角区分开
+ */
+function rmb($string)
+{
+    if(empty($string)){
+        return false;
+    }
+    $stringArray = explode('.',$string);
+    $rmb = $stringArray[0];
+    $corner = $stringArray[1];
+    return [
+        'rmb' => $rmb,
+        'corner' => $corner
+    ];
+}
 
-
-
+function getPath()
+{
+    $request = \think\Request::instance();
+    return $request->domain().'/'.$request->path();
+}
 

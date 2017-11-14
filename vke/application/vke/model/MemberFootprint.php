@@ -39,6 +39,10 @@ class MemberFootprint extends Model
             ->field('p.id,p.pict_url,small_images,p.title,f.time,p.volume,p.reserve_price')
             ->order(['number'=>'desc','time'=>'desc'])
             ->select();
+        foreach($print as $key => $value){
+            $print[$key]['reserve_price'] = rmb($value['reserve_price']);
+        }
         return $print;
     }
+
 }

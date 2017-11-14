@@ -50,6 +50,11 @@ class Fanswelfare extends Common
             ->order($this->sorts_type[$sorts_type],$pro_sorts[$sorts])
             ->field('id,title,small_images,reserve_price,zk_final_price,volume,fans_acer')
             ->select();
+
+        foreach($list as $key => $value){
+            $list[$key]['reserve_price'] = rmb($value['reserve_price']);
+            $list[$key]['zk_final_price'] = rmb($value['zk_final_price']);
+        }
         $result = [
             'data' => [
                 'sorts_type' => $sorts_type,

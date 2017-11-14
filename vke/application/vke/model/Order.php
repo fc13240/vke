@@ -24,6 +24,10 @@ class Order extends Model
             ->field('p.title,p.reserve_price,p.zk_final_price,o.back_acer,o.order_num,o.back_status')
             ->order('o.create_time','desc')
             ->select();
+        foreach($orderInfo as $key => $value){
+            $orderInfo[$key]['reserve_price'] = rmb($value['reserve_price']);
+            $orderInfo[$key]['zk_final_price'] = rmb($value['zk_final_price']);
+        }
         return $orderInfo;
 
     }

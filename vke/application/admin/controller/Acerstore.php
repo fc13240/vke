@@ -29,7 +29,7 @@ class Acerstore extends Base
         $product_type = $request->post('product_type');
         //接收上架状态
         $is_sale = $request->post('is_sale');
-
+        $map = [];
         if(!empty($product_type)){
             $map['product_type'] = $product_type;
         }
@@ -39,5 +39,73 @@ class Acerstore extends Base
         }
 
         //查询积分商城商品
+        $acerList = model('ProductAcer')->getProductAcer($map);
+        $page = $acerList->render();
+        $result = [
+            'data' => [
+                'acer_list' => $acerList,
+                'page' => $page
+            ]
+        ];
+        return resultArray($result);
+    }
+
+    /**
+     * 上下架/一键上下架 - 20171114
+     */
+    public function changeSale()
+    {
+        $request = $this->request;
+        //接受元宝商品id
+        $goods_id = $request -> post('product_id');
+
+        //接受上下架
+        $is_sale = $request -> post('is_sale');
+        $data = [
+            'product_id' => $goods_id,
+            'is_sale' => $is_sale
+        ];
+        auto_validate('AcerStore',$data,'is_sale');
+        $map['product_id'] = ['in',$goods_id];
+        //执行修改
+        $result_edit = model('ProductAcer')->editData($map,$data);
+        if($result_edit !== false){
+            $result = [
+                'data' => [
+                    'message' => '操作成功'
+                ]
+            ];
+        }else{
+            $result = [
+                'error' => '操作失败'
+            ];
+        }
+        return resultArray($result);
+    }
+
+    /**
+     * 添加元宝商品 - 20171114
+     */
+    public function addProductAcer()
+    {
+        $request = $this->request;
+        //接收添加的数据
+        $post = $request->post();
+        auto_validate('AcerStore',$post,'add');
+        //执行添加
+        $post['add_time'] = date('Y-m-d H:i:s',time());
+        $result_id = model('ProductAcer')->addData($post);
+        if($result_id){
+            $result = [
+                'data' => [
+                    'message' => '添加成功'
+                ]
+            ];
+        }else{
+            $result = [
+                'error' => '添加失败'
+            ];
+        }
+        return resultArray($result);
     }
 }

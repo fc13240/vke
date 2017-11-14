@@ -18,6 +18,10 @@ class Product extends Model
             ->order('zk_final_price','asc')
             ->field('id,title,pict_url,small_images,reserve_price,volume,zk_final_price,cat_name')
             ->select();
+        foreach($goods_list as $key => $value){
+            $goods_list[$key]['reserve_price'] = rmb($value['reserve_price']);
+            $goods_list[$key]['zk_final_price'] = rmb($value['zk_final_price']);
+        }
         if(empty($goods_list)){
             return [];
         }else{
@@ -52,7 +56,10 @@ class Product extends Model
                 ->order($order_field,$sorts)
                 ->select();
         }
-
+        foreach($goodsList as $key => $value){
+            $goodsList[$key]['reserve_price'] = rmb($value['reserve_price']);
+            $goodsList[$key]['zk_final_price'] = rmb($value['zk_final_price']);
+        }
         return $goodsList;
     }
 
@@ -73,6 +80,27 @@ class Product extends Model
             ->select();
         return $productList;
 
+    }
+
+    /**
+     * 查询商品详情
+     * @param $product_id
+     * @param $fields
+     * @return array|false|\PDOStatement|string|Model
+     */
+    public function getProductInfo($product_id,$fields)
+    {
+        $map = [
+            'id' => $product_id,
+            'on_sale' => 1
+        ];
+        $productInfo = Db::name("product")
+            ->where($map)
+            ->field($fields)
+            ->find();
+        $productInfo['reserve_price'] = rmb($productInfo['reserve_price']);
+        $productInfo['zk_final_price'] = rmb($productInfo['zk_final_price']);
+        return $productInfo;
     }
 
 }

@@ -86,7 +86,12 @@ class Shareorder extends Common
         $myShareOrder = model('MemberEvaluate')->myShareOrder($user_id);
         if(!empty($myShareOrder)){
             foreach($myShareOrder as $key => $value){
-                $myShareOrder[$key]['evaluate_url'] = explode(',',$value['evaluate_url']);
+                $url = explode(',',$value['evaluate_url']);
+                $evaluate_url = [];
+                foreach($url as $k => $val){
+                    $evaluate_url[]['image'] = $val;
+                }
+                $myShareOrder[$key]['evaluate_url'] = $evaluate_url;
                 $myShareOrder[$key]['create_time'] = substr($value['create_time'],0,10);
             }
 
@@ -107,7 +112,12 @@ class Shareorder extends Common
         $orderSpuare = model('MemberEvaluate')->getOrderSquare();
         if(!empty($orderSpuare)){
             foreach($orderSpuare as $key => $value){
-                $orderSpuare[$key]['evaluate_url'] = explode(',',$value['evaluate_url']);
+                $url = explode(',',$value['evaluate_url']);
+                $evaluate_url = [];
+                foreach($url as $k => $val){
+                    $evaluate_url[]['image'] = $val;
+                }
+                $orderSpuare[$key]['evaluate_url'] = $evaluate_url;
                 $orderSpuare[$key]['create_time'] = substr($value['create_time'],0,10);
             }
         }

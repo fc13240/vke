@@ -10,6 +10,7 @@ namespace app\vke\model;
 use think\Model;
 use think\Db;
 
+
 class Message extends Model
 {
     /**
@@ -32,6 +33,11 @@ class Message extends Model
         return $messageList;
     }
 
+    /**
+     * 判断用户是否有未读消息
+     * @param $user_id
+     * @return bool
+     */
     public function hasMessage($user_id)
     {
         $map = [
@@ -48,4 +54,21 @@ class Message extends Model
             return true;
         }
     }
+
+    /**
+     * 获得用户的未读消息条数
+     */
+    public function getMessageCount($user_id)
+    {
+        $map = [
+            'member_id' => $user_id,
+            'status' => 1,
+            'is_del' => 1
+        ];
+        $count = Db::name('message')
+            ->where($map)
+            ->count();
+        return $count;
+    }
+
 }

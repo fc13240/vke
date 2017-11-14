@@ -73,7 +73,7 @@ class Goods extends Common
 
         //根据商品id,调用接口查询商品信息
         $fields = "id,num_iid,title,pict_url,small_images,reserve_price,zk_final_price,provcity,volume";
-        $goods_detail = model('Goods')->getProductInfo($goods_id,$fields);
+        $goods_detail = model('Product')->getProductInfo($goods_id,$fields);
         if(empty($goods_detail)){
             return resultArray(['error'=>'参数错误']);
         }

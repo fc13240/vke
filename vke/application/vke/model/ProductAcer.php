@@ -19,6 +19,9 @@ class ProductAcer extends Model
             ->order('sorts','desc')
             ->field('product_id,product_name,product_image,title,market_price,exchange_acer,stock')
             ->select();
+        foreach($acerGoodsList as $key => $value){
+            $acerGoodsList[$key]['market_price'] = rmb($value['market_price']);
+        }
         return $acerGoodsList;
     }
     public function setDecStock($product_id)
@@ -45,6 +48,7 @@ class ProductAcer extends Model
             ->where($map)
             ->field($fields)
             ->find();
+        $productInfo['market_price'] = rmb($productInfo['market_price']);
         return $productInfo;
     }
 }

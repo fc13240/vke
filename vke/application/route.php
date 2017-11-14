@@ -118,11 +118,14 @@ Route::rule([
     //获得会员元宝数
     'member_acer' => 'vke/Ucenter/getMemberAcer',
     //上传图片
-    'upload' => 'vke/Index/upload'
+    'upload' => 'vke/Index/upload',
+    //清空消息列表
+    'delMessage' => 'vke/Message/delMessage',
+    //清空我的足迹
+    'delPrint' => 'vke/Ucenter/delPrint'
 ]);
 
-
-
+Route::rule('manager/:c/:a','admin/:c/:a');
 
 return [
     '__pattern__' => [

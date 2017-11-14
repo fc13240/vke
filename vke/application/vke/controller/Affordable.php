@@ -79,7 +79,7 @@ class Affordable extends Common
     public function indexSeason()
     {
         //应季必备
-        $fields = 'title,pict_url,small_images,reserve_price,volume';
+        $fields = 'title,pict_url,small_images,reserve_price,volume,zk_final_price';
         $type_name_season = model('StoreType')->getTypeName(6);
         $season_goods = model('Product')->getIndexGoods('',6,$fields);
 
@@ -112,7 +112,7 @@ class Affordable extends Common
     public function seasonIndex()
     {
         //查询应急必备的商品信息
-        $fields = 'id,num_iid,pict_url,small_images,title,zk_final_price,volume';
+        $fields = 'id,num_iid,pict_url,small_images,title,zk_final_price,volume,reserve_price';
         $seasonProducts = model('Product')->getIndexGoods('',6,$fields);
 
         $result = [
@@ -131,7 +131,7 @@ class Affordable extends Common
         $discountProducts = model('Product')->getIndexGoods('',5,$fields);
         //根据商品原价与折后价计算折扣
         foreach($discountProducts as $key => $value){
-            $num = $value['zk_final_price']/$value['reserve_price']*10;
+            $num = $value['zk_final_price']['rmb']/$value['reserve_price']['rmb']*10;
             $discountProducts[$key]['number'] = $num;
         }
         $result = [

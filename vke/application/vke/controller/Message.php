@@ -7,6 +7,7 @@
  */
 namespace app\vke\controller;
 use app\vke\controller\Common;
+use think\Request;
 
 class Message extends Common
 {
@@ -34,5 +35,41 @@ class Message extends Common
             ]
         ];
         return resultArray($result);
+    }
+
+
+    /**
+     * 清空消息列表 - 20171114
+     */
+    public function delMessage()
+    {
+        $request = Request::instance();
+        $user_id = $this->user_id;
+
+            //执行删除
+            $map = [
+                'member_id' => $user_id
+            ];
+
+            $data = [
+                'is_del' => 2,
+                'del_time' => date('Y-m-d H:i:s',time())
+            ];
+
+            $result_del = model('Message')->where($map)->update($data);
+
+            if($result_del){
+               $result = [
+                   'data' => [
+                       'message' => '删除成功'
+                   ]
+               ];
+            }else{
+                $result = [
+                    'error' => '删除失败'
+                ];
+            }
+            return resultArray($result);
+
     }
 }

@@ -174,6 +174,14 @@ class Goods extends Base
             $map['coupon_number'] = ['lt', $condition4_max];
         }
 
+        //接收每页显示数据条数
+        $page_limit = $request->post('page_limit');
+        if(empty($page_limit)){
+            return resultArray(['error'=>'请输入每页显示数据条数']);
+        }
+
+        $path = getPath();
+
         //查询条件5:期限,即将领完.即将过期
         $condition5 = $request->post('condition5');
         if (!empty($condition5) && $condition5 == '2') { //即将领完
@@ -181,10 +189,12 @@ class Goods extends Base
         }
         //执行查询
         $fields = 'id,pict_url,title,brokerage,zk_final_price,coupon_number,stock';
-        $goodsList = model('Product')->getGoodsList($map, $fields);
+        $goodsList = model('Product')->getGoodsList($map, $fields,$path,$page_limit);
+        $page = $goodsList->render();
         $result = [
             'data' => [
-                'goods_list' => $goodsList
+                'goods_list' => $goodsList,
+                'page' => $page
             ]
         ];
         return resultArray($result);

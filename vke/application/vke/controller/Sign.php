@@ -69,8 +69,7 @@ class Sign extends Common
         foreach($week as $key => $value){
             //查询签到记录表sign_notes
             $map['sign_time'] = ['between',[$value['start'],$value['end']]];
-            $sign = db('sign_notes')->where($map)->field('note_id')->select();
-
+            $sign = db('sign_notes')->where($map)->field('note_id,sign_acer')->find();
             if($sign){
                 $is_sign = 1; //已签到
                 $continue++;
@@ -79,6 +78,7 @@ class Sign extends Common
             }
             $week[$key]['sign'] = $is_sign;
             $week[$key]['week'] = $week_han[$value['week']];
+            $week[$key]['sign_acer'] = $sign['sign_acer'] ? $sign['sign_acer'] : 0;
             unset($week[$key]['start']);
             unset($week[$key]['end']);
             //unset($week[$key]['day']);
