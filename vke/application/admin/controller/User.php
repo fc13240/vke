@@ -94,7 +94,7 @@ class User extends Controller
             $result = [
                 'data' => [
                     'message' => '登录成功',
-                    'url' => 'admin/Index/index'
+                    'url' => 'manager/Index/index'
                 ]
             ];
 

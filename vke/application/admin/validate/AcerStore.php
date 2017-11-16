@@ -45,6 +45,7 @@ class AcerStore extends Validate
 
     protected $scene = [
         'is_sale' => ['product_id','is_sale'],
-        'add' => ['product_type','product_name','product_image','exchange_brief','content','stock','market_price','exchange_acer']
+        'add' => ['product_type','product_name','product_image','exchange_brief','content','stock','market_price','exchange_acer'],
+        'edit' => ['product_id']
     ];
 }

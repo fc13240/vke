@@ -59,12 +59,7 @@ class Order extends Base
         if(empty($order_id)){
             return resultArray(['error'=>'请选择发货订单']);
         }
-
-        if(is_array($order_id)){
-            $map['order_id'] = ['in',$order_id];
-        }else{
-            $map['order_id'] = $order_id;
-        }
+        $map['order_id'] = ['in',$order_id];
         //验证该订单状态
         $fields = 'is_able,status,order_num,express_status';
         $orderInfo = model('ExchangeOrder')->getOrderInfo($map,$fields);

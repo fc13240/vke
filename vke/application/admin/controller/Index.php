@@ -20,4 +20,12 @@ class Index extends Base
         ];
         return resultArray($result);
     }
+
+    /**
+     * 管理-首页管理 - 20171115
+     */
+    public function setBanner()
+    {
+        //查询首页
+    }
 }

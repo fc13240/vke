@@ -138,9 +138,73 @@ function rmb($string)
     ];
 }
 
+/**
+ * 获取当前路径
+ * @return string
+ */
 function getPath()
 {
     $request = \think\Request::instance();
     return $request->domain().'/'.$request->path();
+}
+
+/**
+ * 根据月份获取该月份始末日期
+ */
+function month($month)
+{
+    $date = date('Y',time());
+    $date_month = $date.'-0'.$month;
+    $mday = date('t',strtotime($date_month));
+    $month_start = $date_month.'-01 00:00:00';
+    $monty_end = $date_month.'-'.$mday.' 24:00:00';
+
+    return week($month_start,$monty_end);
+}
+
+/**
+ * 根据星期几获得该星期始末时间
+ */
+function week($date_start,$date_end)
+{
+    $time_start = strtotime($date_start);
+    $time_end = strtotime($date_end);
+    for($i = $time_start; $i <= $time_end; $i += 7*86400){
+        $week = date('w',$i);
+        for($j = 1; $j <= 7; $j++){
+            $weeks[$j] = date('Y-m-d',strtotime( '+'. $j-$week .' days', $i));
+            if($weeks[$j] < date('Y-m-d',$time_start) || $weeks[$j] > $date_end){
+                unset($weeks[$j]);
+            }
+        }
+        ksort($weeks);
+        $weeks_month[] = $weeks;
+    }
+    return $weeks_month;
+
+}
+
+/**
+ * 根据开始日期和结束日期,返回这期间每天的日期 - 20171115
+ */
+function getDateFromRange($startdate, $enddate){
+
+    $stimestamp = strtotime($startdate);
+    $etimestamp = strtotime($enddate);
+
+    // 计算日期段内有多少天
+    $days = ($etimestamp-$stimestamp)/86400+1;
+
+    // 保存每天日期
+    $date = array();
+
+    for($i=0; $i<$days; $i++){
+        $date[] = [
+            'date' => date('Y-m-d', $stimestamp+(86400*$i)),
+            'end' => date('w', $stimestamp+(86400*$i)) == 0 ? '7': date('w', $stimestamp+(86400*$i)),
+        ];
+    }
+
+    return $date;
 }
 

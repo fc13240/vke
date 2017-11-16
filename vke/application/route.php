@@ -93,6 +93,8 @@ Route::rule([
     'addAddress' => 'vke/Address/addAddress',
     //编辑收货地址
     'updateAddress' => 'vke/Address/updateAddress',
+    //删除收货地址
+    'delAddress' => 'vke/Address/delAddress',
     //晒单
     'shareOrder' => 'vke/Shareorder/shareOrder',
     //添加订单

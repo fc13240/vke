@@ -156,7 +156,9 @@ class MemberSign extends Model
             }
 
             //判断是否断签 今天零点的时间-24小时//断签
-            if($time1-24*3600 > $sign_notes["sign_time"]){
+            //判断断签后是否重新计算
+            $is_stop = db('sign_config')->where('type',1)->value('value');
+            if($time1-24*3600 > $sign_notes["sign_time"] && $is_stop == 1){
                 $continue_days = 0;
             }
             //查找连续签到的元宝奖励

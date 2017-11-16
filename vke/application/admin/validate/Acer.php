@@ -21,6 +21,7 @@ class Acer extends Validate
         'acer.number' => '请输入正确格式的元吧数量'
     ];
     protected $scene = [
-        'edit' => ['acer','id']
+        'edit' => ['acer','id'],
+        'acer' => ['acer']
     ];
 }

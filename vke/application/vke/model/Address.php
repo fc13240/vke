@@ -39,8 +39,9 @@ class Address extends Model
         ];
         $address = Db::table('vke_address')
             ->where($map)
-            ->field('province,country,district,person_name,telephone,is_default')
+            ->field('province,country,district,address,person_name,telephone,is_default')
             ->find();
+
         return $address;
     }
 

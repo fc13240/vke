@@ -19,14 +19,18 @@ class Address extends Common
     public function addAddress()
     {
         $user_id = $this->user_id;
+        $address = explode(' ',input('post.address'));
+        if(count($address) < 3){
+            return resultArray(['error'=>'请选择省市区']);
+        }
         //验证数据
         $data = [
             'person_name' => trim(input('post.person_name')),
             'telephone' => trim(input('post.telephone')),
-            'province' => trim(input('post.province')),
-            'country' => trim(input('post.country')),
-            'district' => trim(input('post.district')),
-            'address' => trim(input('post.address')),
+            'province' => $address[0],
+            'country' => $address[1],
+            'district' => $address[2],
+            'address' => trim(input('post.detail')),
             'is_default' => input('is_default') ? trim(input('is_default')) : '2'
         ];
         $validate = validate('Address');
@@ -90,6 +94,15 @@ class Address extends Common
             if(empty($addressInfo)){
                 return resultArray(['error'=>'该地址信息不存在']);
             }
+
+            //数组重构------
+                $addressInfo['address_array'][] =  $addressInfo['province'];
+                $addressInfo['address_array'][] =  $addressInfo['country'];
+                $addressInfo['address_array'][] =  $addressInfo['district'];
+                unset($addressInfo['province']);
+                unset($addressInfo['country']);
+                unset($addressInfo['district']);
+            //数组重构------
             $result = [
                 'data' => [
                     'address_info' => $addressInfo
@@ -98,13 +111,17 @@ class Address extends Common
         }
         elseif(Request::instance()->isPost()){
             //验证数据
+            $address = explode(' ',input('post.address'));
+            if(count($address) < 3){
+                return resultArray(['error'=>'请选择省市区']);
+            }
             $data = [
-                'person_name' => input('person_name'),
-                'telephone' => input('telephone'),
-                'province' => input('province'),
-                'country' => input('country'),
-                'district' => input('district'),
-                'address' => input('address'),
+                'person_name' => input('post.person_name'),
+                'telephone' => input('post.telephone'),
+                'province' => $address[0],
+                'country' => $address[1],
+                'district' => $address[2],
+                'address' => input('post.detail'),
                 'is_default' => input('is_default') ? input('is_default') : '2',
             ];
             $validate = validate('Address');
@@ -125,6 +142,35 @@ class Address extends Common
             }
         }
 
+        return resultArray($result);
+    }
+
+    /**
+     * 删除收货地址 - 20171115
+     */
+    public function delAddress()
+    {
+        $user_id = $this->user_id;
+        $address_id = input('post.address_id');
+        if(empty($address_id)){
+            return resultArray(['error'=>'请选择删除地址']);
+        }
+        //执行删除
+        $result = model('Address')->where(['address_id'=>$address_id])->delete();
+        if($result){
+            //将最新修改的地址设为默认
+            $newest = model('Address')->where('member_id',$user_id)->order('update_time','desc')->find();
+            model('Address')->where('address_id',$newest['address_id'])->update(['is_default'=>1]);
+            $result = [
+                'data' => [
+                    'message' => '删除成功'
+                ]
+            ];
+        }else{
+            $result = [
+                'error' => '删除失败'
+            ];
+        }
         return resultArray($result);
     }
 }

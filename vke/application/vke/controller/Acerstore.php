@@ -48,12 +48,19 @@ class Acerstore extends Common
         }
 
         //查询商品详情
-        $fields = 'product_id,product_name,market_price,exchange_acer,stock,exchange_brief,content,product_image,product_type';
+        $fields = 'product_id,product_name,market_price,small_images,exchange_acer,stock,exchange_brief,content,product_image,product_type';
         $productInfo = model('ProductAcer')->getProductAcerInfo($product_id,$fields);
         if(empty($productInfo)){
             return resultArray(['error'=>'商品已下架或信息不存在']);
         }
-
+        //商品详情图
+        $small_images = explode(',',$productInfo['small_images']);
+        foreach($small_images as $value){
+             $images[] = [
+                'image' => $value
+            ];
+        }
+        $productInfo['small_images'] = $images;
         $result = [
             'data' => [
                 'product_info' => $productInfo

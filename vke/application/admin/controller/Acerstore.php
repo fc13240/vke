@@ -108,4 +108,24 @@ class Acerstore extends Base
         }
         return resultArray($result);
     }
+
+    /**
+     * 编辑元宝商城商品 - 20171115
+     */
+    public function editProductAcer()
+    {
+        if(Request::instance()->isGet()){
+            //接收产品id
+            $product_id = Request::instance()->get('product_id');
+            auto_validate('AcerStore',['product_id'=>$product_id],'edit');
+            //查询该产品信息
+            $map['product_id'] = $product_id;
+            $fields = 'product_id,product_image,small_images,market_price,exchange_acer,';
+            $productInfo = model('ProductAcer')->getProductInfo($map,$fields);
+        }
+        elseif(Request::instance()->isPost()){
+
+        }
+
+    }
 }
