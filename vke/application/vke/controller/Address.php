@@ -129,6 +129,9 @@ class Address extends Common
                 return resultArray(['error'=>$validate->getError()]);
             }
             $uodateModel = model('Address');
+            if($data['is_default'] == 1){
+                $uodateModel->where(['member_id'=>$user_id,'is_default'=>1])->update(['is_default'=>2]);
+            }
             if($uodateModel->save($data,['address_id'=>$address_id])){
                 $result = [
                     'data' => [

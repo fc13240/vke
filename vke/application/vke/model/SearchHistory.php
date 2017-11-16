@@ -25,7 +25,8 @@ class SearchHistory extends Model
         $history = DB::table('vke_search_history')
             ->where($map)
             ->order('number','desc')
-            ->column('keywords');
+            ->field('keywords')
+            ->select();
         return $history;
     }
 
@@ -37,7 +38,8 @@ class SearchHistory extends Model
         $hot = DB::table('vke_search_history')
             ->group('keywords')
             ->order('number','desc')
-            ->column('keywords');
+            ->field('keywords')
+            ->select();
         return $hot;
     }
 

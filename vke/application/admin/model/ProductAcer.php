@@ -22,7 +22,7 @@ class ProductAcer extends Base
         $list = Db::name('product_acer')
             ->where($map)
             ->order('add_time','desc')
-            ->field('product_id,product_image,product_type,product_name,market_price,exchange_acer,stock,is_sale')
+            ->field('product_id,product_image,product_type,type,product_name,market_price,exchange_acer,stock,is_sale')
             ->paginate(1,$count,['path'=>'http://192.168.1.101/admin/Acerstore/acerList']);
         return $list;
     }
@@ -36,5 +36,14 @@ class ProductAcer extends Base
             ->where($map)
             ->field($fields)
             ->find();
+        $small_images = explode(',',$info['small_images']);
+        foreach($small_images as $key => $value){
+            $arr[] = [
+                'image' => $value
+            ];
+        }
+        $info['small_images'] = $arr;
+        $info['market_price'] = rmb($info['market_price']);
+        return $info;
     }
 }

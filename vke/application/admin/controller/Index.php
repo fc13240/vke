@@ -8,6 +8,7 @@
 
 namespace app\admin\controller;
 use app\common\controller\Base;
+use think\Request;
 
 class Index extends Base
 {
@@ -26,6 +27,19 @@ class Index extends Base
      */
     public function setBanner()
     {
-        //查询首页
+        if(Request::instance()->isGet()){
+            //查询首页分类
+            $index_cate = model('CateType')->getIndexCate();
+            $result = [
+                'data' => [
+                    'index_cate' => $index_cate
+                ]
+            ];
+            return resultArray($result);
+        }
+        elseif(Request::instance()->isPost()){
+
+        }
+
     }
 }

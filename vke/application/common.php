@@ -70,7 +70,7 @@ function ajaxReturn($array)
     exit(json_encode($data));
 }
 
-/**20170815wzz
+/**20171115
  * 获取一周每天的时间戳
  * */
 function getWeekTime(){
@@ -148,18 +148,30 @@ function getPath()
     return $request->domain().'/'.$request->path();
 }
 
+function getMonth($month)
+{
+    $date_month = $month;
+    $mday = date('t',strtotime($date_month));
+    $month_start = $date_month.'-01 00:00:00';
+    $month_end = $date_month.'-'.$mday.' 23:59:59';
+    return [
+        'start' => $month_start,
+        'end' => $month_end
+    ];
+
+}
+
 /**
  * 根据月份获取该月份始末日期
  */
 function month($month)
 {
-    $date = date('Y',time());
-    $date_month = $date.'-0'.$month;
+    $date_month = $month;
     $mday = date('t',strtotime($date_month));
     $month_start = $date_month.'-01 00:00:00';
-    $monty_end = $date_month.'-'.$mday.' 24:00:00';
+    $month_end = $date_month.'-'.$mday.' 24:00:00';
 
-    return week($month_start,$monty_end);
+    return week($month_start,$month_end);
 }
 
 /**
@@ -199,12 +211,34 @@ function getDateFromRange($startdate, $enddate){
     $date = array();
 
     for($i=0; $i<$days; $i++){
+        $day = date('Y-m-d', $stimestamp+(86400*$i));
         $date[] = [
-            'date' => date('Y-m-d', $stimestamp+(86400*$i)),
-            'end' => date('w', $stimestamp+(86400*$i)) == 0 ? '7': date('w', $stimestamp+(86400*$i)),
+            'date' => $day,
+            'week' => date('w', $stimestamp+(86400*$i)) == 0 ? '7': date('w', $stimestamp+(86400*$i)),
         ];
     }
 
     return $date;
+}
+
+/**
+ * 获取本年的所有月份信息
+ */
+function getYearMonth()
+{
+    $z = date('Y-m');
+    $month = date('m');
+    $a = date('Y-m', strtotime('-'.($month-1).' months'));
+    $begin = new DateTime($a);
+    $end = new DateTime($z);
+    $end = $end->modify('+1 month');
+    $interval = new DateInterval('P1M');
+    $daterange = new DatePeriod($begin, $interval ,$end);
+    foreach($daterange as $date){
+        $resturn[] = [
+            'month'=>$date->format("Y-m")
+        ];
+    }
+    return $resturn;
 }
 

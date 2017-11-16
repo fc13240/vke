@@ -17,8 +17,9 @@ class MemberEvaluate extends Base
      */
     public function getEvaluateCount($map)
     {
-        return Db::name('member_evaluate')
+        $count = Db::name('member_evaluate')
             ->where($map)
             ->count();
+        return $count;
     }
 }

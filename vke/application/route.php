@@ -124,7 +124,11 @@ Route::rule([
     //清空消息列表
     'delMessage' => 'vke/Message/delMessage',
     //清空我的足迹
-    'delPrint' => 'vke/Ucenter/delPrint'
+    'delPrint' => 'vke/Ucenter/delPrint',
+    //清空搜索历史
+    'delSearch' => 'vke/Search/delSearch',
+    //搜索结果的排序
+    'serrchSort' => 'vke/Search/searchSort'
 ]);
 
 Route::rule('manager/:c/:a','admin/:c/:a');

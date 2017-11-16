@@ -40,6 +40,7 @@ class Acerstore extends Common
      * 传入商品id
      */
     public function exchangeInfo(){
+        $user_id = $this->user_id;
         $product_id = input('product_id');
         if(empty($product_id)){
             return resultArray([
@@ -48,7 +49,7 @@ class Acerstore extends Common
         }
 
         //查询商品详情
-        $fields = 'product_id,product_name,market_price,small_images,exchange_acer,stock,exchange_brief,content,product_image,product_type';
+        $fields = 'product_id,product_name,market_price,small_images,exchange_acer,stock,content,product_image,product_type,type';
         $productInfo = model('ProductAcer')->getProductAcerInfo($product_id,$fields);
         if(empty($productInfo)){
             return resultArray(['error'=>'商品已下架或信息不存在']);
@@ -61,30 +62,20 @@ class Acerstore extends Common
             ];
         }
         $productInfo['small_images'] = $images;
-        $result = [
-            'data' => [
-                'product_info' => $productInfo
-            ]
-        ];
-        return resultArray($result);
-    }
-
-    /**
-     * 兑换详情页的默认地址
-     */
-    public function exchangeInfoAddress()
-    {
-        $user_id = $this->user_id;
-        //查询用户默认地址
+        //查询兑换说明
+        $exchange_brief = db('acer_config')->where('id',1)->value('exchange_brief');
+        $productInfo['exchange_brief'] = $exchange_brief;
         $default_address = model('Address')->getDefaultAddress($user_id);
+        //查询默认地址信息
         $result = [
             'data' => [
+                'product_info' => $productInfo,
                 'default_address' => $default_address
             ]
         ];
-
         return resultArray($result);
     }
+
 
 
     //兑换积分商品 兑换的产品id、兑换数量、手机号、支付宝账号
@@ -93,9 +84,10 @@ class Acerstore extends Common
         //验证用户登录状态
         $this->checkLogin();
         $user_id = $this->user_id;
-        $number = input('number');
-        $productId = input('product_id');
-        $telephone = input('telephone');
+        $number = input('post.number');
+        $productId = input('post.product_id');
+        $telephone = input('post.telephone');
+        $address_id = input('post.address_id');
 //        //*****测试数据*****
 //        $number = 1;
 //        $productId = 1;
@@ -135,7 +127,7 @@ class Acerstore extends Common
 
         //生成订单
         $payModel = new Pay;
-        $makeOrder = $payModel->makeOrder($user_id,$data['product_id'],$data['number'],$one_price,$total_price,$product_type);
+        $makeOrder = $payModel->makeOrder($user_id,$data['product_id'],$data['number'],$one_price,$total_price,$product_type,$address_id);
 
         if($makeOrder){
             $result = $payModel->acerPay($makeOrder,$total_price);

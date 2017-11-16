@@ -12,6 +12,20 @@ use think\Request;
 
 class Signdata extends Base
 {
+
+    /**
+     * 签到数据-本年日期 - 20171116
+     */
+    public function getData(){
+        $year_month = getYearMonth();
+        $result = [
+            'data' => [
+                'year_month' => $year_month
+            ]
+        ];
+        return resultArray($result);
+    }
+
     /**
      * 月签到数据 - 20171115
      */

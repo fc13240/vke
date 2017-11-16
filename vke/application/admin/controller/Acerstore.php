@@ -20,7 +20,7 @@ class Acerstore extends Base
     }
 
     /**
-     * 元宝商城管理 - 20171113
+     * 元宝商城管理-商品列表 - 20171113
      */
     public function acerList()
     {
@@ -120,12 +120,56 @@ class Acerstore extends Base
             auto_validate('AcerStore',['product_id'=>$product_id],'edit');
             //查询该产品信息
             $map['product_id'] = $product_id;
-            $fields = 'product_id,product_image,small_images,market_price,exchange_acer,';
+            $fields = 'product_id,product_name,product_type,type,product_image,small_images,market_price,stock,exchange_acer,content';
             $productInfo = model('ProductAcer')->getProductInfo($map,$fields);
+            $result = [
+                'data' => [
+                    'product' => $productInfo
+                ]
+            ];
+            return resultArray($result);
+        }
+        elseif(Request::instance()->isPost()) {
+            //接收修改的元宝数据
+
+        }
+
+    }
+
+    /**
+     * 管理-元宝商城管理-兑换说明 - 20171116
+     */
+    public function exchangeBrief()
+    {
+        if(Request::instance()->isGet()){ //查询兑换说明
+            $exchang_brief = db('acer_config')->where('id',1)->value('exchange_brief');
+            $result = [
+                'data' => [
+                    'brief' => $exchang_brief
+                ]
+            ];
+            return resultArray($result);
         }
         elseif(Request::instance()->isPost()){
-
+            //接收修改的兑换时活命
+            $brief = Request::instance()->post('brief');
+            if(empty($brief)){
+                return resultArray(['error'=>'请输入兑换说明']);
+            }
+            //执行修改
+            $result_edit = db('acer_config')->where(['id'=>1])->update(['exchange_brief'=>$brief]);
+            if($result_edit !== false){
+                $result = [
+                    'data' => [
+                        'message' => '修改成功'
+                    ]
+                ];
+            }else{
+                $result = [
+                    'error' => '修改失败'
+                ];
+            }
+            return resultArray($result);
         }
-
     }
 }

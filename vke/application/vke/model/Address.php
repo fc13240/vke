@@ -48,16 +48,22 @@ class Address extends Model
     /**
      * 获得用户默认地址
      */
-    public function getDefaultAddress($user_id)
+    public function getDefaultAddress($user_id,$address_id='')
     {
+        $map['member_id'] = $user_id;
+        $map['is_default'] = 1;
+        if(!empty($address_id)){
+            $map['address_id'] = $address_id;
+            unset($map['is_default']);
+        }
         $address = Db::name('address')
-            ->where(['member_id'=>$user_id,'is_default'=>1])
-            ->field('address_id,province,country,district,address,person_name,telephone')
+            ->where($map)
+            ->field('address_id,province,country,district,address,person_name,telephone,is_default')
             ->find();
         if(empty($address)){
             $address = Db::name('address')
                 ->where(['member_id'=>$user_id])
-                ->field('address_id,province,country,district,address,person_name,telephone')
+                ->field('address_id,province,country,district,address,person_name,telephone,is_default')
                 ->order('update_time','desc')
                 ->find();
         }

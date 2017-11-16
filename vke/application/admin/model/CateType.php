@@ -25,7 +25,7 @@ class CateType extends Base
         $list = Db::name('cate_type')
             ->where($map)
             ->order('sorts','desc')
-            ->field('id,pid,cate_name')
+            ->field('id,pid,cate_name,image_url')
             ->select();
             foreach($list as $key => $value){
                 if($value['pid'] == 0){
@@ -33,6 +33,24 @@ class CateType extends Base
                 }
 
             }
+        return $list;
+    }
+
+    /**
+     * 获取当前首页一级分类 - 20171116
+     */
+    public function getIndexCate()
+    {
+        $map = [
+            'type' => '1',
+            'pid' => '0',
+            'status' => '1'
+        ];
+        $list = Db::name('cate_type')
+            ->where($map)
+            ->field('id,cate_name,image_url,us_id')
+            ->order('sorts','desc')
+            ->select();
         return $list;
     }
 }

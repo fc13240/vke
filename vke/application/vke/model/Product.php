@@ -66,18 +66,23 @@ class Product extends Model
     /**
      * 根据关键词搜索商品
      */
-    public function getProductListByKeywords($keywords)
+    public function getProductListByKeywords($keywords,$order='id',$sort='ASC')
     {
         $map = [
             'title' => ['like',"%$keywords%"],
             'on_sale' => 1
         ];
 
+
         $productList = DB::table('vke_product')
             ->where($map)
-            ->order('zk_final_price','asc')
+            ->order($order,$sort)
             ->field('id,title,pict_url,reserve_price,zk_final_price,volume')
             ->select();
+        foreach($productList as $key => $value){
+            $productList[$key]['reserve_price'] = rmb($value['reserve_price']);
+            $productList[$key]['zk_final_price'] = rmb($value['zk_final_price']);
+        }
         return $productList;
 
     }
