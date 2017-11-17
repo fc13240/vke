@@ -128,7 +128,9 @@ Route::rule([
     //清空搜索历史
     'delSearch' => 'vke/Search/delSearch',
     //搜索结果的排序
-    'serrchSort' => 'vke/Search/searchSort'
+    'serrchSort' => 'vke/Search/searchSort',
+    //晒单说明
+    'shareBrief' => 'vke/Shareorder/shareBrief'
 ]);
 
 Route::rule('manager/:c/:a','admin/:c/:a');

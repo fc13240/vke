@@ -30,10 +30,14 @@ class Shareorder extends Common
         if(Request::instance()->isPost()){
             $user_id = $this->user_id;
             $data = [
-                'evaluate_detail' => input('evaluate'),
-                'evaluate_url' => input('images',""),
-                'order_num' => input('order_num')
+                'evaluate_detail' => input('post.evaluate'),
+                'evaluate_url' => json_decode(input('post.evaluate_url',"")),
+                'order_num' => input('post.order_num')
             ];
+            $url_string = '';
+            foreach($data['evaluate_url'] as $key => $value){
+                $url_string .= $value->image_url.',';
+            }
 
             $validate = validate('Evaluate');
             if(!$validate->check($data)){
@@ -46,13 +50,15 @@ class Shareorder extends Common
             }
 
             //同一商品同一用户只能晒单一次
-            if(MemberEvaluate::get(['order_num'=>$data['order_num'],'member_id'=>$user_id,'examine_status'=>1])){
+            if(MemberEvaluate::get(['order_num'=>$data['order_num'],'member_id'=>$user_id,'examine_status'=>['neq',3]])){
                 return resultArray(['error'=>'请勿重复晒单']);
             }
+
             //查询晒单默认的奖励元宝数
             $acer_number = db('acer_reward')->where(['type'=>2,'status'=>1])->value('acer_number');
 
             //添加到数据库
+            $data['evaluate_url'] = trim($url_string,',');
             $data['member_id'] = $user_id;
             $data['examine_status'] = 2;
             $data['acer_num'] = $acer_number;
@@ -128,6 +134,20 @@ class Shareorder extends Common
             ]
         ];
 
+        return resultArray($result);
+    }
+
+    /**
+     * 晒单说明 - 20171117
+     */
+    public function shareBrief()
+    {
+        $brief = db('share_config')->where('type',1)->value('value');
+        $result = [
+            'data' => [
+                'brief' => $brief
+            ]
+        ];
         return resultArray($result);
     }
 }

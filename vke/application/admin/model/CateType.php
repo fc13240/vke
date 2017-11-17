@@ -53,4 +53,37 @@ class CateType extends Base
             ->select();
         return $list;
     }
+
+    /**
+     * 根据一级菜单id获得二级菜单
+     */
+    public function getChildCate($pid)
+    {
+        $map = [
+            'pid' => $pid,
+            'status' => 1
+        ];
+        $list = Db::name('cate_type')
+            ->where($map)
+            ->field('id,cate_name')
+            ->order('sorts','desc')
+            ->select();
+        return $list;
+    }
+
+    /**
+     * 根据一级分类,获取二级分类id
+     */
+    public function getChildId($pid)
+    {
+        $map = [
+            'pid' => $pid,
+            'status' => 1
+        ];
+        $list = Db::name('cate_type')
+            ->where($map)
+            ->order('sorts','desc')
+            ->column('id');
+        return $list;
+    }
 }

@@ -169,8 +169,6 @@ class Search extends Common
         $sorts_arr = $this->sorts();
         $sort_type = $sorts_arr['sort_type'];
         $sort = $sorts_arr['sorts'];
-
-
         $user_id = $this->user_id;
         //接收搜索关键词
         $keywords = input('keywords');
@@ -193,7 +191,7 @@ class Search extends Common
 
         }
         //根据搜索关键词搜索产品
-        $productList = model('Product')->getProductListByKeywords($keywords,$sort_type[$sort],$this->sorts);
+        $productList = model('Product')->getProductListByKeywords($keywords,$sort_type[$sort]);
         $result = [
             'data' => [
                 'sort' => $sort,

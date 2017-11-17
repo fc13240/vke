@@ -7,6 +7,7 @@
  */
 namespace app\vke\controller;
 use app\vke\controller\Common;
+use think\Request;
 
 class Affordable extends Common
 {
@@ -21,6 +22,7 @@ class Affordable extends Common
     {
         //2.商店分类名称
         $type_name_nine = model('StoreType')->getTypeName(4);
+        $type_name_nine['type_id'] = 4;
         //3.三个展示商品
         $fields = 'title,pict_url,small_images,reserve_price,zk_final_price';
         $nine_goods = model('Product')->getIndexGoods('',4,$fields,3);
@@ -42,12 +44,13 @@ class Affordable extends Common
     {
         //19.9专区
         $type_name_nineteen = model('StoreType')->getTypeName(7);
+        $type_name_nineteen['type_id'] = 7;
         $fields = 'title,pict_url,small_images,reserve_price,zk_final_price';
         $nineteen_goods = model('Product')->getIndexGoods('',7,$fields,3);
         $result = [
             'data' => [
                     'type' => $type_name_nineteen,
-                    'goods' => $nineteen_goods
+                    'goods' => $nineteen_goods,
             ]
         ];
 
@@ -127,7 +130,7 @@ class Affordable extends Common
     public function discount()
     {
         //查询聚折扣商品
-        $fields = 'id,num_iid,pict_url,small_images,title,reserve_price,zk_final_price';
+        $fields = 'id,num_iid,pict_url,small_images,title,reserve_price,zk_final_price,volume';
         $discountProducts = model('Product')->getIndexGoods('',5,$fields);
         //根据商品原价与折后价计算折扣
         foreach($discountProducts as $key => $value){
@@ -186,57 +189,60 @@ class Affordable extends Common
         if(empty($sort)){
             $sort = $sorts_type[0]['id'];
         }
-        $sorts = input('sorts');
-        if(!empty($sorts)){
-            $this->sorts = $sorts;
-        }
 
-        //当前排序分类
-        $sort_now = session('sort_now');
-        if(!empty($sort_now)){
-           if($sort == $sort_now){ //排序类型未改变,改变的是升序倒叙
-               if($this->sorts == "ASC"){
-                   $this->sorts = "DESC";
-               }else{
-                   $this->sorts = "ASC";
-               }
-           }else{
-               $this->sorts = "ASC";
-           }
-        }
-        session('sort_now',$sort);
+        $type = Request::instance()->post('type_id');
+
+//        $sorts = input('sorts');
+//        if(!empty($sorts)){
+//            $this->sorts = $sorts;
+//        }
+
+//        //当前排序分类
+//        $sort_now = session('sort_now');
+//        if(!empty($sort_now)){
+//           if($sort == $sort_now){ //排序类型未改变,改变的是升序倒叙
+//               if($this->sorts == "ASC"){
+//                   $this->sorts = "DESC";
+//               }else{
+//                   $this->sorts = "ASC";
+//               }
+//           }else{
+//               $this->sorts = "ASC";
+//           }
+//        }
+//        session('sort_now',$sort);
         $sort_type = $this->sorts_type;
 
         //查询9.9元商品
-        $fields = 'id,num_iid,title,reserve_price,zk_final_price,volume';
-        $nineProducts = model('Product')->getIndexGoods('',4,$fields,'',$sort_type[$sort],$this->sorts);
+        $fields = 'id,num_iid,title,reserve_price,zk_final_price,pict_url,volume';
+        $nineProducts = model('Product')->getIndexGoods('',$type,$fields,'',$sort_type[$sort]);
 
         $result = [
             'data' => [
                 'sort' => $sort,
-                'sorts' => $this->sorts,
+//                'sorts' => $this->sorts,
                 'nine_products' => $nineProducts
             ]
         ];
        return resultArray($result);
     }
 
-    //19.9专区   调用商品查询api查找价格在19.9左右的商品
-    public function nineteen()
-    {
-        //查询19.9商品
-        $goodsId = model('ProductStore')->getGoodsIdList(6);
-        if(empty($goodsId)){
-            $nineteenProducts = [];
-        }else{
-            $nineteenProducts = model('Product')->getGoodsList($goodsId);
-        }
-
-        $result = [
-            'data' => [
-                'nineteen_products' => $nineteenProducts
-            ]
-        ];
-        resultArray($result);
-    }
+//    //19.9专区   调用商品查询api查找价格在19.9左右的商品
+//    public function nineteen()
+//    {
+//        //查询19.9商品
+//        $goodsId = model('ProductStore')->getGoodsIdList(6);
+//        if(empty($goodsId)){
+//            $nineteenProducts = [];
+//        }else{
+//            $nineteenProducts = model('Product')->getGoodsList($goodsId);
+//        }
+//
+//        $result = [
+//            'data' => [
+//                'nineteen_products' => $nineteenProducts
+//            ]
+//        ];
+//        resultArray($result);
+//    }
 }

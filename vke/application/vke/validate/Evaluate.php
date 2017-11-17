@@ -13,11 +13,13 @@ class Evaluate extends Validate
 {
     protected $rule = [
         'evaluate_detail' => 'require',
+        'evaluate_url' =>'require',
         'order_num' => 'require'
     ];
 
     protected $message = [
-        'evaluate_detail.require' => '晒单信息不能为空',
-        'order_num.require' => '请选择订单'
+        'evaluate_detail.require' => '晒单感受不能为空',
+        'evaluate_url,require' => '请上传晒单图片',
+        'order_num.require' => '订单号不能为空'
     ];
 }
