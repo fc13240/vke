@@ -43,7 +43,7 @@ class Index extends Base
             //修改后的banner图
             $banner_list = Request::instance()->post('banner_list');
             //执行修改
-            $result_edit = model('Banner')->update($banner_list);
+            $result_edit = model('Banner')->updateAll($banner_list);
             if($result_edit !== false){
                 $result = [
                     'data' => [
@@ -57,6 +57,38 @@ class Index extends Base
             }
             return resultArray($result);
         }
+    }
+
+    /**
+     * 添加首页banner图 - 20171120
+     */
+    public function addBanner()
+    {
+        $banner_image = Request::instance()->post('banner_image');
+        if(empty($banner_image)){
+            return resultArray(['error'=>'请上传图片']);
+        }
+        $banner_url = Request::instance()->post('banner_url');
+        $data = [
+            'banner_image' => $banner_image,
+            'banner_url' => $banner_url,
+            'create_time' => date('Y-m-d H:i:s',time()),
+            'type_id' => 1,
+        ];
+        //执行添加
+        $result_add = model('Banner')->addData($data);
+        if($result_add){
+            $result = [
+                'data' => [
+                    'message' => '添加成功'
+                ]
+            ];
+        }else{
+            $result = [
+                'error' => '添加失败'
+            ];
+        }
+        return resultArray($result);
     }
 
     /**

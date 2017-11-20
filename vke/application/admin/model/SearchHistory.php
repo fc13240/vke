@@ -24,4 +24,29 @@ class SearchHistory extends Base
             ->select();
         return $list;
     }
+
+    /**
+     * 查询相应日期内的搜索词次数 - 20171120
+     */
+    public function getHistory($map,$limit=10)
+    {
+        $list = Db::name('search_history')
+            ->where($map)
+            ->order('number','desc')
+            ->limit($limit)
+            ->field('keywords,number')
+            ->select();
+        return $list;
+    }
+
+    /**
+     * 查询期间内的搜索次数 - 20171120
+     */
+    public function getSerachCount($map)
+    {
+        $count = Db::name('search_history')
+            ->where($map)
+            ->sum('number');
+        return $count;
+    }
 }

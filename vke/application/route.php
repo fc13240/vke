@@ -68,7 +68,7 @@ Route::rule([
     //兑换详情-默认地址
     'exchangeinfo_address' => 'vke/Acerstore/exchangeInfoAddress',
     //通知列表
-    'getmessage' => 'vke/Message/getMessage',
+    'getmessage' => 'vke/AdminMessage/getMessage',
     //提价意见反馈
     'feedback' => 'vke/Feedback/feedback',
     //个人中心
@@ -122,7 +122,7 @@ Route::rule([
     //上传图片
     'upload' => 'vke/Index/upload',
     //清空消息列表
-    'delMessage' => 'vke/Message/delMessage',
+    'delMessage' => 'vke/AdminMessage/delMessage',
     //清空我的足迹
     'delPrint' => 'vke/Ucenter/delPrint',
     //清空搜索历史

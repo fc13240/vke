@@ -127,12 +127,33 @@ class Acerstore extends Base
                     'product' => $productInfo
                 ]
             ];
-            return resultArray($result);
         }
         elseif(Request::instance()->isPost()) {
             //接收修改的元宝数据
+            $product_info = Request::instance()->post('product');
+            if(empty($product_info)){
+                return resultArray(['error'=>'请输入商品信息']);
+            }
+            $id = $product_info['product_id'];
+            //修改小图格式
+            $product_info['small_images'] = implode(',',$product_info['small_images']);
+            //执行修改
+            $map['product_id'] = $id;
+            $result_edit = model('Producct_acer')->editData($map,$product_info);
+            if($result_edit !== false){
+                $result = [
+                    'data' => [
+                        'message' => '修改成功'
+                    ]
+                ];
+            }else{
+                $result = [
+                    'error' => '修改失败'
+                ];
+            }
 
         }
+        return resultArray($result);
 
     }
 

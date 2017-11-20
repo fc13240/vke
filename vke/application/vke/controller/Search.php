@@ -117,44 +117,27 @@ class Search extends Common
     /**
      * 搜索排序方式
      */
-    public function sorts()
+    public function sorts($type)
     {
         //查询排序类型
         $sorts_type = db('sort')
-            ->where(['type_id'=>2,'status'=>1])
+            ->where(['type_id'=>$type,'status'=>1])
             ->order('sorts','desc')
             ->field('id,sort_name')
             ->select();
         //查询排序字段
         $this->sorts_type = db('sort')
-            ->where(['type_id'=>2,'status'=>1])
+            ->where(['type_id'=>$type,'status'=>1])
             ->order('sorts','desc')
             ->column('id,field');
+
         //接收排序类型
         $sort = input('sort');
         if(empty($sort)){
             $sort = $sorts_type[0]['id'];
         }
-        $sorts = strtoupper(input('sorts'));
-        if(!empty($sorts)){
-            $this->sorts = $sorts;
-        }
-        //当前排序分类
-        $sort_now = session('sort_now');
-        if(!empty($sort_now)){
-            if($sort == $sort_now){ //排序类型未改变,改变的是升序倒叙
-                if($this->sorts == "ASC"){
-                    $this->sorts = "DESC";
-                }else{
-                    $this->sorts = "ASC";
-                }
-            }else{
-                $this->sorts = "ASC";
-            }
-        }
-        session('sort_now',$sort);
-        $sort_type = $this->sorts_type;
 
+        $sort_type = $this->sorts_type;
         return [
             'sorts' => $sort,
             'sort_type' => $sort_type
@@ -166,7 +149,7 @@ class Search extends Common
      */
     public function doSearch()
     {
-        $sorts_arr = $this->sorts();
+        $sorts_arr = $this->sorts(3);
         $sort_type = $sorts_arr['sort_type'];
         $sort = $sorts_arr['sorts'];
         $user_id = $this->user_id;

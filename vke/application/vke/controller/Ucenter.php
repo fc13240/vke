@@ -29,9 +29,9 @@ class Ucenter extends Common
         $is_first = Member::where('member_id','eq',$user_id)->value('is_first_login');
 
         //判断该用户是否有未读消息
-        $has_message = model('Message')->hasMessage($user_id);
+        $has_message = model('AdminMessage')->hasMessage($user_id);
 
-        $message_count = model('Message')->getMessageCount($user_id);
+        $message_count = model('AdminMessage')->getMessageCount($user_id);
 
         $result = [
             'data' =>[

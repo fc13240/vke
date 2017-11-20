@@ -18,25 +18,38 @@ class Acer extends Base
     public function acerConfig()
     {
         if(Request::instance()->isGet()){ //查询积分配置
-            $config = db('acer_config')->select(1);
-            if(empty($config)){
-                $config[] = [
-                    'id' => '',
-                    'rate' => '',
-                    'url' => '',
-                    'day_limit' => '',
-                    'month_limit' => ''
-                ];
-            }
+            $config = db('acer_config')->find(1);
+
             $result = [
                 'data' => [
                     'config' => $config
                 ]
             ];
-            return resultArray($result);
-        }
-        elseif(Request::instance()->isPost()){
 
         }
+        elseif(Request::instance()->isPost()){
+            $config = Request::instance()->post('config');
+            if(empty($config)){
+                return resultArray(['error'=>'请输入配置']);
+            }
+            if(empty($config['rate'])){
+                return resultArray(['error'=>'请输入积分汇率']);
+            }
+            //执行修改
+            $map['id'] = 1;
+            $result_edit = model('AcerConfig')->editData($map,$config);
+            if($result_edit !== false){
+                $result = [
+                    'data' => [
+                        'message' => '保存成功'
+                    ]
+                ];
+            }else{
+                $result = [
+                    'error' => '保存失败'
+                ];
+            }
+        }
+        return resultArray($result);
     }
 }

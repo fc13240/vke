@@ -57,7 +57,8 @@ class Sharedata extends Base
         $year = [];
         //查询当年所有月份的星期情况
         for($i = 1; $i <= 12; $i++){
-            $month = month(2);
+            $date = date('Y-m',time());
+            $month = month($date);
             foreach($month as $key => $value){
                 $week = [
                     'start' => reset($value),

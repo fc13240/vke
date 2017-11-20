@@ -35,4 +35,16 @@ class Member extends Base
             ->select();
         return $list;
     }
+
+    /**
+     * 查询用户当前已有的元宝 - 20171120
+     */
+    public function memberAcer($member_id)
+    {
+        $acer = Db::name('member')
+            ->where('member_id','in',$member_id)
+            ->field('member_acer,member_id')
+            ->select();
+        return $acer;
+    }
 }

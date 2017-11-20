@@ -26,7 +26,7 @@ class Menu extends Base
         $result = [
             'data' => [
                 'menu' => $data,
-                'data_menu' => $this->menu
+                //'data_menu' => $this->menu
             ]
         ];
         return resultArray($result);

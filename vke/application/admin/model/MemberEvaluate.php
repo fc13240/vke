@@ -42,6 +42,12 @@ class MemberEvaluate extends Base
     {
         $member_id = Db::name('member_evaluate')
             ->where($map)
-            ->column('member_id');
+            ->column('member_id,examine_status');
+        foreach($member_id as $key => $value){
+            if($value == 1){
+                unset($member_id[$key]);
+            }
+        }
+        return array_keys($member_id);
     }
 }

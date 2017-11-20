@@ -25,21 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Order.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/admin/controller/Order.php">
+      <file leaf-file-name="Message.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/controller/Message.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2058">
-              <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Shareorder.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/admin/controller/Shareorder.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
+            <state relative-caret-position="400">
+              <caret line="48" column="39" lean-forward="false" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
               <folding>
                 <element signature="e#129#160#0#PHP" expanded="true" />
               </folding>
@@ -47,32 +37,88 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MemberEvaluate.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/admin/model/MemberEvaluate.php">
+      <file leaf-file-name="Base.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/common/controller/Base.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="44" column="31" lean-forward="false" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
+            <state relative-caret-position="567">
+              <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="route.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/route.php">
+      <file leaf-file-name="AdminMenu.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/model/AdminMenu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="116" column="9" lean-forward="false" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
+            <state relative-caret-position="162">
+              <caret line="23" column="78" lean-forward="false" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Search.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/vke/controller/Search.php">
+      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/controller/Index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-470">
-              <caret line="170" column="36" lean-forward="false" selection-start-line="170" selection-start-column="36" selection-end-line="170" selection-end-column="36" />
+            <state relative-caret-position="1836">
+              <caret line="75" column="27" lean-forward="false" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Menu.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/admin/controller/Menu.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Shareorder.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/controller/Shareorder.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="124" column="78" lean-forward="false" selection-start-line="124" selection-start-column="78" selection-end-line="124" selection-end-column="78" />
+              <folding>
+                <element signature="e#129#160#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sharedata.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/controller/Sharedata.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3429">
+              <caret line="133" column="5" lean-forward="false" selection-start-line="79" selection-start-column="3" selection-end-line="133" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminMessage.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/model/AdminMessage.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="34" />
+              <folding>
+                <element signature="e#124#149#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShareConfig.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/model/ShareConfig.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="37" />
+              <folding>
+                <element signature="e#124#149#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,14 +134,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>orderSquare</find>
-      <find>getFootPrint</find>
-      <find>paginate</find>
-      <find>seasoni</find>
-      <find>exchangeInfo</find>
-      <find>getProductAcerInfo</find>
-      <find>getMyOrder</find>
-      <find>exchangein</find>
       <find>goodsde</find>
       <find>acerlist</find>
       <find>getAcerGoodsList</find>
@@ -115,9 +153,17 @@
       <find>getProductInfo</find>
       <find>9.9</find>
       <find>getIndexGoods</find>
-      <find>upload</find>
       <find>dosera</find>
       <find>dos</find>
+      <find>isAgree</find>
+      <find>sorts_type</find>
+      <find>sorts</find>
+      <find>sorts(</find>
+      <find>导出</find>
+      <find>isDayLimit</find>
+      <find>put_csv</find>
+      <find>upload</find>
+      <find>uplodad</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -126,57 +172,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/vke/controller/Goods.php" />
-        <option value="$PROJECT_DIR$/application/vke/model/Order.php" />
-        <option value="$PROJECT_DIR$/application/vke/model/ProductAcer.php" />
-        <option value="$PROJECT_DIR$/application/admin/validate/Banner.php" />
-        <option value="$PROJECT_DIR$/application/admin/model/Product.php" />
-        <option value="$PROJECT_DIR$/application/vke/controller/Sign.php" />
-        <option value="$PROJECT_DIR$/application/admin/controller/Goods.php" />
-        <option value="$PROJECT_DIR$/application/admin/validate/Goods.php" />
-        <option value="$PROJECT_DIR$/application/admin/controller/User.php" />
-        <option value="$PROJECT_DIR$/application/admin/model/SignNotes.php" />
         <option value="$PROJECT_DIR$/application/admin/validate/Acer.php" />
         <option value="$PROJECT_DIR$/application/admin/model/SignReward.php" />
         <option value="$PROJECT_DIR$/application/vke/model/MemberSign.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Sign.php" />
-        <option value="$PROJECT_DIR$/application/admin/controller/Acer.php" />
         <option value="$PROJECT_DIR$/application/admin/validate/AcerStore.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Fanswelfare.php" />
         <option value="$PROJECT_DIR$/application/admin/validate/ShareData.php" />
         <option value="$PROJECT_DIR$/application/vke/controller/Address.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Signdata.php" />
-        <option value="$PROJECT_DIR$/application/admin/controller/Sharedata.php" />
         <option value="$PROJECT_DIR$/application/vke/model/Address.php" />
-        <option value="$PROJECT_DIR$/application/common.php" />
         <option value="$PROJECT_DIR$/application/admin/model/MemberFootprint.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Goodsdata.php" />
-        <option value="$PROJECT_DIR$/application/admin/model/Member.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Summarydata.php" />
-        <option value="$PROJECT_DIR$/application/admin/model/SearchHistory.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Order.php" />
         <option value="$PROJECT_DIR$/application/vke/model/SearchHistory.php" />
         <option value="$PROJECT_DIR$/application/vke/controller/Acerstore.php" />
         <option value="$PROJECT_DIR$/application/admin/model/ProductAcer.php" />
-        <option value="$PROJECT_DIR$/application/admin/controller/Acerstore.php" />
         <option value="$PROJECT_DIR$/application/admin/model/CateUs.php" />
         <option value="$PROJECT_DIR$/application/vke/model/Product.php" />
         <option value="$PROJECT_DIR$/application/admin/model/CateType.php" />
         <option value="$PROJECT_DIR$/application/vke/controller/Affordable.php" />
         <option value="$PROJECT_DIR$/application/admin/validate/CateType.php" />
-        <option value="$PROJECT_DIR$/application/admin/model/Banner.php" />
-        <option value="$PROJECT_DIR$/application/common/controller/Base.php" />
         <option value="$PROJECT_DIR$/application/vke/controller/Index.php" />
-        <option value="$PROJECT_DIR$/application/vke/controller/Common.php" />
-        <option value="$PROJECT_DIR$/application/vke/view/index/Index.html" />
-        <option value="$PROJECT_DIR$/application/admin/controller/Index.php" />
         <option value="$PROJECT_DIR$/application/admin/model/ShareOrder.php" />
         <option value="$PROJECT_DIR$/application/vke/validate/Evaluate.php" />
         <option value="$PROJECT_DIR$/application/route.php" />
         <option value="$PROJECT_DIR$/application/vke/controller/Shareorder.php" />
-        <option value="$PROJECT_DIR$/application/vke/controller/Search.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/Member.php" />
         <option value="$PROJECT_DIR$/application/admin/model/MemberEvaluate.php" />
+        <option value="$PROJECT_DIR$/application/vke/controller/Search.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/AcerConfig.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Acer.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Acerstore.php" />
+        <option value="$PROJECT_DIR$/application/common.php" />
+        <option value="$PROJECT_DIR$/application/admin/validate/Password.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/User.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/Banner.php" />
+        <option value="$PROJECT_DIR$/application/vke/view/index/Index.html" />
+        <option value="$PROJECT_DIR$/application/vke/controller/Common.php" />
+        <option value="$PROJECT_DIR$/application/common/controller/Base.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Index.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Sharedata.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/SearchHistory.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Searchdata.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/Message.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/AdminMessage.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Shareorder.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/ShareConfig.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Message.php" />
+        <option value="$PROJECT_DIR$/application/admin/model/AdminMenu.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Menu.php" />
       </list>
     </option>
   </component>
@@ -208,6 +254,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -252,6 +299,19 @@
               <item name="vke" type="b2602c69:ProjectViewProjectNode" />
               <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="common" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="vke" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="common" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="vke" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -260,13 +320,6 @@
               <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="vke" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="validate" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="vke" type="b2602c69:ProjectViewProjectNode" />
@@ -283,16 +336,10 @@
               <item name="view" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="index" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="vke" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vke" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -359,11 +406,12 @@
       <workItem from="1510880801994" duration="2990000" />
       <workItem from="1510883867422" duration="1474000" />
       <workItem from="1510885798587" duration="24472000" />
+      <workItem from="1511140084446" duration="27101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="349764000" />
+    <option name="totallyTimeSpent" value="376865000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -382,6 +430,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947233" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947233" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17291667" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" x="482" y="46" width="475" height="777" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -393,7 +442,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -429,132 +477,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/admin/model/SignReward.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/vke/model/MemberSign.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="159" column="74" lean-forward="true" selection-start-line="159" selection-start-column="74" selection-end-line="159" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Acer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="e#129#160#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/model/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="21" column="61" lean-forward="false" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/validate/AcerStore.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Fanswelfare.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1139">
-          <caret line="86" column="96" lean-forward="false" selection-start-line="86" selection-start-column="96" selection-end-line="86" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/model/SignNotes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/model/Address.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Sign.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1323">
-          <caret line="89" column="45" lean-forward="false" selection-start-line="89" selection-start-column="45" selection-end-line="89" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/vke/controller/Pay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="33" column="43" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/vke/controller/Myexchange.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Signdata.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding>
-            <element signature="e#129#160#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/validate/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/validate/ShareData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/vke/controller/Address.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="940">
-          <caret line="136" column="31" lean-forward="true" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/vke/model/Address.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
           <caret line="65" column="102" lean-forward="false" selection-start-line="65" selection-start-column="102" selection-end-line="65" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="166" column="21" lean-forward="false" selection-start-line="166" selection-start-column="15" selection-end-line="166" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -586,16 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/model/Member.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="32" />
-          <folding>
-            <element signature="e#124#149#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/controller/Summarydata.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="454">
@@ -603,13 +519,6 @@
           <folding>
             <element signature="e#129#160#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/model/SearchHistory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -650,14 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Acerstore.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/model/CateUs.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
@@ -672,7 +573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="783">
           <caret line="35" column="33" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -691,24 +591,8 @@
         <state relative-caret-position="157">
           <caret line="94" column="36" lean-forward="false" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
           <folding>
-            <element signature="e#131#161#0#PHP" expanded="true" />
+            <element signature="e#131#161#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/model/Banner.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/controller/Base.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="967">
-          <caret line="71" column="5" lean-forward="false" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -716,7 +600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -736,14 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/vke/controller/Common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="91" column="7" lean-forward="false" selection-start-line="91" selection-start-column="7" selection-end-line="91" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/vke/controller/Index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -752,43 +627,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/vke/view/index/Index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="207" column="32" lean-forward="false" selection-start-line="207" selection-start-column="20" selection-end-line="207" selection-end-column="32" />
-          <folding>
-            <element signature="e#127#158#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/model/ShareOrder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Sharedata.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/model/ShareOrder.php" />
     <entry file="file://$PROJECT_DIR$/application/admin/controller/Order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2058">
+        <state relative-caret-position="54">
           <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
           <folding />
         </state>
@@ -812,35 +654,251 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/route.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="2916">
           <caret line="116" column="9" lean-forward="false" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/vke/controller/Search.php">
+    <entry file="file://$PROJECT_DIR$/application/admin/model/Member.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-470">
-          <caret line="170" column="36" lean-forward="false" selection-start-line="170" selection-start-column="36" selection-end-line="170" selection-end-column="36" />
+        <state relative-caret-position="508">
+          <caret line="46" column="22" lean-forward="false" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/model/MemberEvaluate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="44" column="31" lean-forward="false" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
+        <state relative-caret-position="616">
+          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/vke/controller/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="152" column="45" lean-forward="false" selection-start-line="152" selection-start-column="45" selection-end-line="152" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Acer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Acerstore.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="150" column="34" lean-forward="true" selection-start-line="150" selection-start-column="34" selection-end-line="150" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Freedom/Freedom/刘祺/local/ybh/Application/Common/Common/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-416">
+          <caret line="884" column="5" lean-forward="false" selection-start-line="884" selection-start-column="3" selection-end-line="884" selection-end-column="5" />
+          <folding>
+            <marker date="1505398752697" expanded="true" signature="29187:29193" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Freedom/Freedom/刘祺/local/ybh/Application/Admin/Controller/OrderController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="411" column="0" lean-forward="false" selection-start-line="411" selection-start-column="0" selection-end-line="437" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Freedom/Freedom/刘祺/local/ybh/Application/Admin/Controller/FinanceController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="73" column="22" lean-forward="false" selection-start-line="73" selection-start-column="15" selection-end-line="73" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/validate/Password.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="27" column="72" lean-forward="false" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="210" column="1" lean-forward="true" selection-start-line="210" selection-start-column="1" selection-end-line="210" selection-end-column="1" />
+          <folding>
+            <element signature="e#128#149#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/model/AcerConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#124#149#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/model/Banner.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+          <folding>
+            <element signature="e#124#149#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/vke/controller/Common.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="91" column="8" lean-forward="false" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/common.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6864">
+          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/vke/view/index/Index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="8" column="53" lean-forward="false" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Sign.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2867">
+          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/validate/ShareData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="15" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/model/SearchHistory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="49" column="22" lean-forward="false" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Searchdata.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+          <folding>
+            <element signature="e#129#160#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Sharedata.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3429">
+          <caret line="133" column="5" lean-forward="false" selection-start-line="79" selection-start-column="3" selection-end-line="133" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/controller/Shareorder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
+        <state relative-caret-position="243">
+          <caret line="124" column="78" lean-forward="false" selection-start-line="124" selection-start-column="78" selection-end-line="124" selection-end-column="78" />
           <folding>
             <element signature="e#129#160#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/model/AdminMessage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="34" />
+          <folding>
+            <element signature="e#124#149#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/model/ShareConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="37" />
+          <folding>
+            <element signature="e#124#149#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="48" column="39" lean-forward="false" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+          <folding>
+            <element signature="e#129#160#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/common/controller/Base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/model/AdminMenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="23" column="78" lean-forward="false" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1836">
+          <caret line="75" column="27" lean-forward="false" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

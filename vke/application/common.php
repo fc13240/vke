@@ -175,6 +175,18 @@ function month($month)
 }
 
 /**
+ * 根据月份获取该月份始末日期
+ */
+function month_s_e($month)
+{
+    $date_month = $month;
+    $mday = date('t',strtotime($date_month));
+    $month_start = $date_month.'-01 00:00:00';
+    $month_end = $date_month.'-'.$mday.' 24:00:00';
+
+    return [$month_start,$month_end];
+}
+/**
  * 根据星期几获得该星期始末时间
  */
 function week($date_start,$date_end)
@@ -242,3 +254,53 @@ function getYearMonth()
     return $resturn;
 }
 
+/**
+ *记录元宝记录 - 20171120
+ */
+function inserAcerNotes($member_id,$type,$number,$before,$after,$class,$msg="")
+{
+    $data = [
+        'member_id' => $member_id,
+        'type' => $type,
+        'number' => $number,
+        'before' => $before,
+        'after' => $after,
+        'class' => $class,
+        'msg' => $msg,
+        'add_time' => date('Y-m-d H:i:s',time())
+    ];
+
+    $result = db('acer_notes')->insert($data);
+    return $result;
+}
+
+/**
+ * cvs导出 - 20171120
+ */
+//导出csv文件
+function put_csv($name, $list, $title){
+
+    header ( 'Content-Type: application/vnd.ms-excel' );
+    header ( 'Content-Disposition: attachment;filename='.$name.".xls" );
+    header ( 'Cache-Control: max-age=0' );
+    header("Expires: 0");
+    $file = fopen('php://output',"a");
+    $limit=1000;
+    $calc=0;
+    //foreach ($title as $v){
+    //    $tit[]=iconv('UTF-8', 'GB2312//IGNORE',$v);
+    //}
+    fputcsv($file,$title,"\t");
+    foreach ($list as $v){
+        $calc++;
+        if($limit==$calc){
+            ob_flush();
+            flush();
+            $calc=0;
+        }
+        fputcsv($file,$v,"\t");
+    }
+    unset($list);
+    fclose($file);
+    exit();
+}

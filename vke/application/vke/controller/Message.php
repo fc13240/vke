@@ -24,7 +24,7 @@ class Message extends Common
     {
         $user_id = $this->user_id;
         //获得该用户的消息列表
-        $messageList = model('Message')->getMessageList($user_id);
+        $messageList = model('AdminMessage')->getMessageList($user_id);
         foreach($messageList as $key => $value){
             $time = date("m-d H:i",strtotime($value['add_time']));
             $messageList[$key]['add_time'] = $time;
@@ -56,7 +56,7 @@ class Message extends Common
                 'del_time' => date('Y-m-d H:i:s',time())
             ];
 
-            $result_del = model('Message')->where($map)->update($data);
+            $result_del = model('AdminMessage')->where($map)->update($data);
 
             if($result_del){
                $result = [

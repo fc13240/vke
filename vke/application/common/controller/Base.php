@@ -72,19 +72,23 @@ class Base extends Controller
     {
         $request = Request::instance();
         //获取表单上传到额图片
-        $files = $request->file();
+        $files = $request->file('images');
         if(empty($files)){
             $result = ['error'=>'请上传图片'];
             ajaxReturn($result);
         }
-        foreach($files as $file){
+        foreach($files as $key => $file){
+            //dump($file);
             //将图片移动到public/uploads/vke
             $info = $file->move(ROOT_PATH.'public'.DS.'uploads'.DS.'vk');
             if($info){
-
                 // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
                 $url = str_replace('\\','/',$info->getSaveName());
-                $image_url = config('image_url').$url;
+                $image_url[] =
+                    [
+                        'image'=>config('image_url').$url
+                    ];
+
                 $result = [
                     'data' => [
                         'image_url' => $image_url
@@ -95,7 +99,8 @@ class Base extends Controller
                 // 上传失败获取错误信息
                 $result = ['error'=>$file->getError()];
             }
-            ajaxReturn($result);
         }
+        ajaxReturn($result);
+
     }
 }
