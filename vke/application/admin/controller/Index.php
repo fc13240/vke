@@ -50,6 +50,7 @@ class Index extends Base
                         'message' => '修改成功'
                     ]
                 ];
+                cache('index_banner',null);
             }else{
                 $result = [
                     'error'=>'修改失败'
@@ -83,9 +84,36 @@ class Index extends Base
                     'message' => '添加成功'
                 ]
             ];
+            cache('index_banner',null);
         }else{
             $result = [
                 'error' => '添加失败'
+            ];
+        }
+        return resultArray($result);
+    }
+
+    /**
+     * 删除banner - 20171121
+     */
+    public function delBanner()
+    {
+        $banner_id = input('post.banner_id');
+        if(empty($banner_id)){
+            return resultArray(['error'=>'请选择删除的banner图']);
+        }
+        //执行删除
+        $result_del = model('Banner')->delData(['banner_id'=>$banner_id]);
+        if($result_del){
+            $result = [
+                'data' => [
+                    'message' => '删除成功'
+                ]
+            ];
+            cache('index_banner',null);
+        }else{
+            $result = [
+                'error' => '删除失败'
             ];
         }
         return resultArray($result);

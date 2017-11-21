@@ -279,7 +279,6 @@ function inserAcerNotes($member_id,$type,$number,$before,$after,$class,$msg="")
  */
 //导出csv文件
 function put_csv($name, $list, $title){
-
     header ( 'Content-Type: application/vnd.ms-excel' );
     header ( 'Content-Disposition: attachment;filename='.$name.".xls" );
     header ( 'Cache-Control: max-age=0' );
@@ -287,10 +286,10 @@ function put_csv($name, $list, $title){
     $file = fopen('php://output',"a");
     $limit=1000;
     $calc=0;
-    //foreach ($title as $v){
-    //    $tit[]=iconv('UTF-8', 'GB2312//IGNORE',$v);
-    //}
-    fputcsv($file,$title,"\t");
+    foreach ($title as $v){
+        $tit[]=iconv('UTF-8', 'GB2312//IGNORE',$v);
+    }
+    fputcsv($file,$tit,"\t");
     foreach ($list as $v){
         $calc++;
         if($limit==$calc){
@@ -298,7 +297,11 @@ function put_csv($name, $list, $title){
             flush();
             $calc=0;
         }
-        fputcsv($file,$v,"\t");
+        $value_value = [];
+        foreach($v as $value){
+            $value_value[] = iconv('UTF-8', 'GB2312//IGNORE',$value);
+        }
+        fputcsv($file,$value_value,"\t");
     }
     unset($list);
     fclose($file);

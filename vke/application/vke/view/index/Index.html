@@ -6,30 +6,11 @@
 </head>
 <body>
 <!--<form method="post" id="formFile" enctype="multipart/form-data" action="{:url('vke/Index/upload')}">-->
-    <input type="file" id="file_input" name="images[]" multiple/>
-    <input type="button" value="上传" onclick="doUpload()" />
-<!--</form>-->
 
+<!--</form>-->
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-    function doUpload(){
-        var formData = new FormData();
-        $.ajax({
-            url: 'http://192.168.1.101/upload' ,
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (returndata) {
-                alert(returndata);
-            },
-            error: function (returndata) {
-                console.log(returndata);
-            }
-        });
-    }
+    window.location.href = '192.168.1.101/manager/User/verify'
 </script>
 </html>

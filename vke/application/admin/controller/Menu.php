@@ -15,6 +15,24 @@ use think\Db;
 class Menu extends Base
 {
     /**
+     * 未读消息条数以及最新一条消息 - 20171121
+     */
+    public function unreadMessage()
+    {
+        //查询后台的未读消息
+        $unreadCount = model('AdminMessage')->unreadCount();
+        //查询最新的一条未读消息
+        $latestMessage = model('AdminMessage')->latestMessage();
+        $result = [
+            'data' => [
+                'count' => $unreadCount,
+                'message' => $latestMessage
+            ]
+        ];
+        return resultArray($result);
+    }
+
+    /**
      * 菜单首页
      * @return array|\think\response\Json
      */
@@ -29,6 +47,51 @@ class Menu extends Base
                 //'data_menu' => $this->menu
             ]
         ];
+        return $data;
+        return resultArray($result);
+    }
+
+    /**
+     * 菜单排序 - 20171121
+     */
+    public function menuSort()
+    {
+        $menu = input('post.menu');
+        if(empty($menu)){
+            return resultArray(['error'=>'修改失败']);
+        }
+        $menu_count = 300;
+        $sort = [];
+        foreach($menu as $key => $value){
+            $sort[] = [
+                'id' => $value['id'],
+                'sorts' => $menu_count
+            ];
+            $menu_count--;
+            if(!empty($value['_data'])){
+                foreach($value['_data'] as $k => $v){
+                    $sort[] = [
+                        'id' => $v['id'],
+                        'sorts' => $menu_count
+                    ];
+                    $menu_count--;
+                }
+
+            }
+        }
+        //执行修改
+        $result_edit = model('AdminMenu')->saveAll($sort);
+        if($result_edit !== false){
+            $result = [
+                'data' => [
+                    'message' => '保存成功'
+                ]
+            ];
+        }else{
+            $result = [
+                'error' => '保存失败'
+            ];
+        }
         return resultArray($result);
     }
 

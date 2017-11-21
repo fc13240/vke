@@ -11,7 +11,7 @@ class Index extends Common
 {
     public function index()
     {
-        return view('Index',['msg'=>'123132']);
+        return view('index',['msg'=>'132465']);
     }
     //首页，不需要参数
     public function index_banner()

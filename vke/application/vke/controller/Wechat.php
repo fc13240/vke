@@ -31,7 +31,7 @@ class Wechat
     public function getUserInfo()
     {
         if(input('get.state') != session("wx_state")){
-            //$this->redirect("http://" . $_SERVER['HTTP_HOST'] . "/weke/Index/index");
+            //$this->redirect("http://" . $_SERVER['HTTP_HOST'] . "/weke/Index/user");
         }
         $code = input('get.code');
         //获取access_token

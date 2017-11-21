@@ -78,7 +78,7 @@ class Common extends Controller
      * 引导未知控制器
      */
     public function __call($method, $param){
-        $this->redirect("vke/index");die;
+        $this->redirect("vke/user");die;
     }
 
     /**

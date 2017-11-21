@@ -22,10 +22,12 @@ final class Data
             return array();
         }
         $arr = array();
+        $num = 0;
         foreach ($data as $v) {
             if ($v[$fieldPid] == $pid) {
-                $arr[$v[$fieldPri]] = $v;
-                $arr[$v[$fieldPri]]["_data"] = self::channelLevel($data, $v[$fieldPri],  $fieldPri, $fieldPid, $level + 1);
+                $arr[$num] = $v;
+                $arr[$num]["_data"] = self::channelLevel($data, $v[$fieldPri],  $fieldPri, $fieldPid, $level + 1);
+                $num++;
             }
         }
 

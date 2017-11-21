@@ -37,12 +37,12 @@ CREATE TABLE `bjyadmin_auth_rule`  (
 -- Records of bjyadmin_auth_rule
 -- ----------------------------
 INSERT INTO `bjyadmin_auth_rule` VALUES (1, 20, 'Admin/ShowNav/nav', '菜单管理', 1, 1, '');
-INSERT INTO `bjyadmin_auth_rule` VALUES (2, 1, 'Admin/Nav/index', '菜单列表', 1, 1, '');
+INSERT INTO `bjyadmin_auth_rule` VALUES (2, 1, 'Admin/Nav/user', '菜单列表', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (3, 1, 'Admin/Nav/add', '添加菜单', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (4, 1, 'Admin/Nav/edit', '修改菜单', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (5, 1, 'Admin/Nav/delete', '删除菜单', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (21, 0, 'Admin/ShowNav/rule', '权限控制', 1, 1, '');
-INSERT INTO `bjyadmin_auth_rule` VALUES (7, 21, 'Admin/Rule/index', '权限管理', 1, 1, '');
+INSERT INTO `bjyadmin_auth_rule` VALUES (7, 21, 'Admin/Rule/user', '权限管理', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (8, 7, 'Admin/Rule/add', '添加权限', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (9, 7, 'Admin/Rule/edit', '修改权限', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (10, 7, 'Admin/Rule/delete', '删除权限', 1, 1, '');
@@ -54,11 +54,11 @@ INSERT INTO `bjyadmin_auth_rule` VALUES (15, 11, 'Admin/Rule/rule_group', '分�
 INSERT INTO `bjyadmin_auth_rule` VALUES (16, 11, 'Admin/Rule/check_user', '添加成员', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (19, 21, 'Admin/Rule/admin_user_list', '管理员列表', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (20, 0, 'Admin/ShowNav/config', '系统设置', 1, 1, '');
-INSERT INTO `bjyadmin_auth_rule` VALUES (6, 0, 'Admin/Index/index', '后台首页', 1, 1, '');
+INSERT INTO `bjyadmin_auth_rule` VALUES (6, 0, 'Admin/Index/user', '后台首页', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (64, 1, 'Admin/Nav/order', '菜单排序', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (96, 6, 'Admin/Index/welcome', '欢迎界面', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (104, 0, 'Admin/ShowNav/posts', '文章管理', 1, 1, '');
-INSERT INTO `bjyadmin_auth_rule` VALUES (105, 104, 'Admin/Posts/index', '文章列表', 1, 1, '');
+INSERT INTO `bjyadmin_auth_rule` VALUES (105, 104, 'Admin/Posts/user', '文章列表', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (106, 105, 'Admin/Posts/add_posts', '添加文章', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (107, 105, 'Admin/Posts/edit_posts', '修改文章', 1, 1, '');
 INSERT INTO `bjyadmin_auth_rule` VALUES (108, 105, 'Admin/Posts/delete_posts', '删除文章', 1, 1, '');

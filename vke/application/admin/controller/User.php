@@ -5,16 +5,16 @@
  * Date: 2017/11/8
  * Time: 10:14
  */
-
 namespace app\admin\controller;
 use think\Controller;
 use app\admin\model\AdminUsers;
 use think\Request;
-
+use think\Cookie;
 
 class User extends Controller
 {
     protected $admin_id;
+
     /**
      * 用户执行注册后台会员
      */
@@ -67,7 +67,15 @@ class User extends Controller
         $username = input('post.username');
         //密码
         $password = input('post.password');
-
+        //验证码
+        $verify = input('post.verify');
+        //是否记住密码
+        $isRemember = input('post.is_remember'); //1记住 2不记住
+        //验证验证码
+        $captcha = new \think\captcha\Captcha();
+        if(!$captcha->check($verify)){
+            //return resultArray(['error'=>'验证码错误']);
+        }
         $data = [
             'username' => $username,
             'password' => $password
@@ -96,10 +104,20 @@ class User extends Controller
             $result = [
                 'data' => [
                     'message' => '登录成功',
-                    'url' => 'manager/Index/index'
+                    'url' => 'manager/Index/user'
                 ]
             ];
+            //是否记住登录账号密码
+            if(!empty($isRemember)){
+                $data = [
+                        'username' => $username,
+                        'password' => $password
+                ];
 
+                Cookie::set('autologin',serialize($data),'604800');
+            }else{
+                setcookie('autologin',null);
+            }
         }else{
             $result = [
                 'error' => '登录失败'
@@ -115,6 +133,7 @@ class User extends Controller
     public function logout()
     {
         session('user',null);
+        setcookie('autologin',null);
         return resultArray(['data'=>['message'=>'退出成功']]);
     }
 
@@ -207,5 +226,38 @@ class User extends Controller
         if($data['new_password'] != $data['sure_password']){
             ajaxReturn(['error'=>'两次密码不一致']);
         }
+    }
+
+    /**
+     * 登录页面 - 20171121
+     */
+    public function loginPage()
+    {
+
+            if(Cookie::has('autologin')){
+                $cookie_info = unserialize($_COOKIE['autologin']);
+                $username = $cookie_info['username'];
+                $password = $cookie_info['password'];
+                $result = [
+                    'data' => [
+                        'username' => $username,
+                        'password' => $password
+                    ]
+                ];
+            }else{
+                $result = [
+                    'error' => '请登录'
+                ];
+            }
+            return resultArray($result);
+    }
+
+    /**
+     * 登录页验证码 - 20171121
+     */
+    public function verify()
+    {
+        $captcha = new \think\captcha\Captcha();
+        return $captcha->entry();
     }
 }

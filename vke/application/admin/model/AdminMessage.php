@@ -24,4 +24,36 @@ class AdminMessage extends Base
             ->select();
         return $list;
     }
+
+    /**
+     * 查询未读消息条数 - 20171121
+     */
+    public function unreadCount()
+    {
+        $map = [
+            'status' => 1,
+            'is_del' => 1
+        ];
+        $count = Db::name('admin_message')
+            ->where($map)
+            ->count();
+        return $count;
+    }
+
+    /**
+     * 最新一条消息 - 20171121
+     */
+    public function latestMessage()
+    {
+        $map = [
+            'status' => 1,
+            'is_del' => 1
+        ];
+        $message = Db::name('admin_message')
+            ->where($map)
+            ->order('add_time','desc')
+            ->field('id,title,msg')
+            ->find();
+        return $message;
+    }
 }
