@@ -7,6 +7,11 @@
  */
 namespace app\vke\controller;
 use app\vke\controller\Common;
+use think\Loader;
+use app\vke\controller\Test;
+Loader::import('sdk.TopClient');
+Loader::import('sdk.request.TbkAdzoneCreateRequest');
+
 class Index extends Common
 {
     public function index()
@@ -81,5 +86,18 @@ class Index extends Common
             ]
         ];
         return resultArray($result);
+    }
+
+    public function sdk()
+    {
+        $c = new \TopClient;
+        $c->appkey = 'test';
+        $c->secretKey = 'test';
+
+        $req = new \TbkAdzoneCreateRequest;
+        $req->setSiteId("123456");
+        $req->setAdzoneName("广告位");
+        $resp = $c->execute($req);
+        dump($resp);
     }
 }

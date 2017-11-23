@@ -19,8 +19,9 @@ class SearchHistory extends Base
     {
         $list = Db::name('search_history')
             ->order('number','desc')
+            ->group('keywords')
             ->limit(20)
-            ->field('keywords,number')
+            ->field('keywords,sum(number)')
             ->select();
         return $list;
     }
@@ -46,7 +47,7 @@ class SearchHistory extends Base
     {
         $count = Db::name('search_history')
             ->where($map)
-            ->sum('number');
+            ->count('number');
         return $count;
     }
 }

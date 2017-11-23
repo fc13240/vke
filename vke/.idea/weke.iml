@@ -8,5 +8,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ybh" />
     <orderEntry type="module" module-name="php" />
+    <orderEntry type="module" module-name="taoke" />
   </component>
 </module>

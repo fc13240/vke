@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../think_admin/.idea/php.iml" filepath="$PROJECT_DIR$/../think_admin/.idea/php.iml" />
+      <module fileurl="file://D:/我的文档/taoke/.idea/taoke.iml" filepath="D:/我的文档/taoke/.idea/taoke.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/weke.iml" filepath="$PROJECT_DIR$/.idea/weke.iml" />
       <module fileurl="file://D:/Freedom/Freedom/刘祺/local/ybh/.idea/ybh.iml" filepath="D:/Freedom/Freedom/刘祺/local/ybh/.idea/ybh.iml" />
     </modules>

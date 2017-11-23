@@ -47,4 +47,29 @@ class Member extends Base
             ->select();
         return $acer;
     }
+
+    /**
+     * 当前所有用户的id - 20171122
+     */
+    public function getMemberId()
+    {
+        $map = [
+            'is_del' => 2
+        ];
+        $member_id = Db::name('member')
+            ->where($map)
+            ->column('member_id');
+        return $member_id;
+    }
+
+    /**
+     * 新增人数 - 20171122
+     */
+    public function getNewCount($map)
+    {
+        $count = Db::name('member')
+            ->where($map)
+            ->count();
+        return $count;
+    }
 }

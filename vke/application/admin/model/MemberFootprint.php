@@ -38,8 +38,8 @@ class MemberFootprint extends Base
      */
     public function getProduct($map,$limit)
     {
-        $list = Db::view('MemberFootprint','number')
-            ->view('Product','pict_url,title','MemberFootprint.product_id = Product.id')
+        $list = Db::view('Product','id,pict_url,title')
+            ->view('MemberFootprint','number','MemberFootprint.product_id = Product.id')
             ->where($map)
             ->order('number','desc')
             ->limit($limit)

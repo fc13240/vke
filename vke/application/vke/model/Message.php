@@ -19,10 +19,10 @@ class Message extends Model
     public function getMessageList($user_id)
     {
         $map = [
-            'member_id' => $user_id,
+            'member_id' => ['like','%'.$user_id.'%'],
             'is_del' => 1
         ];
-        $messageList = Db::table('vke_message')
+        $messageList = Db::name('message')
             ->where($map)
             ->order(['status'=>'asc','add_time'=>'desc'])
             ->field('id,title,msg,status,add_time')

@@ -10,7 +10,7 @@ namespace app\common\controller;
 use think\Auth;
 use think\Request;
 use think\Controller;
-
+header("Access-Control-Allow-Origin: *"); // 允许任意域名发起的跨域请求
 class Base extends Controller
 {
     public $admin_id;

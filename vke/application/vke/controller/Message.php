@@ -24,7 +24,7 @@ class Message extends Common
     {
         $user_id = $this->user_id;
         //获得该用户的消息列表
-        $messageList = model('AdminMessage')->getMessageList($user_id);
+        $messageList = model('Message')->getMessageList($user_id);
         foreach($messageList as $key => $value){
             $time = date("m-d H:i",strtotime($value['add_time']));
             $messageList[$key]['add_time'] = $time;

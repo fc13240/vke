@@ -19,14 +19,16 @@ class Product extends Base
      * @param $fields 查询字段
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public function getGoodsList($map,$fields,$path,$limit=10)
+    public function getGoodsList($map,$fields)
     {
-        $count = model('Product')->where($map)->count();
         $list = Db::name('product')
             ->where($map)
             ->field($fields)
             ->order('create_time','desc')
-            ->paginate($limit,$count,['path'=>$path]);
+            ->select();
+        foreach($list as $key => $value){
+            $list[$key]['discount'] = round($value['zk_final_price']/$value['reserve_price']*10,1);
+        }
         return $list;
     }
 

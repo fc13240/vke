@@ -14,6 +14,7 @@
     <file url="file://$PROJECT_DIR$/../tbk/template/taodi/list.php" charset="GBK" />
     <file url="file://$PROJECT_DIR$/../tbk/template/taodi/pages.php" charset="GBK" />
     <file url="file://$PROJECT_DIR$/../tbk/template/taodi/sitemap.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/extend/sdk/RequestCheckUtil.php" charset="GBK" />
     <file url="file://E:/资料/k531/优秀淘宝站源码 带来路完美修正版/template/taodi/index.php" charset="GBK" />
   </component>
 </project>

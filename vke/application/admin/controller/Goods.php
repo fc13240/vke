@@ -174,11 +174,6 @@ class Goods extends Base
             $map['coupon_number'] = ['lt', $condition4_max];
         }
 
-        //接收每页显示数据条数
-        $page_limit = $request->post('page_limit');
-        if(empty($page_limit)){
-            return resultArray(['error'=>'请输入每页显示数据条数']);
-        }
 
         $path = getPath();
 
@@ -188,14 +183,11 @@ class Goods extends Base
             $map['stock'] = ['lt', 10];
         }
         //执行查询
-        $fields = 'id,pict_url,title,brokerage,zk_final_price,coupon_number,stock';
-        $goodsList = model('Product')->getGoodsList($map, $fields,$path,$page_limit);
-        $page = $goodsList->render();
+        $fields = 'id,pict_url,title,brokerage,zk_final_price,coupon_number,stock,volume,reserve_price';
+        $goodsList = model('Product')->getGoodsList($map, $fields);
         $result = [
-            'data' => [
-                'goods_list' => $goodsList,
-                'page' => $page
-            ]
+            'data' => $goodsList,
+
         ];
         return resultArray($result);
     }

@@ -151,6 +151,7 @@ class Search extends Common
     {
         $sorts_arr = $this->sorts(3);
         $sort_type = $sorts_arr['sort_type'];
+
         $sort = $sorts_arr['sorts'];
         $user_id = $this->user_id;
         //接收搜索关键词
@@ -161,9 +162,7 @@ class Search extends Common
         //将搜索内容存入数据库,根据会员id和搜索内容查询该用户是否已经有过搜索
         $search_result = db('search_history')->where(['member_id'=>$user_id,'keywords'=>$keywords])->value('id');
         $model = model('SearchHistory');
-        if($search_result){
-            $model->where('id',$search_result)->setInc('number',1);
-        }else{
+
             $data = [
                 'member_id' => $user_id,
                 'keywords' => $keywords,
@@ -172,7 +171,6 @@ class Search extends Common
             $model->data($data);
             $model->save();
 
-        }
         //根据搜索关键词搜索产品
         $productList = model('Product')->getProductListByKeywords($keywords,$sort_type[$sort]);
         $result = [

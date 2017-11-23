@@ -68,7 +68,7 @@ Route::rule([
     //兑换详情-默认地址
     'exchangeinfo_address' => 'vke/Acerstore/exchangeInfoAddress',
     //通知列表
-    'getmessage' => 'vke/AdminMessage/getMessage',
+    'getmessage' => 'vke/Message/getMessage',
     //提价意见反馈
     'feedback' => 'vke/Feedback/feedback',
     //个人中心
