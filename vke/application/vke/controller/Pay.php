@@ -80,7 +80,15 @@ class Pay extends Common
                 $order->status = 2;
                 if($order->save()){
                     Db::commit();
+                    //向后台发送系统消息
+                    $message = [
+                        'type' => '3',
+                        'title' => '元宝商城待处理订单通知',
+                        'msg' => '您有新的兑换商城订单，请点击前往处理。订单号为'.$order_num
+                    ];
+                    sendMessage($message);
                     return ['data'=>['message'=>'兑换成功']];
+
                 }else{
                     //修改订单为无效的订单,并且记录错误信息
                     db('exchange_order')->where('order_num',$order_num)->setField('is_able',2);

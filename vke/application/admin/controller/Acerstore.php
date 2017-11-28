@@ -27,16 +27,16 @@ class Acerstore extends Base
         $request = $this->request;
         //接收奖品类型
         $product_type = $request->post('product_type');
-        $type = $request->post('type');
+        //$type = $request->post('type');
         //接收上架状态
         $is_sale = $request->post('is_sale');
         $map = [];
         if(!empty($product_type)){
             $map['product_type'] = $product_type;
         }
-        if(!empty($type)){
+        /*if(!empty($type)){
             $map['type'] = $type;
-        }
+        }*/
         if(!empty($is_sale)){
             $map['is_sale'] = $is_sale;
         }

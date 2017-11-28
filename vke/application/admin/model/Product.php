@@ -19,12 +19,12 @@ class Product extends Base
      * @param $fields 查询字段
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public function getGoodsList($map,$fields)
+    public function getGoodsList($map,$fields,$order='')
     {
         $list = Db::name('product')
             ->where($map)
             ->field($fields)
-            ->order('create_time','desc')
+            ->order($order)
             ->select();
         foreach($list as $key => $value){
             $list[$key]['discount'] = round($value['zk_final_price']/$value['reserve_price']*10,1);

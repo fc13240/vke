@@ -334,3 +334,22 @@ function getApiRequest($req,$arr)
     return $resp;
 }
 
+/**
+ * 向后台发送系统消息 - 20171128
+ */
+function sendMessage($array)
+{
+
+    $data = [
+        'type' => $array['type'],
+        'title' => trim($array['title']),
+        'msg' => trim($array['msg']),
+        'status' => 1,
+        'is_del' => 1,
+        'add_time' => date('Y-m-d H:i:s',time())
+    ];
+
+    $result = \think\Db::name('admin_message')->insert($data);
+    return $result;
+}
+

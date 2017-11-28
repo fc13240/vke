@@ -97,4 +97,30 @@ class Message extends Base
         }
         return resultArray($result);
     }
+
+    /**
+     * 设为已读 - 20171128
+     */
+    public function setStatus()
+    {
+        $message_id = input('message_id');
+        if(empty($message_id)){
+            return resultArray(['error'=>'请选择消息']);
+        }
+
+        $result_edit = Db::name('admin_message')->where('id',$message_id)->update(['status'=>2]);
+        if($result_edit !== false){
+            $result = [
+                'data' => [
+                    'message' => '成功'
+                ]
+            ];
+        }else{
+            $result = [
+                'error' => '失败'
+            ];
+        }
+
+        return resultArray($result);
+    }
 }

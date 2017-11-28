@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 use app\common\controller\Base;
 use think\Request;
+use think\Db;
 
 class Affordable extends Base
 {
@@ -34,22 +35,19 @@ class Affordable extends Base
     {
         $request = $this->request;
         //分类id
-        $store_id = $request->post('store_id');
-        //接收图片路径
-        $image = $request->post('image');
-        //接收专场名称
-        $store_name = $request->post('store_name');
-        $data = [
-            'store_id'=>$store_id,
-            'image'=>$image,
-            'store_name'=>$store_name
-        ];
-        auto_validate('Affordable',$data,'save');
-        //检查该名称是否已经存在
-        $this->checkExist('StoreType','store_name',$store_name);
+        $store_type = $request->post('store_type/a');
+
+        foreach($store_type as $key => $value){
+            //检查该名称是否已经存在
+            $this->checkExist('StoreType','store_name',$value['store_name']);
+            //检查id是否存在
+            $id = model('StoreType')->where(['id'=>$value['id']])->value('id');
+            if(empty($id)){
+                return resultArray(['error'=>'数据错误']);
+            }
+        }
         //执行修改
-        unset($data['store_id']);
-        $result_edit = model('StoreType')->editData(['id'=>$store_id],$data);
+        $result_edit = model('StoreType')->saveAll($store_type);
         if($result_edit !== false){
             $result = [
                 'data' => [

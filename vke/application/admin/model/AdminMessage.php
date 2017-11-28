@@ -20,7 +20,7 @@ class AdminMessage extends Base
         $list = Db::name('admin_message')
             ->where($map)
             ->order(['status'=>'asc','add_time'=>'desc'])
-            ->field('id,title,msg,status,add_time')
+            ->field('id,type,title,msg,status,add_time')
             ->select();
         return $list;
     }

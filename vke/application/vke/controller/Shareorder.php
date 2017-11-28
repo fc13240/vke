@@ -32,7 +32,7 @@ class Shareorder extends Common
             $data = [
                 'evaluate_detail' => input('post.evaluate'),
                 'evaluate_url' => json_decode(input('post.evaluate_url',"")),
-                'order_num' => input('post.order_num')
+                'order_num' => trim(input('post.order_num'))
             ];
             $url_string = '';
             foreach($data['evaluate_url'] as $key => $value){
@@ -43,11 +43,11 @@ class Shareorder extends Common
             if(!$validate->check($data)){
                 return resultArray(['error'=>$validate->getError()]);
             }
-            //验证该订单号是否存在
-
-            if(!Order::get(['order_num'=>$data['order_num']])){
-                return resultArray(['error'=>'该订单不存在']);
-            }
+//            //验证该订单号是否存在
+//
+//            if(!Order::get(['order_num'=>$data['order_num']])){
+//                return resultArray(['error'=>'该订单不存在']);
+//            }
 
             //同一商品同一用户只能晒单一次
             if(MemberEvaluate::get(['order_num'=>$data['order_num'],'member_id'=>$user_id,'examine_status'=>['neq',3]])){
@@ -71,13 +71,19 @@ class Shareorder extends Common
                         'message' => '晒单成功,请等待审核'
                     ]
                 ];
+                //向后台发送系统通知
+                $message = [
+                    'type' => 1,
+                    'title' => '晒单待审核通知',
+                    'msg' => '您有新的用户晒单待审核，请点击前往处理。订单号为:'.$data['order_num'],
+                ];
+                sendMessage($message);
             }else{
                 $result = [
                     'error' => '晒单失败'
                 ];
             }
             return resultArray($result);
-
         }
     }
 

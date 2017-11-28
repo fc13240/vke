@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <input type="text" class="one"/>one <br>
+        <input type="text" class="one"/>one <br>
+        <input type="text" class="two"/>two <br>
+        <input type="text" class="two"/>two <br>
+        <input type="text" class="three"/>three <br>
+        <input type="text" class="three"/>three <br>
+        <input type="button" value="提交" />
+    </form>
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    $(function(){
+        var store_type = [];
+        $('input[type=button]').on('click',function(){
+
+            var one = {};
+            one.image = $('input[class=one]').eq(0).val();
+            one.store_name = $('input[class=one]').eq(1).val();
+            one.id = 100;
+
+            var two = {};
+            two.image = $('input[class=two]').eq(0).val();
+            two.store_name = $('input[class=two]').eq(1).val();
+            two.id = 101;
+
+            store_type.push(one);
+            store_type.push(two);
+
+            $.ajax({
+                url:'http://192.168.1.101/manager/Affordable/save',
+                data:{store_type:store_type},
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    consolt.log(data);
+                }
+            });
+        });
+
+    })
+</script>
+</html>

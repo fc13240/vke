@@ -74,6 +74,14 @@ class Order extends Common
                         'message' => '订单添加成功'
                     ]
                 ];
+
+                //向后台发送系统通知
+                $message = [
+                    'type' => '2',
+                    'title' => '返利订单待审核通知',
+                    'msg' => '您有新的返利订单待审核，请点击前往处理。订单号为'.$order_num
+                ];
+                sendMessage($message);
             }
             else{
                 $result = [
