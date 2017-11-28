@@ -13,15 +13,17 @@ use think\Controller;
 header("Access-Control-Allow-Origin: *"); // 允许任意域名发起的跨域请求
 class Base extends Controller
 {
-    public $admin_id;
+    public $admin_id = 1;
     public $menu;
+    private $appkey = 'Test';
+    private $secret = 'Test';
     public function _initialize()
     {
-        $this->admin_id = session('user')['id'];
-        //验证登录
-        if(empty($this->admin_id)){
-             ajaxReturn(['error'=>'请登录']);
-        }
+//        $this->admin_id = session('user')['id'];
+//        //验证登录
+//        if(empty($this->admin_id)){
+//             ajaxReturn(['error'=>'请登录']);
+//        }
 
 
         $auth=new Auth();
@@ -73,34 +75,30 @@ class Base extends Controller
         $request = Request::instance();
         //获取表单上传到额图片
         $files = $request->file('images');
-        if(empty($files)){
-            $result = ['error'=>'请上传图片'];
+        if (empty($files)) {
+            $result = ['error' => '请上传图片'];
             ajaxReturn($result);
         }
-        foreach($files as $key => $file){
-            //dump($file);
-            //将图片移动到public/uploads/vke
-            $info = $file->move(ROOT_PATH.'public'.DS.'uploads'.DS.'vk');
-            if($info){
-                // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-                $url = str_replace('\\','/',$info->getSaveName());
-                $image_url[] =
-                    [
-                        'image'=>config('image_url').$url
-                    ];
+        //将图片移动到public/uploads/vke
+        $info = $files->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'vk');
+        if ($info) {
+            // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
+            $url = str_replace('\\', '/', $info->getSaveName());
+            $image_url = config('image_url') . $url;
+            $result = [
+                'data' => [
+                    'image_url' => $image_url
+                ]
+            ];
 
-                $result = [
-                    'data' => [
-                        'image_url' => $image_url
-                    ]
-                ];
-
-            }else{
-                // 上传失败获取错误信息
-                $result = ['error'=>$file->getError()];
-            }
+        } else {
+            // 上传失败获取错误信息
+            $result = ['error' => $files->getError()];
         }
         ajaxReturn($result);
-
     }
+
+/*****************************************************************************************************/
+
+
 }

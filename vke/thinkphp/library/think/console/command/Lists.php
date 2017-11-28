@@ -33,7 +33,7 @@ The <info>%command.name%</info> command lists all commands:
 
 You can also display the commands for a specific namespace:
 
-  <info>php %command.full_name% test</info>
+  <info>php %command.full_name% Test</info>
 
 It's also possible to get raw list of commands (useful for embedding command runner):
 

@@ -8,6 +8,7 @@
 namespace app\vke\controller;
 use app\vke\model\Banner;
 use app\vke\controller\Common;
+use think\Loader;
 
 
 class Fanswelfare extends Common
@@ -121,14 +122,49 @@ class Fanswelfare extends Common
      */
     public function newsPaperGoods()
     {
-        //查询参与抢购的商品信息
-        $goods = [];
+
+        //抢购时间id
+        $panic_id = input('post.panic_id');
+        if(empty($panic_id)){
+            return resultArray(['error'=>'请选择抢购时间']);
+        }
+
+        $key = 'panic_id'.$panic_id;
+        $data = cache($key);
+        if(empty($data)){
+            //根据抢购时间id查询时间段
+            $panic_time = model('PanicTime')->getTime($panic_id);
+            $start_time = date('Y-m-d',time()).' '.$panic_time['start_time'];
+            $end_time = date('Y-m-d',time()).' '.$panic_time['end_time'];
+            $data = $this->getApiData($start_time,$end_time);
+            cache($key,$data,7200);
+        }
+
         $result = [
             'data' => [
-                'goods' => $goods
+                'goods' => $data
             ]
         ];
         return resultArray($result);
+    }
+
+    public function getApiData($start_time,$end_time)
+    {
+        //查询参与抢购的商品信息
+        Loader::import('sdk.request.TbkJuTqgGetRequest');
+        Loader::import('sdk.TopClient');
+        $c = new \TopClient;
+        $c->appkey = config('appkey');
+        $c->secretKey = config('secret');
+        $req = new \TbkJuTqgGetRequest;
+        $req->setAdzoneId(config('adzone_id'));
+        $req->setFields("click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time");
+        $req->setStartTime($start_time);
+        $req->setEndTime($end_time);
+        $req->setPageNo("1");
+        $req->setPageSize("40");
+        $resp = $c->execute($req);
+        return (array)$resp->results->results;
     }
 
     //超值线报

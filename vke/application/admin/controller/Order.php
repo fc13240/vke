@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 use app\common\controller\Base;
 use think\Request;
+use think\Db;
 
 class Order extends Base
 {
@@ -89,12 +90,164 @@ class Order extends Base
         return resultArray($result);
     }
 
+    /**
+     * 未处理订单个数 - 20171124
+     */
+    public function getOrderNum()
+    {
+        //查两张表(返利订单表和元宝商城表)
+        $number_one = model('Order')->getOrderNumber();
+        $number_two = model('ExchangeOrder')->getNumber();
+        $number = $number_one + $number_two;
+
+        $data = [
+            'data' => [
+                'number' => $number
+            ]
+        ];
+        return resultArray($data);
+    }
 
     /**
      * 返利订单审核-列表 - 20171116
      */
     public function backOrderList()
     {
-        //接收
+        //接收查询的订单时间
+        $start_date = input('post.start');
+        $end_date = input('post.end');
+        $status = input('post.status');
+        if(empty($status)){
+            $status = 2;
+        }
+        auto_validate('ShareData',['start'=>$start_date,'end'=>$end_date],'select');
+
+        $map['back_status'] = $status;
+        //执行查询
+        $order_list = model('order')->getOrderList($map);
+        $data = [
+            'data' => [
+                'order_list' => $order_list
+            ]
+        ];
+        return resultArray($data);
+    }
+
+    /**
+     * 订单通过奖励 - 20171127
+     */
+    public function aggreeOrder()
+    {
+        //订单id
+        $order_num = input('post.order_num/a');
+        if(empty($order_num)){
+            return resultArray(['error'=>'请选择订单']);
+        }
+        $map['order_num'] = ['in',$order_num];
+        //验证订单是否存在
+       $this->checkOrder($order_num);
+
+        //订单验证通过后执行修改
+        $member_id = model('Order')->getMemberId($order_num);
+        $edit_data = [
+            'back_status' => 1,
+            'update_time' => date('Y-m-d H:i:s',time())
+        ];
+
+
+        Db::startTrans();
+        try{
+            Db::name('order')->where($map)->update($edit_data);
+            foreach($member_id as $key => $value){
+                Db::name('member')->where('member_id',$value['member_id'])->setInc('member_acer',$value['back_acer']);
+            }
+            Db::commit();
+
+            //记录元宝交易流水
+            foreach($member_id as $key => $value){
+                $note_data[] = [
+                    'member_id' => $value['member_id'],
+                    'type' => '1',
+                    'number' => $value['back_acer'],
+                    'before' => $value['back_acer'],
+                    'after' => $value['member_acer'] + $value['back_acer'],
+                    'class' => 1,
+                    'msg' => '粉丝福利赠送元宝'
+                ];
+            }
+            Db::name('acer_notes')->insertAll($note_data);
+            $data = [
+                'data' => [
+                    'message' => '操作成功'
+                ]
+            ];
+        }catch(\Exception $exception){
+            Db::rollback();
+            $data = [
+                'error' => '操作失败'
+            ];
+        }
+        return resultArray($data);
+    }
+
+    /**
+     * 订单未通过 - 20171127
+     */
+    public function refuseOrder()
+    {
+        //订单id
+        $order_num = input('post.order_num/a');
+        if(empty($order_num)){
+            return resultArray(['error'=>'请选择订单']);
+        }
+        $map['order_num'] = ['in',$order_num];
+        //验证订单是否存在
+        $this->checkOrder($order_num);
+
+        //订单验证通过后执行修改
+        $edit_data = [
+            'back_status' => 3,
+            'update_time' => date('Y-m-d H:i:s',time())
+        ];
+        $result_edit = model('Order')->editData($map,$edit_data);
+        if($result_edit !== false){
+            $data = [
+                'data' => [
+                    'message' => '操作成功'
+                ]
+            ];
+        }else{
+            $data = [
+                'error' => '操作失败'
+            ];
+        }
+
+        return resultArray($data);
+    }
+
+    /**
+     * 验证订单是否存在 - 20171127
+     */
+    public function checkOrder($order_num)
+    {
+        $map['order_num'] = ['in',$order_num];
+        if(is_array($order_num)){
+            $order_info = model('Order')->where($map)->column('order_num');
+            //两数组差集
+            $diff_if = array_diff($order_num,$order_info);
+            if(!empty($diff_if)) {
+                if (count($diff_if) >= 2) {
+                    $resturn_number = implode(',', $diff_if);
+                } elseif (count($diff_if) == 1) {
+                    $resturn_number = $diff_if[0];
+                }
+                ajaxReturn(['error' => '以下单号不存在' . $resturn_number]);
+            }
+        }else{
+            $order_info = model('Order')->where($map)->value('id');
+            if(empty($order_info)){
+                ajaxReturn(['error'=>'该订单号不存在']);
+            }
+        }
     }
 }

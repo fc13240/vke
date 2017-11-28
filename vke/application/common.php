@@ -255,7 +255,15 @@ function getYearMonth()
 }
 
 /**
- *记录元宝记录 - 20171120
+ * 记录元宝记录 - 20171120
+ * @param $member_id 会员id
+ * @param $type 类型 1收入 2支出
+ * @param $number 交易数量
+ * @param $before 交易前元宝数
+ * @param $after 交易后元宝数
+ * @param $class 1粉丝福利商品获得  2每日签到获得 3兑换积分商品支出 4晒单获得元宝
+ * @param string $msg
+ * @return int|string
  */
 function inserAcerNotes($member_id,$type,$number,$before,$after,$class,$msg="")
 {
@@ -270,7 +278,7 @@ function inserAcerNotes($member_id,$type,$number,$before,$after,$class,$msg="")
         'add_time' => date('Y-m-d H:i:s',time())
     ];
 
-    $result = db('acer_notes')->insert($data);
+    $result = \think\Db::name('notes')->insert($data);
     return $result;
 }
 
@@ -307,3 +315,22 @@ function put_csv($name, $list, $title){
     fclose($file);
     exit();
 }
+
+/**
+ *实例化api,设置api参数
+ */
+function getApiRequest($req,$arr)
+{
+    \think\Loader::import('sdk.TopClient');
+    $c = new \TopClient;
+    $c->appkey = config('appkey');
+    $c->secretKey = config('secret');
+
+    foreach($arr as $key => $value)
+    {
+        $req->$key($value);
+    }
+    $resp = $c->execute($req);
+    return $resp;
+}
+

@@ -9,7 +9,7 @@ class Index
     public function index()
     {
         $memcache = new Memcache();
-        $memcache->set('test1','test');
+        $memcache->set('test1','Test');
         $test = $memcache->get('test1');
         echo $test;
     }

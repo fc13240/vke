@@ -9,8 +9,9 @@ namespace app\vke\controller;
 use app\vke\controller\Common;
 use think\Loader;
 use app\vke\controller\Test;
+Loader::import('sdk.request.TbkJuTqgGetRequest');
 Loader::import('sdk.TopClient');
-Loader::import('sdk.request.TbkAdzoneCreateRequest');
+Loader::import('sdk.request.TbkRebateOrderGetRequest');
 
 class Index extends Common
 {
@@ -88,15 +89,44 @@ class Index extends Common
         return resultArray($result);
     }
 
+    public function apiProducts()
+    {
+        \think\Loader::import('sdk.request.TbkItemGetRequest');
+        $req = new \TbkItemGetRequest;
+        $arr = [
+            'setFields' => 'click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time',
+            'setQ' => '女装',
+        ];
+       $result = getApiRequest($req,$arr);
+    }
+
     public function sdk()
     {
         $c = new \TopClient;
-        $c->appkey = 'test';
-        $c->secretKey = 'test';
+        $c->appkey = 'Test';
+        $c->secretKey = 'Test';
+        $req = new \TbkJuTqgGetRequest;
+        $req->setAdzoneId("1");
+        $req->setFields("click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time");
+        $req->setStartTime("2017-11-24 13:00:00");
+        $req->setEndTime("2017-11-24 15:00:00");
+        $req->setPageNo("1");
+        $req->setPageSize("40");
+        $resp = $c->execute($req);
+        dump($resp);
+    }
 
-        $req = new \TbkAdzoneCreateRequest;
-        $req->setSiteId("123456");
-        $req->setAdzoneName("广告位");
+    public function apiOrder()
+    {
+        $c = new \TopClient;
+        $c->appkey = 'Test';
+        $c->secretKey = 'Test';
+        $req = new \TbkRebateOrderGetRequest;
+        $req->setFields("tb_trade_parent_id,tb_trade_id,num_iid,item_title,item_num,price,pay_price,seller_nick,seller_shop_title,commission,commission_rate,unid,create_time,earning_time");
+        $req->setStartTime("2017-11-23 13:52:08");
+        $req->setSpan("600");
+        $req->setPageNo("1");
+        $req->setPageSize("20");
         $resp = $c->execute($req);
         dump($resp);
     }

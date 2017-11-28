@@ -59,4 +59,20 @@ class ExchangeOrder extends Base
             ->select();
         return $info;
     }
+
+    /**
+     * 获得未发货的订单的数量 - 20171124
+     */
+    public function getNumber()
+    {
+        $map = [
+            'status' => 1,
+            'express_status' => 1,
+            'is_able' => 1
+        ];
+        $number = Db::name('exchange_order')
+            ->where($map)
+            ->count();
+        return $number;
+    }
 }

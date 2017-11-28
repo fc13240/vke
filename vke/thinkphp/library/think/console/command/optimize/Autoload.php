@@ -86,7 +86,7 @@ EOF;
 
             if (!isset($classMap[$class])) {
                 $classMap[$class] = $pathCode;
-            } elseif ($classMap[$class] !== $pathCode && !preg_match('{/(test|fixture|example|stub)s?/}i', strtr($classMap[$class] . ' ' . $path, '\\', '/'))) {
+            } elseif ($classMap[$class] !== $pathCode && !preg_match('{/(Test|fixture|example|stub)s?/}i', strtr($classMap[$class] . ' ' . $path, '\\', '/'))) {
                 $this->output->writeln(
                     '<warning>Warning: Ambiguous class resolution, "' . $class . '"' .
                     ' was found in both "' . str_replace(["',\n"], [
@@ -207,7 +207,7 @@ EOF;
 
                 if (!isset($map[$class])) {
                     $map[$class] = $filePath;
-                } elseif ($map[$class] !== $filePath && !preg_match('{/(test|fixture|example|stub)s?/}i', strtr($map[$class] . ' ' . $filePath, '\\', '/'))) {
+                } elseif ($map[$class] !== $filePath && !preg_match('{/(Test|fixture|example|stub)s?/}i', strtr($map[$class] . ' ' . $filePath, '\\', '/'))) {
                     $this->output->writeln(
                         '<warning>Warning: Ambiguous class resolution, "' . $class . '"' .
                         ' was found in both "' . $map[$class] . '" and "' . $filePath . '", the first will be used.</warning>'

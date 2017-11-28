@@ -18,10 +18,23 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     $(function(){
+        var arr = [];
         $('input[type=button]').on('click',function(){
-            var order_num = $('input[checked=checked]').value();
-            console.log(order_num);
+            $('input:checked').each(function(i){
+                arr[i]=$(this).val();
+            });
+            $.ajax({
+                url:'http://192.168.1.101/manager/Order/refuseOrder',
+                data:{order_num:arr},
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                   // console.log(data);
+                }
+
+            })
         });
+
     })
 </script>
 </html>

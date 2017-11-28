@@ -16,5 +16,8 @@ return [
     'default_return_type'    => 'html',
     // 默认AJAX 数据返回格式,可选json xml ...
     'default_ajax_return'    => 'json',
-    'image_url' => 'http://192.168.1.101/uploads/vk/'
+    'image_url' => 'http://192.168.1.101/uploads/vk/',
+    'appkey' => 'Test',
+    'secret' => 'Test',
+    'adzone_id' => '1'
 ];
