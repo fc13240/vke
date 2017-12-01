@@ -14,7 +14,7 @@ class Group extends Validate
     protected $rule = [
         'id' => 'require|number',
         'id_del' => 'require|number',
-        'id_allot' => 'require|number',
+        'id_allot' => 'require',
         'title' => 'require'
     ];
     protected $message = [
@@ -24,10 +24,9 @@ class Group extends Validate
         'id_del.require' => '请选择要删除的分组',
         'id_del.number' => '请选择要删除的分组',
         'id_allot.require' => '请选择要分组',
-        'id_allot.number' => '请选择分组',
     ];
     protected $scene = [
-        'eidt' => ['id','title'],
+        'edit' => ['id','title'],
         'del' => ['id_del'],
         'allot' => ['id_allot']
     ];

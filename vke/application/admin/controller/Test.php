@@ -18,4 +18,12 @@ class Test extends Controller
     public function test(){
         return view();
     }
+    public function ajaxReturn()
+    {
+        return view();
+    }
+    public function testRoute($mca)
+    {
+        dump($mca);
+    }
 }

@@ -130,7 +130,9 @@ Route::rule([
     //搜索结果的排序
     'serrchSort' => 'vke/Search/searchSort',
     //晒单说明
-    'shareBrief' => 'vke/Shareorder/shareBrief'
+    'shareBrief' => 'vke/Shareorder/shareBrief',
+    //后台上传图片
+    'manager/upload' => 'vke/Index/upload'
 ]);
 
 Route::rule('manager/:c/:a','admin/:c/:a');

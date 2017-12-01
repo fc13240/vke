@@ -215,6 +215,7 @@ class File extends SplFileObject
         if (is_string($ext)) {
             $ext = explode(',', $ext);
         }
+
         $extension = strtolower(pathinfo($this->getInfo('name'), PATHINFO_EXTENSION));
         if (!in_array($extension, $ext)) {
             return false;

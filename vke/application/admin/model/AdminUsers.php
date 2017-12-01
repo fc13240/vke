@@ -24,6 +24,16 @@ class AdminUsers extends Base
     }
 
     /**
+     * 查询所有管理员id - 20171201
+     */
+    public function getAdminId()
+    {
+        $uid = Db::name('admin_users')
+            ->column('id');
+        return $uid;
+    }
+
+    /**
      * 查询管理员信息
      */
     public function getUserInfo($admin_id,$fields)
@@ -36,5 +46,17 @@ class AdminUsers extends Base
             ->field($fields)
             ->find();
         return $info;
+    }
+
+    /**
+     * 查询管理员名称与id - 20171201
+     */
+    public function getUsers($map,$fields)
+    {
+        $users = Db::name('admin_users')
+            ->where($map)
+            ->field($fields)
+            ->select();
+        return $users;
     }
 }

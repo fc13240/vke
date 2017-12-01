@@ -15,7 +15,8 @@ class Users extends Validate
         'id' => 'require|number',
         'username' => 'require',
         'telephone' => ['require','regex'=>"^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$"],
-        'password' => 'require'
+        'password' => 'require',
+        'status' => 'require|number'
 
     ];
     protected $message = [
@@ -24,11 +25,13 @@ class Users extends Validate
         'username.require' => '请输入管理员昵称',
         'telephone.require' => '请输入手机号',
         'telephone.regex' => '手机号格式错误',
-        'password.require' => '请输入密码'
+        'password.require' => '请输入密码',
+        'status.require' => '请选择登录状态',
+        'status.number' => '请选择登录状态',
     ];
 
     protected $scene = [
-        'add' => ['username','telephone','password'],
+        'add' => ['username','telephone','password','status'],
         'edit' => ['id'],
         'edit_do' => ['id','username','telephone'],
         'select' => ['username']

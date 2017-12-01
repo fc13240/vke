@@ -73,6 +73,10 @@ class Rule extends Base
     public function editRule()
     {
         $rule_id = input('post.rule_id');
+        if(empty($rule_id)){
+            return $this->addRule();
+        }
+
         $rule_name = trim(input('post.rule_name'));
         $rule_mca = trim(strtolower(input('post.rule_mca')));
         $data = [
@@ -216,14 +220,21 @@ class Rule extends Base
     */
    public function editGroup()
    {
-       $group_id = input('post.group_id');
+       $group_id = input('post.id');
+       if(empty($group_id)){
+           return $this->addGroup();
+       }
        $group_name = trim(input('post.group_name'));
         $data = [
             'id' => $group_id,
             'title' => $group_name
         ];
         auto_validate('Group',$data,'edit');
-
+        //验证该组id是否存在
+       $id = model('AuthGroup')->where('id',$group_id)->value('id');
+       if(empty($id)){
+           return resultArray(['error'=>'该分组不存在']);
+       }
         //验证分组名称是否已经存在
        $this->checkExist('AuthGroup','title',$group_name);
        //执行修改
@@ -250,7 +261,7 @@ class Rule extends Base
     */
    public function delGroup()
    {
-       $group_id = input('post.group_id');
+       $group_id = input('post.id');
        auto_validate('Group',['id_del'=>$group_id],'del');
        $result = model('AuthGroup')->delData(['id'=>$group_id]);
        if($result){
@@ -281,6 +292,10 @@ class Rule extends Base
            $list = Data::channelLevel($ruleList);
            //查询该分组拥有权限
            $rule = model('AuthGroup')->getGroupRule($group_id);
+           //$rule = toString($rule);
+
+           //递归修改id为字符串
+           $list = $this->toString($list,$field='id');
            $result = [
                'data' => [
                    'rule_list' => $list,
@@ -290,10 +305,10 @@ class Rule extends Base
        }
        elseif($request->isPost()){
            //分组id
-           $group_id = input('post.group_id');
+           $group_id = \think\Request::instance()->post('group_id');
            auto_validate('Group',['id_allot'=>$group_id],'allot');
            //权限id
-           $rule_id = input('post.rule_id');
+           $rule_id = \think\Request::instance()->post('rule_id/a');
            if(is_array($rule_id)){
                $rules = implode(',',$rule_id);
            }else{
@@ -357,33 +372,77 @@ class Rule extends Base
         }
    }
 
+    /**
+     * 添加管理员 - 20171201
+     */
+    public function searchUser()
+    {
+        $request = \think\Request::instance();
+        $group_id = $request->post('group_id');
+        $map['group_id'] = $group_id;
+        $admin_id = model('AuthGroupAccess')->getGroupUsers($map);
+        //查询所有成员
+        $all_admin = model('AdminUsers')->getAdminId();
+
+        $diff_admin = array_diff($all_admin,$admin_id);
+        $map_admin = [
+            'id' => ['in',$diff_admin]
+        ];
+        $fields = 'id,username';
+        $admin = model('AdminUsers')->getUsers($map_admin,$fields);
+        $admin = $this->toString($admin,'id');
+        $result = [
+            'data' => [
+                'admin' => $admin
+            ]
+        ];
+        return resultArray($result);
+    }
+
+
    /**
     * 执行添加成员-20171109
     */
    public function doAdduser()
    {
         $group_id = input('post.group_id');
-        $admin_id = input('post.admin_id');
+        $admin_id = \think\Request::instance()->post('admin_id/a');
+
         $data = [
             'uid' => $admin_id,
             'group_id' => $group_id
         ];
         auto_validate('GroupUser',$data);
         //执行添加
-       $isexist = model('AuthGroupAccess')->where($data)->value('uid');
+       $map = [
+           'uid' => ['in',$admin_id],
+           'group_id' => $group_id
+       ];
+       $isexist = model('AuthGroupAccess')->where($map)->value('uid');
        if(empty($isexist)){
-          $result_add =  model('AuthGroupAccess')->data($data)->save();
-          if($result_add){
-              $result = [
-                  'data' => [
-                      'message' => '添加成功'
-                  ]
-              ];
-          }else{
-              $result = [
-                  'error' => '添加失败'
-              ];
-          }
+           Db::startTrans();
+           try{
+               foreach($admin_id as $key => $value){
+                   $add_data = [
+                       'uid' => $value,
+                       'group_id' => $group_id,
+                       'create_time' => date('Y-m-d H:i:s',time()),
+                       'update_time' => date('Y-m-d H:i:s',time()),
+                   ];
+                    Db::name('auth_group_access')->insert($add_data);
+               }
+               Db::commit();
+               $result = [
+                   'data' => [
+                       'message' => '添加成功'
+                   ]
+               ];
+           }catch(\Exception $exception){
+                Db::rollback();
+               $result = [
+                   'error' => '添加失败'
+               ];
+           }
        }else{
            $result = [
                'data' => [
@@ -391,7 +450,6 @@ class Rule extends Base
                ]
            ];
        }
-
        return resultArray($result);
    }
    /**********************************************分组end********************************************************/
@@ -404,6 +462,11 @@ class Rule extends Base
    public function userList()
    {
         $userList = model('AdminUsers')->getUserList();
+        foreach($userList as $key => $value){
+            $group_id = model('AuthGroupAccess')->getGroupId($value['id']);
+            $group_name = model('AuthGroup')->getGroupNameArray(array_values($group_id));
+            $userList[$key]['group_name'] = $group_name;
+        }
         $result = [
             'data' => [
                 'user_list' => $userList
@@ -431,10 +494,13 @@ class Rule extends Base
             $username = trim(input('post.username'));
             $telephone = trim(input('post.telephone'));
             $password = trim(input('post.password'));
+            $group_id = \think\Request::instance()->post('group_id/a');
+            $status = input('post.status');
             $data = [
                 'username' => $username,
                 'telephone' => $telephone,
-                'password' => $password
+                'password' => $password,
+                'status' => $status
             ];
             auto_validate('Users',$data,'add');
             //判断该用户是否已经存在
@@ -442,8 +508,18 @@ class Rule extends Base
             //执行添加
             $data['create_time'] = date('Y-m-d H:i:s',time());
             $data['password'] = password_hash($data['password'],PASSWORD_DEFAULT);
-
+            $data['status'] = $status;
             $id = model('AdminUsers')->addData($data);
+            foreach($group_id as $key => $value){
+                $group_data = [
+                    'uid' => $id,
+                    'group_id' => $value,
+                    'create_time' => date('Y-m-d H:i:s',time()),
+                    'update_time' => date('Y-m-d H:i:s',time())
+                ];
+                model('AuthGroupAccess')->addData($group_data);
+            }
+
             if($id){
                 $result = [
                     'data' => [
@@ -456,7 +532,7 @@ class Rule extends Base
                 ];
             }
         }
-        return resultArray($result);
+        ajaxReturn($result);
     }
 
     /**
@@ -474,6 +550,10 @@ class Rule extends Base
             //查询管理员信息
             $fields = 'id,username,telephone,status';
             $userInfo = model('AdminUsers')->getUserInfo($admin_id,$fields);
+            //查询该管理员所在组
+            $user_group = model('AuthGroupAccess')->getGroupId($admin_id);
+            $userInfo['group_id'] = $user_group;
+            $userInfo['status'] = (string)$userInfo['status'];
             $result = [
                 'data' => [
                     'user_info' => $userInfo
@@ -482,18 +562,25 @@ class Rule extends Base
             return resultArray($result);
         }
         elseif($request->method() == 'POST'){
-            $admin_id = $request->post('admin_id');
-            $group_id = $request->post('group_id');
+            $admin_id = $request->post('id');
+            if(empty($admin_id)){
+                $this->addAdmin();
+            }
+            $group_id = $request->post('group_id/a');
             $username = trim($request->post('username'));
             $password = trim($request->post('password'));
             $telephone = trim($request->post('telephone'));
+            $status = $request->post('status');
             $data = [
                 'id' => $admin_id,
                 'username' => $username,
                 'telephone' => $telephone,
             ];
             auto_validate('Users',$data,'edit_do');
-
+            if(!empty($status))
+            {
+                $data['status'] = $status;
+            }
             if(!empty($password)){
                 $data['password'] = password_hash($password,PASSWORD_DEFAULT);
             }
@@ -533,35 +620,20 @@ class Rule extends Base
         }
     }
 
-    /**
-     * 获取管理员分组信息
-     */
-    public function getAdminGroup()
-    {
-        $admin_id = input('post.admin_id');
-        auto_validate('Users',['id'=>$admin_id],'edit');
-        if(!AdminUsers::get($admin_id)){
-            return resultArray(['error'=>'该管理员不存在']);
-        }
-        //查询所有分组
-        $all_groups = model('AuthGroup')->getGroupList();
-        //查询该管理员所在分组
-        $admin_groups = model('AuthGroupAccess')->getGroupId($admin_id);
-
-        foreach($all_groups as $key => $value){
-            if(in_array($value['id'],$admin_groups)){
-                $all_groups[$key]['status'] = 1;
-            }else{
-                $all_groups[$key]['status'] = 2;
-            }
-        }
-        $result = [
-            'data' => [
-                'all_groups' => $all_groups,
-            ]
-        ];
-        return resultArray($result);
-    }
    /*********************************************管理员end*******************************************************/
 
+
+   /**
+    * 递归修改id为字符串类型 - 20171201
+    */
+   public function toString($list,$field='')
+   {
+       $list = toString($list,'id');
+        foreach($list as $key => $value){
+            if(!empty($value['_data'])){
+                $list[$key]['_data']=$this->toString($value['_data'],'id');
+            }
+        }
+        return $list;
+   }
 }

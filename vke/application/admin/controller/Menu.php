@@ -39,15 +39,22 @@ class Menu extends Base
     public function index()
     {
         $admin_nav = new AdminMenu;
-        $fields = 'id,pid,name,mca';
+        $fields = 'id,pid,name,mca,icon,url';
         $data= $admin_nav ->getData('sorts,id',$fields);
+        foreach($data as $key => $value){
+            if(!empty($value['icon'])){
+                $image_url = explode(',',$value['icon']);
+                $data[$key]['icon'] = $image_url[0];
+                $data[$key]['icon_blue'] = $image_url[1];
+            }
+
+        }
         $result = [
             'data' => [
                 'menu' => $data,
                 //'data_menu' => $this->menu
             ]
         ];
-        return $data;
         return resultArray($result);
     }
 

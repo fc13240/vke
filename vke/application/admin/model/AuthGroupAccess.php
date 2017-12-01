@@ -12,9 +12,17 @@ use think\Db;
 
 class AuthGroupAccess extends Base
 {
-    public function getGroupUsers($group_id)
+    /**
+     *
+     * @param $group_id
+     * @return array
+     */
+    public function getGroupUsers($map)
     {
-
+        $admin_id = Db::name('auth_group_access')
+            ->where($map)
+            ->column('uid');
+        return $admin_id;
     }
 
     /**
@@ -24,7 +32,18 @@ class AuthGroupAccess extends Base
     public function getGroupId($admin){
         $group_id = Db::name('auth_group_access')
             ->where('uid',$admin)
+           // ->fetchsql(true)
             ->column('group_id');
+        return $group_id;
+    }
+
+    public function getGroup($admin)
+    {
+        $group_id = Db::name('auth_group_access')
+            ->where('uid',$admin)
+            // ->fetchsql(true)
+            ->field('group_id')
+            ->select();
         return $group_id;
     }
 }

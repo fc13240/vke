@@ -70,7 +70,7 @@ class User extends Controller
         //验证码
         $verify = input('post.verify');
         //是否记住密码
-        $isRemember = input('post.is_remember'); //1记住 2不记住
+        $isRemember = input('post.isRemember'); //1记住 0不记住
         //验证验证码
         $captcha = new \think\captcha\Captcha();
         if(!$captcha->check($verify)){

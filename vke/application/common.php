@@ -35,8 +35,8 @@ function addErrorOrder($member_id,$order_num,$msg)
 function resultArray($array)
 {
     if(isset($array['data'])) {
-        $array['error'] = '';
         $code = 200;
+        $array['error'] = '';
     } elseif (isset($array['error'])) {
         $code = 400;
         $array['data'] = '';
@@ -67,7 +67,8 @@ function ajaxReturn($array)
         'data'  => $array['data'],
         'error' => $array['error']
     ];
-    exit(json_encode($data));
+
+    exit(json_encode($data, JSON_UNESCAPED_UNICODE));
 }
 
 /**20171115
@@ -351,5 +352,26 @@ function sendMessage($array)
 
     $result = \think\Db::name('admin_message')->insert($data);
     return $result;
+}
+
+/**
+ * 数组内元素转为字符串类型 - 20171201
+ */
+function toString($array,$field='')
+{
+    foreach($array as $key => $value){
+        if(empty($field)){
+            $array[$key] = (string)$value;
+        }
+        elseif(is_array($field))
+        {
+
+        }
+        else
+        {
+            $array[$key][$field] = (string)$value[$field];
+        }
+    }
+    return $array;
 }
 

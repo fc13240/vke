@@ -55,4 +55,16 @@ class AuthGroup extends Base
             ->value('title');
         return $group_name;
     }
+
+    /**
+     * 获取用户组名
+     */
+    public function getGroupNameArray($group_id)
+    {
+        $group_name = Db::name('auth_group')
+            ->where('id','in',$group_id)
+            ->field('title')
+            ->select();
+        return $group_name;
+    }
 }

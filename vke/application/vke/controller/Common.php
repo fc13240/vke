@@ -89,16 +89,14 @@ class Common extends Controller
         $request = Request::instance();
         //获取表单上传到额图片
         $files = $request->file('images');
-
         if(empty($files)){
             $result = ['error'=>'请上传图片'];
             ajaxReturn($result);
         }
         foreach($files as $key => $file){
             //将图片移动到public/uploads/vke
-           $info = $file->move(ROOT_PATH.'public'.DS.'uploads'.DS.'vk');
+           $info = $file->validate(['size'=>'3145728','ext'=>'jpg,png,jpeg'])->move(ROOT_PATH.'public'.DS.'uploads'.DS.'vk');
             if($info){
-
                 // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
                 $url = str_replace('\\','/',$info->getSaveName());
                 $image_url[]= [

@@ -20,12 +20,12 @@ class Shareorder extends Base
     {
         //晒单id
         if(empty($share_id)){
-            ajaxReturn(['error'=>'请选择查看的晒单']);
+            return resultArray(['error'=>'请选择查看的晒单']);
         }
         //根据晒单id查询是否存在
         $value = db('member_evaluate')->where('evaluate_id',$share_id)->value('evaluate_id');
         if(empty($value)){
-            ajaxReturn(['error'=>'该订单不存在']);
+            return resultArray(['error'=>'该订单不存在']);
         }
     }
 
@@ -112,10 +112,10 @@ class Shareorder extends Base
         }
         if(is_array($share_id)){
             foreach($share_id as $key => $value){
-                $this->checkOrder($value['share_id']);
+                return $this->checkOrder($value['share_id']);
             }
         }else{
-            $this->checkOrder($share_id);
+            return $this->checkOrder($share_id);
         }
 
         $map['evaluate_id'] = ['in',$share_id];
