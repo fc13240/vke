@@ -50,7 +50,7 @@ class Goods extends Common
 
         //根据分类id调用淘宝客接口查询商品数据
         $fields = "id,title,pict_url,small_images,reserve_price,volume,zk_final_price,cat_name";
-        $goodsList = model('Product')->getIndexGoods($goods_type,'',$fields);
+        $goodsList = model('Product')->getIndexGoods($goods_type,'',$fields,'','coupon_number','desc');
         $goods_count = count($goodsList);
         //返回数据
         $result = [
@@ -66,17 +66,27 @@ class Goods extends Common
     //商品详情  需要传入商品id
     public function goodsDetail()
     {
-        $goods_id = input('goods_id');
+        $goods_id = Request::instance()->post('goods_id');
         if(empty($goods_id)){
             return resultArray(['error'=>'参数错误']);
         }
 
         //根据商品id,调用接口查询商品信息
-        $fields = "id,num_iid,title,pict_url,small_images,reserve_price,zk_final_price,provcity,volume";
+        $fields = "id,num_iid,title,pict_url,product_type,small_images,reserve_price,zk_final_price,provcity,volume,click_url";
         $goods_detail = model('Product')->getProductInfo($goods_id,$fields);
+        if(!empty($goods_detail['error'])){
+            return resultArray($goods_detail);
+        }
         if(empty($goods_detail)){
             return resultArray(['error'=>'参数错误']);
         }
+
+        if(!empty($goods_detail['small_images'])){
+            $goods_detail['small_images'] = explode(',',$goods_detail['small_images']);
+        }else{
+            $goods_detail['small_images'] = [];
+        }
+
 
         //浏览商品后,添加到我的浏览记录中   获取浏览历史时判断登录,根据登录状态获取不同的浏览历史
         //查询该会员是否登录

@@ -27,17 +27,44 @@ class Order extends Base
     {
         $request = $this->request;
         //接收筛选条件-下单日期
-        $date = $request->post('date');
-        //类别
-        $type = $request->post('type');
+        $start = $request->post('start');
+        $end = $request->post('end');
+        //类别 1充值 2提现 3实物
+        $type = $request->post('goods_type');
+
+        $express_status = $request->post('express_type');
         $map = [];
-        if(!empty($date)){
-            $map['exchange_time'] = $date;
+        if(!empty($start) && !empty($end)){
+            $map['exchange_time'] = ['between',[$start.' 00:00:00',$end.' 23:59:59']];
         }
-        if(!empty($type)){
-            $map['product_type'] = $type;
+        elseif(!empty($start)){
+            $map['exchange_time'] = ['gt',$start.' 23:59:59'];
+        }
+        elseif(!empty($end)){
+            $map['exchange_time'] = ['lt',$end.' 00:00:00'];
         }
 
+
+
+
+        if(!empty($type)){
+            if($type == 1){
+                $map['product_type'] = 1;
+                $map['type'] = 1;
+            }
+            elseif($type == 2){
+                $map['product_type'] = 1;
+                $map['type'] = 2;
+            }
+            elseif($type == 3){
+                $map['product_type'] = 2;
+            }
+
+        }
+
+        if(!empty($express_status)){
+            $map['express_status'] = $express_status;
+        }
         //查询订单
         $orderList = model('ExchangeOrder')->getOrderList($map);
 
@@ -56,7 +83,7 @@ class Order extends Base
     {
         $request = $this->request;
         //接受订单id
-        $order_id = $request->post('order_id');
+        $order_id = $request->post('order_id/a');
         if(empty($order_id)){
             return resultArray(['error'=>'请选择发货订单']);
         }
@@ -117,29 +144,49 @@ class Order extends Base
         $start_date = input('post.start');
         $end_date = input('post.end');
         $status = input('post.status');
-        if(empty($status)){
-            $status = 2;
+
+        if(empty($start_date) || empty($end_date)){
+            $end_date = date('Y-m-d',time());
+            $start_date = date('Y-m-d',time()-7*86400);
         }
         auto_validate('ShareData',['start'=>$start_date,'end'=>$end_date],'select');
 
-        $map['back_status'] = $status;
+        if(!empty($status)){
+            $map['back_status'] = $status;
+        }
+        $map['create_time'] = ['between',[$start_date,$end_date]];
         //执行查询
         $order_list = model('order')->getOrderList($map);
         $data = [
             'data' => [
-                'order_list' => $order_list
+                'order_list' => $order_list,
+                'start' => $start_date,
+                'end' => $end_date
             ]
         ];
         return resultArray($data);
     }
 
+    public function examineOrder()
+    {
+        $order_num = Request::instance()->post('order_num/a');
+        $status = Request::instance()->post('status');
+        switch($status){
+            case 1:
+                return $this->aggreeOrder($order_num);
+                break;
+            case 2:
+                return $this->refuseOrder($order_num);
+                break;
+        }
+    }
+
     /**
      * 订单通过奖励 - 20171127
      */
-    public function aggreeOrder()
+    public function aggreeOrder($order_num)
     {
         //订单id
-        $order_num = input('post.order_num/a');
         if(empty($order_num)){
             return resultArray(['error'=>'请选择订单']);
         }
@@ -193,10 +240,9 @@ class Order extends Base
     /**
      * 订单未通过 - 20171127
      */
-    public function refuseOrder()
+    public function refuseOrder($order_num)
     {
         //订单id
-        $order_num = input('post.order_num/a');
         if(empty($order_num)){
             return resultArray(['error'=>'请选择订单']);
         }

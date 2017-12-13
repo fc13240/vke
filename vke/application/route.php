@@ -12,131 +12,154 @@ use think\Route;
 //前台路由配置
 Route::rule([
     //首页-banner
-    'index_banner' => 'vke/Index/index_banner',
+    'api/index_banner' => 'vke/Index/index_banner',
     //首页-商品分类
-    'index_type' => 'vke/Index/index_type',
+    'api/index_type' => 'vke/Index/index_type',
     //首页-商店
-    'index_store_type' => 'vke/Index/index_store_type',
+    'api/index_store_type' => 'vke/Index/index_store_type',
     //首页-商品
-    'index_goods' => 'vke/Index/index_goods',
+    'api/index_goods' => 'vke/Index/index_goods',
     //商品列表页
-    'goodslist' => 'vke/Goods/goodsList',
+    'api/goodslist' => 'vke/Goods/goodsList',
     //商品列表页-分类
-    'goodslist_type' => 'vke/Goods/goodsListType',
+    'api/goodslist_type' => 'vke/Goods/goodsListType',
     //我的兑换
-    'myexchange' => 'vke/Myexchange/myExchange',
+    'api/myexchange' => 'vke/Myexchange/myExchange',
     //兑换记录-分类
-    'myexchange_type' => 'vke/Myexchange/myExchangeType',
+    'api/myexchange_type' => 'vke/Myexchange/myExchangeType',
     //会员元宝数
-    'member_acer' => 'vke/Ucenter/getMemberAcer',
+    'api/member_acer' => 'vke/Ucenter/getMemberAcer',
     //兑换记录-已免单金额
-    'myexchange_free' => 'vke/Myexchange/myExchangeFree',
+    'api/myexchange_free' => 'vke/Myexchange/myExchangeFree',
     //兑换积分商品
-    'exchange' => 'vke/Acerstore/exchangeProduct',
+    'api/exchange' => 'vke/Acerstore/exchangeProduct',
     //粉丝福利-banner
-    'fanswelfare_banner' => 'vke/Fanswelfare/fansWelfareBanner',
+    'api/fanswelfare_banner' => 'vke/Fanswelfare/fansWelfareBanner',
     //粉丝福利-商品
-    'fanswelfare' => 'vke/Fanswelfare/fansWelfare',
+    'api/fanswelfare' => 'vke/Fanswelfare/fansWelfare',
     //粉丝福利-分类
-    'fanswelfare_type' => 'vke/Fanswelfare/fansWelfareType',
+    'api/fanswelfare_type' => 'vke/Fanswelfare/fansWelfareType',
     //超值线报-banner
-    'newspaper_banner' => 'vke/Fanswelfare/newsPaperBanner',
+    'api/newspaper_banner' => 'vke/Fanswelfare/newsPaperBanner',
     //超值线报-商品
-    'newspaper_goods' => 'vke/Fanswelfare/newsPaperGoods',
+    'api/newspaper_goods' => 'vke/Fanswelfare/newsPaperGoods',
     //超值线报-抢购时间
-    'newspaper_time' => 'vke/Fanswelfare/newsPaper',
+    'api/newspaper_time' => 'vke/Fanswelfare/newsPaper',
     //超实惠-9.9-banner
-    'c_index_nine' => 'vke/Affordable/indexNine',
+    'api/c_index_nine' => 'vke/Affordable/indexNine',
     //超实惠-9.9-banner
-    'c_index_nineteen' => 'vke/Affordable/indexNineteen',
+    'api/c_index_nineteen' => 'vke/Affordable/indexNineteen',
     //超实惠-聚折扣
-    'c_index_discount' => 'vke/Affordable/indexDiscount',
+    'api/c_index_discount' => 'vke/Affordable/indexDiscount',
     //超实惠-应季必备
-    'c_index_season' => 'vke/Affordable/indexSeason',
+    'api/c_index_season' => 'vke/Affordable/indexSeason',
     //9.9专区-排序方式
-    'nine_sort' => 'vke/Affordable/nineSort',
+    'api/nine_sort' => 'vke/Affordable/nineSort',
     //9.9专区-排序方式
-    'nine' => 'vke/Affordable/nine',
+    'api/nine' => 'vke/Affordable/nine',
     //聚折扣
-    'discount' => 'vke/Affordable/discount',
+    'api/discount' => 'vke/Affordable/discount',
     //应季必备-banner
-    'season_banner' => 'vke/Affordable/seasonBanner',
+    'api/season_banner' => 'vke/Affordable/seasonBanner',
     //应季必备-商品
-    'seasonindex' => 'vke/Affordable/seasonIndex',
+    'api/seasonindex' => 'vke/Affordable/seasonIndex',
     //兑换详情-商品详情
-    'exchangeinfo' => 'vke/Acerstore/exchangeInfo',
+    'api/exchangeinfo' => 'vke/Acerstore/exchangeInfo',
     //兑换详情-默认地址
-    'exchangeinfo_address' => 'vke/Acerstore/exchangeInfoAddress',
+    'api/exchangeinfo_address' => 'vke/Acerstore/exchangeInfoAddress',
     //通知列表
-    'getmessage' => 'vke/Message/getMessage',
+    'api/getmessage' => 'vke/Message/getMessage',
     //提价意见反馈
-    'feedback' => 'vke/Feedback/feedback',
+    'api/feedback' => 'vke/Feedback/feedback',
     //个人中心
-    'center' => 'vke/Ucenter/center',
+    'api/center' => 'vke/Ucenter/center',
     //签到页面-签到奖励
-    'signpage_reward' => 'vke/Sign/signPage',
+    'api/signpage_reward' => 'vke/Sign/signPage',
     //签到页面-一周签到详情
-    'signpage_week' => 'vke/Sign/signPageWeek',
+    'api/signpage_week' => 'vke/Sign/signPageWeek',
     //签到页面-兑换记录
-    'signpage_history' => 'vke/Sign/signPageHistory',
+    'api/signpage_history' => 'vke/Sign/signPageHistory',
     //执行签到
-    'dosign' => 'vke/Sign/doSign',
+    'api/dosign' => 'vke/Sign/doSign',
     //用户个人信息
-    'userinfo' => 'vke/Ucenter/userInfo',
+    'api/userinfo' => 'vke/Ucenter/userInfo',
     //商品详情
-    'goodsdetail' => 'vke/Goods/goodsDetail',
+    'api/goodsdetail' => 'vke/Goods/goodsDetail',
     //我的足迹
-    'footprint' => 'vke/Ucenter/getFootPrint',
+    'api/footprint' => 'vke/Ucenter/getFootPrint',
     //收货地址
-    'address_list' => 'vke/Address/addressList',
+    'api/address_list' => 'vke/Address/addressList',
     //添加收货地址
-    'addAddress' => 'vke/Address/addAddress',
+    'api/addAddress' => 'vke/Address/addAddress',
     //编辑收货地址
-    'updateAddress' => 'vke/Address/updateAddress',
+    'api/updateAddress' => 'vke/Address/updateAddress',
     //删除收货地址
-    'delAddress' => 'vke/Address/delAddress',
+    'api/delAddress' => 'vke/Address/delAddress',
     //晒单
-    'shareOrder' => 'vke/Shareorder/shareOrder',
+    'api/shareOrder' => 'vke/Shareorder/shareOrder',
     //添加订单
-    'addOrder' => 'vke/Order/addOrderPage',
+    'api/addOrder' => 'vke/Order/addOrderPage',
     //我的订单
-    'myOrder' => 'vke/Order/myOrder',
+    'api/myOrder' => 'vke/Order/myOrder',
     //积分商城列表
-    'acerList' => 'vke/Acerstore/acerList',
+    'api/acerList' => 'vke/Acerstore/acerList',
     //我的晒单列表
-    'myShareOrder' => 'vke/Shareorder/myShareOrder',
+    'api/myShareOrder' => 'vke/Shareorder/myShareOrder',
     //晒单广场
-    'orderSquare' => 'vke/Shareorder/orderSquare',
+    'api/orderSquare' => 'vke/Shareorder/orderSquare',
     //搜索页面-搜索历史
-    'searchPage' => 'vke/Search/searchPage',
+    'api/searchPage' => 'vke/Search/searchPage',
     //搜索页面-热门推荐
-    'searchHot' => 'vke/Search/searchPageHot',
+    'api/searchHot' => 'vke/Search/searchPageHot',
     //搜索页面-默认搜索项
-    'searchDefault' => 'vke/Search/searchDefault',
+    'api/searchDefault' => 'vke/Search/searchDefault',
     //执行搜索
-    'doSearch' => 'vke/Search/doSearch',
+    'api/doSearch' => 'vke/Search/doSearch',
     //智搜页面
-    'AIsearch' => 'vke/Search/AIsearch',
+    'api/AIsearch' => 'vke/Search/AIsearch',
     //获得会员元宝数
-    'member_acer' => 'vke/Ucenter/getMemberAcer',
+    'api/member_acer' => 'vke/Ucenter/getMemberAcer',
     //上传图片
-    'upload' => 'vke/Index/upload',
+    'api/upload' => 'vke/Index/upload',
     //清空消息列表
-    'delMessage' => 'vke/AdminMessage/delMessage',
+    'api/delMessage' => 'vke/AdminMessage/delMessage',
     //清空我的足迹
-    'delPrint' => 'vke/Ucenter/delPrint',
+    'api/delPrint' => 'vke/Ucenter/delPrint',
     //清空搜索历史
-    'delSearch' => 'vke/Search/delSearch',
+    'api/delSearch' => 'vke/Search/delSearch',
     //搜索结果的排序
-    'serrchSort' => 'vke/Search/searchSort',
+    'api/serrchSort' => 'vke/Search/searchSort',
     //晒单说明
-    'shareBrief' => 'vke/Shareorder/shareBrief',
+    'api/shareBrief' => 'vke/Shareorder/shareBrief',
     //后台上传图片
-    'manager/upload' => 'vke/Index/upload'
+    'api/manager/upload' => 'vke/Index/upload',
+    //商品详情
+    'api/goodsDetail' => 'vke/Goods/goodsDetail',
+    //微信登录
+    'api/wechatLogin' => 'vke/Wechat/index',
+    //获取微信登录者信息
+    'api/getUserInfo' => 'vke/Wechat/getUserInfo',
+    'api/redirects' => 'vke/Redirects/redirects',
+    //生成淘口令
+    'api/command' => 'vke/Sdkproduct/createCommand',
+    //淘抢购api
+    'api/rob' => 'vke/Sdkproduct/robApi',
+    //聚划算api
+    'api/discount' => 'vke/Sdkproduct/discount',
+    //测试
+    'api/testCommand' => 'vke/Sdkproduct/testCommand',
+    'api/testTurn' => 'vke/Sdkproduct/testCommand',
+    //超值线报
+    'api/overflow' => 'vke/Sdkproduct/overflowCoupon'
 ]);
 
 Route::rule('manager/:c/:a','admin/:c/:a');
 
+Route::rule([
+    //小程序登录获得sessionKey
+    'app/login' => 'apps/Login/getSessionKey',
+    'app/checkMember' => 'apps/Member/checkMember'
+]);
 return [
     '__pattern__' => [
         'name' => '\w+',

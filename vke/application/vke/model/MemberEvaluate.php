@@ -36,7 +36,8 @@ class MemberEvaluate extends Model
     {
         $map = [
             'e.examine_status' => '1',
-            'e.is_del' => '2'
+            'e.is_del' => '2',
+            'e.is_square' => '1'
         ];
         $square = Db::table('vke_member_evaluate')
             ->alias('e')

@@ -103,9 +103,34 @@ class Product extends Model
             ->where($map)
             ->field($fields)
             ->find();
-        $productInfo['reserve_price'] = rmb($productInfo['reserve_price']);
-        $productInfo['zk_final_price'] = rmb($productInfo['zk_final_price']);
+       if(empty($productInfo)){
+           return ['error'=>'参数错误'];
+       }
+
+       if(!empty($productInfo['reserve_price'])){
+           $productInfo['reserve_price'] = rmb($productInfo['reserve_price']);
+       }
+       if(!empty($productInfo['zk_final_price'])){
+           $productInfo['zk_final_price'] = rmb($productInfo['zk_final_price']);
+       }
         return $productInfo;
     }
 
+
+    /**
+     * 查询该分类下关联商品 - 20171212
+     */
+    public function getRelevance($product_type,$limit = 6)
+    {
+        $map = [
+            'product_type'=>$product_type,
+            'on_sale' => 1
+        ];
+        $relevance_list = Db::name('product')
+            ->where($map)
+            ->limit($limit)
+            ->field('id,num_iid,title,pict_url,reserve_price,coupon_number,volume,zk_final_price')
+            ->select();
+        return $relevance_list;
+    }
 }

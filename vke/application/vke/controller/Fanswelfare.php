@@ -49,7 +49,7 @@ class Fanswelfare extends Common
             ->where('store_type','eq','2')
             ->where('on_sale','eq','1')
             ->order($this->sorts_type[$sorts_type],$pro_sorts[$sorts])
-            ->field('id,title,small_images,reserve_price,zk_final_price,volume,fans_acer')
+            ->field('id,title,small_images,pict_url,reserve_price,zk_final_price,volume,fans_acer')
             ->select();
 
         foreach($list as $key => $value){

@@ -25,6 +25,7 @@ class SearchHistory extends Model
         $history = DB::table('vke_search_history')
             ->where($map)
             ->order('number','desc')
+            ->distinct('keywords')
             ->field('keywords')
             ->select();
         return $history;

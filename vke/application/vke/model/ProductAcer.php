@@ -48,7 +48,9 @@ class ProductAcer extends Model
             ->where($map)
             ->field($fields)
             ->find();
-        $productInfo['market_price'] = rmb($productInfo['market_price']);
+        if(!empty($productInfo)){
+            $productInfo['market_price'] = rmb($productInfo['market_price']);
+        }
         return $productInfo;
     }
 }

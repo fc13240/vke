@@ -30,9 +30,9 @@ class Shareorder extends Common
         if(Request::instance()->isPost()){
             $user_id = $this->user_id;
             $data = [
-                'evaluate_detail' => input('post.evaluate'),
+                'evaluate_detail' => strip_tags(trim(input('post.evaluate'))),
                 'evaluate_url' => json_decode(input('post.evaluate_url',"")),
-                'order_num' => trim(input('post.order_num'))
+                'order_num' => strip_tags(trim(input('post.order_num')))
             ];
             $url_string = '';
             foreach($data['evaluate_url'] as $key => $value){

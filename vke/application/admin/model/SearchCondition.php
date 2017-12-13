@@ -26,7 +26,7 @@ class SearchCondition extends Base
         $condition = Db::name('search_condition')
             ->where($map)
             ->order('sorts','desc')
-            ->field('condition_min,condition_max')
+            ->field('id,condition_min,condition_max')
             ->select();
         return $condition;
     }

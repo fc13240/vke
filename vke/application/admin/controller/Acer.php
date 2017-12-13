@@ -18,7 +18,7 @@ class Acer extends Base
     public function acerConfig()
     {
         if(Request::instance()->isGet()){ //查询积分配置
-            $config = db('acer_config')->find(1);
+            $config = db('acer_config')->field('id,rate,url,day_limit,month_limit')->find(1);
 
             $result = [
                 'data' => [
@@ -28,7 +28,8 @@ class Acer extends Base
 
         }
         elseif(Request::instance()->isPost()){
-            $config = Request::instance()->post('config');
+
+            $config = Request::instance()->post();
             if(empty($config)){
                 return resultArray(['error'=>'请输入配置']);
             }

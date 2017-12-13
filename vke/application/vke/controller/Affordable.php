@@ -21,16 +21,24 @@ class Affordable extends Common
     public function indexNine()
     {
         //2.商店分类名称
-        $type_name_nine = model('StoreType')->getTypeName(4);
-        $type_name_nine['type_id'] = 4;
-        //3.三个展示商品
-        $fields = 'title,pict_url,small_images,reserve_price,zk_final_price';
-        $nine_goods = model('Product')->getIndexGoods('',4,$fields,3);
+        //$nine_arr = cache('type_name_nine');
+        if(empty($type_name_nine)){
+            $type_name_nine = model('StoreType')->getTypeName(4);
+            $type_name_nine['type_id'] = 4;
+            //3.三个展示商品
+            $fields = 'id,title,pict_url,small_images,reserve_price,zk_final_price';
+            $nine_goods = model('Product')->getIndexGoods('',4,$fields,3);
+            $nine_arr[] = $type_name_nine;
+            $nine_arr[] = $nine_goods;
+            cache('type_name_nine',$nine_arr);
+        }
+
+
 
         $result = [
             'data' => [
-                    'type' => $type_name_nine,
-                    'goods' => $nine_goods
+                    'type' => $nine_arr[0],
+                    'goods' => $nine_arr[1]
             ]
         ];
 
@@ -43,14 +51,22 @@ class Affordable extends Common
     public function indexNineteen()
     {
         //19.9专区
-        $type_name_nineteen = model('StoreType')->getTypeName(7);
-        $type_name_nineteen['type_id'] = 7;
-        $fields = 'title,pict_url,small_images,reserve_price,zk_final_price';
-        $nineteen_goods = model('Product')->getIndexGoods('',7,$fields,3);
+        //$nineteen_arr = cache('type_name_nineteen');
+        if(empty($type_name_nineteen)){
+            $type_name_nineteen = model('StoreType')->getTypeName(7);
+            $type_name_nineteen['type_id'] = 7;
+            $fields = 'id,title,pict_url,small_images,reserve_price,zk_final_price';
+            $nineteen_goods = model('Product')->getIndexGoods('',7,$fields,3);
+
+            $nineteen_arr[] = $type_name_nineteen;
+            $nineteen_arr[] = $nineteen_goods;
+            cache('type_name_nineteen',$nineteen_arr);
+        }
+
         $result = [
             'data' => [
-                    'type' => $type_name_nineteen,
-                    'goods' => $nineteen_goods,
+                    'type' => $nineteen_arr[0],
+                    'goods' => $nineteen_arr[1],
             ]
         ];
 
@@ -63,14 +79,23 @@ class Affordable extends Common
      */
     public function indexDiscount()
     {
-        $fields = 'title,pict_url,small_images,reserve_price,zk_final_price';
-        //聚折扣
-        $type_name_discount = model('StoreType')->getTypeName(5);
-        $discount_goods = model('Product')->getIndexGoods('',5,$fields,3);
+
+        //$discount_arr = cache('type_name_discount');
+        if(empty($discount_arr)){
+            $fields = 'id,title,pict_url,small_images,reserve_price,zk_final_price';
+            //聚折扣
+            $type_name_discount = model('StoreType')->getTypeName(5);
+            $discount_goods = model('Product')->getIndexGoods('',5,$fields,3);
+
+            $discount_arr[] = $type_name_discount;
+            $discount_arr[] = $discount_goods;
+            cache('type_name_discount',$discount_arr);
+        }
+
         $result = [
             'data' => [
-                'type' => $type_name_discount,
-                'goods' => $discount_goods
+                'type' => $discount_arr[0],
+                'goods' => $discount_arr[1]
             ],
         ];
         return resultArray($result);
@@ -81,15 +106,22 @@ class Affordable extends Common
      */
     public function indexSeason()
     {
-        //应季必备
-        $fields = 'title,pict_url,small_images,reserve_price,volume,zk_final_price';
-        $type_name_season = model('StoreType')->getTypeName(6);
-        $season_goods = model('Product')->getIndexGoods('',6,$fields);
+        //$season_arr = cache('type_name_season');
+        if(empty($season_arr)){
+            //应季必备
+            $fields = 'id,title,pict_url,small_images,reserve_price,volume,zk_final_price';
+            $type_name_season = model('StoreType')->getTypeName(6);
+            $season_goods = model('Product')->getIndexGoods('',6,$fields);
+
+            $season_arr[] = $type_name_season;
+            $season_arr[] = $season_goods;
+            cache('type_name_season',$season_arr);
+        }
 
         $result = [
             'data' => [
-                    'type' => $type_name_season,
-                    'goods' => $season_goods
+                    'type' => $season_arr[0],
+                    'goods' => $season_arr[1]
             ]
         ];
         return resultArray($result);

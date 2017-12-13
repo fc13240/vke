@@ -11,9 +11,38 @@ use app\common\controller\Base;
 use app\admin\model\AdminMenu;
 use think\Request;
 use think\Db;
+use \traits\controller\Data;
 
 class Menu extends Base
 {
+    public function totalMenu()
+    {
+        $fields = 'id,pid,name,mca,icon,url';
+        $data=Db::name('admin_menu')->field($fields)->order('sorts,id','desc')->select();
+        // 获取树形或者结构数据
+        $data= Data::channelLevel($data,0,'id');
+        $data_arr = [];
+        foreach($data as $key => $value){
+            $data_arr[] = $value;
+        }
+        foreach($data_arr as $key => $value){
+            if(!empty($value['_data'])){
+                $data_child = [];
+                foreach($value['_data'] as $k => $v){
+                    $data_child[] = $v;
+                };
+                $data_arr[$key]['_data'] = $data_child;
+            }
+        }
+        $result = [
+            'data' => [
+                'menu'=>$data_arr
+            ]
+        ];
+        return resultArray($result);
+    }
+
+
     /**
      * 未读消息条数以及最新一条消息 - 20171121
      */
@@ -23,6 +52,9 @@ class Menu extends Base
         $unreadCount = model('AdminMessage')->unreadCount();
         //查询最新的一条未读消息
         $latestMessage = model('AdminMessage')->latestMessage();
+        if(empty($latestMessage)){
+            $latestMessage = "";
+        }
         $result = [
             'data' => [
                 'count' => $unreadCount,
@@ -41,17 +73,32 @@ class Menu extends Base
         $admin_nav = new AdminMenu;
         $fields = 'id,pid,name,mca,icon,url';
         $data= $admin_nav ->getData('sorts,id',$fields);
+
+        $data_arr = [];
         foreach($data as $key => $value){
+            $data_arr[] = $value;
+        }
+        foreach($data_arr as $key => $value){
+            if(!empty($value['_data'])){
+                $data_child = [];
+                foreach($value['_data'] as $k => $v){
+                    $data_child[] = $v;
+                };
+                $data_arr[$key]['_data'] = $data_child;
+            }
+        }
+
+
+        foreach($data_arr as $key => $value){
             if(!empty($value['icon'])){
                 $image_url = explode(',',$value['icon']);
-                $data[$key]['icon'] = $image_url[0];
-                $data[$key]['icon_blue'] = $image_url[1];
+                $data_arr[$key]['icon'] = $image_url[0];
+                $data_arr[$key]['icon_blue'] = $image_url[1];
             }
-
         }
         $result = [
             'data' => [
-                'menu' => $data,
+                'menu' => $data_arr,
                 //'data_menu' => $this->menu
             ]
         ];
@@ -108,17 +155,20 @@ class Menu extends Base
     public function addMenu()
     {
         $menuName = trim(input('post.menu_name'));
-        $mca = strtolower(input('post.mca'));
+        $mca = strtolower(input('post.menu_mca'));
+        $url = trim(input('post.url'));
         $data = [
             'name' => $menuName,
             'mca' => $mca
         ];
         auto_validate('Menu',$data,'add_1');
+        $this->checkExist('AdminMenu','mca',$mca);
         //验证通过后添加数据库---添加菜单同时添加顶级权限
         $data_menu = [
             'pid' => 0,
             'name' => $menuName,
-            'mca' => $mca
+            'mca' => $mca,
+            'url' => $url
         ];
         $data_rule = [
             'pid' => 0,
@@ -139,7 +189,7 @@ class Menu extends Base
         }catch (\Exception $e){
             Db::rollback();
             $result = [
-                'error' => '添加失败'
+                'error' => $e->getMessage()
             ];
         }
         return resultArray($result);
@@ -155,12 +205,14 @@ class Menu extends Base
         $menu_id = $request->post('menu_id');
         $menu_name = trim($request->post('menu_name'));
         $menu_mca = strtolower($request->post('menu_mca'));
+        $url = trim($request->post('url'));
         $data = [
             'pid' => $menu_id,
             'name' => $menu_name,
-            'mca' => $menu_mca
+            'mca' => $menu_mca,
+            'url' => $url
         ];
-
+        auto_validate('Menu',$data,'add_2');
         //根据菜单id查询权限id
         $rule_id = Db::name('auth_rule')->where(['menu_id'=>$menu_id])->value('id');
         $data_rule = [
@@ -178,15 +230,17 @@ class Menu extends Base
             $data_rule['menu_id'] = $new_rule_id;
             Db::name('auth_rule')->insert($data_rule);
             Db::commit();
+
             $result = [
                 'data' => [
                     'message' => '添加成功'
                 ]
             ];
         }catch(\Exception $e){
+
             Db::rollback();
             $result = [
-                'error' => '添加失败'
+                'error' => $e->getMessage()
             ];
         }
         return resultArray($result);
@@ -220,12 +274,17 @@ class Menu extends Base
         elseif($request->method() == 'POST'){
             //接收菜单id
             $menu_id = $request->post('menu_id');
+            if(empty($menu_id)){
+                return $this->addMenu();
+            }
             $menu_name = trim($request->post('menu_name'));
             $menu_mca = strtolower($request->post('menu_mca'));
+            $menu_url = trim($request->post('url'));
             $data = [
                 'pid' => $menu_id,
                 'name' => $menu_name,
-                'mca' => $menu_mca
+                'mca' => $menu_mca,
+                'url' => $menu_url
             ];
             auto_validate('Menu',$data,'add_2');
             //验证模块/控制器/方法是否已经存在

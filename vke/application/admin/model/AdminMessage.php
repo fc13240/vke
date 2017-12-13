@@ -26,6 +26,19 @@ class AdminMessage extends Base
     }
 
     /**
+     * 消息列表-分页 - 20171204
+     */
+    public function getMessageListPage($map,$page_list)
+    {
+        $list = Db::name('admin_message')
+            ->where($map)
+            ->order(['status'=>'asc','add_time'=>'desc'])
+            ->field('id,type,title,msg,status,add_time')
+            ->paginate($page_list);
+        return $list;
+    }
+
+    /**
      * 查询未读消息条数 - 20171121
      */
     public function unreadCount()

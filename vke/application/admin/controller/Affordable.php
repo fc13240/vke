@@ -20,6 +20,11 @@ class Affordable extends Base
     {
         $fields = 'id,store_name,image';
         $storeList = model('StoreType')->getStoreList($fields);
+        foreach($storeList as $key => $value){
+            if(in_array($value['id'],['2','1'])){
+                unset($storeList[$key]);
+            }
+        }
         $result = [
             'data' => [
                 'store_list' => $storeList
@@ -35,11 +40,9 @@ class Affordable extends Base
     {
         $request = $this->request;
         //分类id
-        $store_type = $request->post('store_type/a');
+        $store_type = $request->post();
 
         foreach($store_type as $key => $value){
-            //检查该名称是否已经存在
-            $this->checkExist('StoreType','store_name',$value['store_name']);
             //检查id是否存在
             $id = model('StoreType')->where(['id'=>$value['id']])->value('id');
             if(empty($id)){

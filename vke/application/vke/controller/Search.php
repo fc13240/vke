@@ -8,6 +8,7 @@
 
 namespace app\vke\controller;
 use app\vke\controller\Common;
+use think\Request;
 
 class Search extends Common
 {
@@ -155,7 +156,10 @@ class Search extends Common
         $sort = $sorts_arr['sorts'];
         $user_id = $this->user_id;
         //接收搜索关键词
-        $keywords = input('keywords');
+
+        $keywords = Request::instance()->post('keywords');
+        $keywords = trim($keywords);
+        $keywords = strip_tags($keywords);
         if(empty($keywords)){
             return resultArray(['error'=>'请输入搜索内容']);
         }

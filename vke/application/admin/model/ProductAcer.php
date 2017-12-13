@@ -23,7 +23,7 @@ class ProductAcer extends Base
             ->where($map)
             ->order('add_time','desc')
             ->field('product_id,product_image,product_type,type,product_name,market_price,exchange_acer,stock,is_sale')
-            ->paginate(1,$count,['path'=>'http://192.168.1.101/admin/Acerstore/acerList']);
+            ->select();
         return $list;
     }
 
@@ -37,13 +37,19 @@ class ProductAcer extends Base
             ->field($fields)
             ->find();
         $small_images = explode(',',$info['small_images']);
-        foreach($small_images as $key => $value){
-            $arr[] = [
-                'image' => $value
-            ];
+        if($info['product_type'] == 2){
+            $info['goods_type'] = 3;
         }
-        $info['small_images'] = $arr;
-        $info['market_price'] = rmb($info['market_price']);
+        elseif($info['product_type'] == 1 && $info['type'] == 1){
+            $info['goods_type'] = 1;
+        }
+        elseif($info['product_type'] == 1 && $info['type'] == 2){
+            $info['goods_type'] = 2;
+        }
+        unset($info['product_type']);
+        unset($info['type']);
+        $info['small_images'] = $small_images;
+        $info['market_price'] = $info['market_price'];
         return $info;
     }
 }

@@ -6,10 +6,12 @@
  * Time: 10:39
  */
 namespace app\vke\controller;
+use think\Controller;
+
 header("Access-Control-Allow-Origin: *");
-class Userinfo
+class Userinfo extends Controller
 {
-    protected $app_id;
+    protected $app_id = 'wx3d2bfcee97e18e30';
     /**
      * 获取网页授权登录地址
      * @param string $redirect_uri
@@ -18,7 +20,7 @@ class Userinfo
      */
     public function get_authorize_url($redirect_uri = '', $state = ''){
         $redirect_uri = urlencode($redirect_uri);
-        return "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$this->app_id}&redirect_uri={$redirect_uri}&response_type=code&scope=snsapi_userinfo&state={$state}#wechat_redirect";
+        return "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$this->app_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=snsapi_userinfo&state=".$state."#wechat_redirect";
     }
 
     /**
@@ -35,6 +37,8 @@ class Userinfo
                 'access_token' => $token_data['access_token'],
                 'openid' => $token_data['openid']
             ];
+        }else{
+            return $token_data;
         }
 
     }

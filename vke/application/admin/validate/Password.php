@@ -12,9 +12,12 @@ use think\Validate;
 class Password extends Validate
 {
     protected $rule = [
-        'old_password' => ['require','regex'=>'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,14}$'],
+       /* 'old_password' => ['require','regex'=>'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,14}$'],
         'new_password' => ['require','regex'=>'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,14}$'],
-        'sure_password' => ['require','regex'=>'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,14}$'],
+        'sure_password' => ['require','regex'=>'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,14}$'],*/
+        'old_password' => ['require'],
+        'new_password' => ['require'],
+        'sure_password' => ['require'],
     ];
     protected $message = [
         'old_password.require' => '请输入原密码',

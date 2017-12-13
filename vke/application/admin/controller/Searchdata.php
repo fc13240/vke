@@ -19,12 +19,29 @@ class Searchdata extends Base
     {
         $start = input('post.start');
         $end = input('post.end');
+        if(empty($start) && empty($end)){
+            $end = date('Y-m-d',time());
+            $start = date('Y-m-d',time()-7*86400);
+        }
         auto_validate('ShareData',['start'=>$start,'end'=>$end]);
         $list = $this->searchWords($start,$end);
+
+        $keywords = [];
+        $number = [];
+        foreach($list as $key => $value){
+            $keywords[] = (string)$value['keywords'];
+            $number[] = (string)$value['number'];
+        }
         $result = [
             'data' => [
-                'search_list' => $list
-            ]
+                'left' => [
+                    'keywords' => $keywords,
+                    'number' => $number
+                ],
+                'right' => $list,
+                'start' => $start,
+                'end' => $end
+             ]
         ];
         return resultArray($result);
     }
@@ -33,7 +50,7 @@ class Searchdata extends Base
         $map['create_time'] = ['between',[$start,$end]];
         $list = model('SearchHistory')->getHistory($map,10);
         foreach($list as $key => $value){
-            $list[$key]['ratio'] = $value['number']/100;
+            $list[$key]['number'] = (string)$value['number'];
         }
         return $list;
     }

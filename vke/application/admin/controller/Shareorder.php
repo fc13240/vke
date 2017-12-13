@@ -13,6 +13,44 @@ use think\Db;
 
 class Shareorder extends Base
 {
+
+
+    public function getOrderList()
+    {
+        //查询日期
+        $start_date = Request::instance()->post('start');
+        $end_date = Request::instance()->post('end');
+        if(empty($start_date) || empty($end_date)){
+            $start_date = date('Y-m-d',time());
+            $end_date = date('Y-m-d',time()-7*86400);
+        }
+
+        //晒单状态- 0全部1广场中 2未加入
+        $is_square = Request::instance()->post('is_square');
+
+        //状态- 0全部 1审核通过 2未审核 3审核拒绝
+        $examine_status = Request::instance()->post('status');
+
+        $map['create_time'] = ['between',[$start_date,$end_date]];
+        if(!empty($is_square)){
+            $map['is_square'] = $is_square;
+        }
+
+        if(!empty($examine_status)){
+            $map['examine_status'] = $examine_status;
+        }
+
+        $order_list = model('MemberEvaluate')->getShareList($map);
+        $result = [
+            'data' => [
+                'order_list' => $order_list,
+                'start' => $start_date,
+                'end' => $end_date
+            ]
+        ];
+        return resultArray($result);
+    }
+
     /**
      * 验证订单
      */
@@ -40,10 +78,12 @@ class Shareorder extends Base
         $share_info = model('MemberEvaluate')->getEvaluateInfo($share_id);
         $share_info['update_time'] = substr($share_info['update_time'],0,10);
         $url = explode(',',$share_info['evaluate_url']);
-        foreach($url as $key => $value){
-            $share_url[] = [
-                'image' => $value
-            ];
+        if(!empty($url)){
+            foreach($url as $key => $value){
+                $share_url[] = [
+                    'image' => $value
+                ];
+            }
         }
         $share_info['evaluate_url'] = $share_url;
         $result = [
@@ -57,31 +97,41 @@ class Shareorder extends Base
     /**
      * 设置晒单奖励元宝数 - 20171117
      */
-    public function setRewardAcer()
+    public function setShareConfig()
     {
         if(Request::instance()->isGet()){
             $acer = db('acer_reward')->where('type',2)->value('acer_number');
+            $brief = db('share_config')->where('id',1)->value('value');
             $result = [
                 'data' => [
-                    'reward_acer' => $acer
+                    'acer' => $acer,
+                    'brief' => $brief
                 ]
             ];
         }
         elseif(Request::instance()->isPost()){
             //新设元宝数
             $new_acer = Request::instance()->post('acer');
+            $brief = Request::instance()->post('brief');
+            if(!empty($brief)){
+                return resultArray(['error'=>'请输入晒单规则说明']);
+            }
             if(!is_numeric($new_acer)){
                 return resultArray(['error'=>'请输入正确的元宝数量']);
             }
             //执行修改
-            $result_edit = db('acer_reward')->where('type',2)->update(['acer_number'=>$new_acer]);
-            if($result_edit !== false){
+            Db::startTrans();
+            try{
+                Db::name('acer_reward')->where('type',2)->update(['acer_number'=>$new_acer]);
+                Db::name('share_config')->where('type',1)->update(['value'=>$brief]);
+                Db::commit();
                 $result = [
                     'data' => [
                         'message' => '修改成功'
                     ]
                 ];
-            }else{
+            }catch(\Exception $e){
+                Db::rollback();
                 $result = [
                     'error' => '修改失败'
                 ];
@@ -96,9 +146,8 @@ class Shareorder extends Base
     public function examineOrder()
     {
         $examine_status = Request::instance()->post('type');
-        if(empty($examine_status)){
-            return resultArray(['error'=>'请选择通过或拒绝']);
-        }
+        $is_square = Request::instance()->post('is_square');
+
         if($examine_status == 2){
             $status = 1;
         }
@@ -106,16 +155,22 @@ class Shareorder extends Base
             $status = 3;
         }
         //未通过的订单id
-        $share_id = Request::instance()->post('share_id');
+        $share_id = Request::instance()->post('share_id/a');
         if(empty($share_id)){
             return resultArray(['error'=>'请选择审核的订单']);
         }
         if(is_array($share_id)){
             foreach($share_id as $key => $value){
-                return $this->checkOrder($value['share_id']);
+                $check_result = $this->checkOrder($value);
+                if($check_result){
+                    return $check_result;
+                }
             }
         }else{
-            return $this->checkOrder($share_id);
+            $check_result = $this->checkOrder($share_id);
+            if($check_result){
+                return $check_result;
+            }
         }
 
         $map['evaluate_id'] = ['in',$share_id];
@@ -127,16 +182,27 @@ class Shareorder extends Base
         $data = [];
         Db::startTrans();
         try{
-            Db::name('member_evaluate')->where('evaluate_id','in',$share_id)->update(['examine_status'=>$status]);
-            foreach($member_id as $key => $value){
-                $data[] = [
-                    'member_id' => $value,
-                    'msg' => $msg['value'],
-                    'title' => $msg['title'],
-                    'add_time' => date('Y-m-d H:i:s',time())
+            if(!empty($status)){
+                $edit_data = [
+                    'examine_status'=>$status
                 ];
+                foreach($member_id as $key => $value){
+                    $data[] = [
+                        'member_id' => $value,
+                        'msg' => $msg['value'],
+                        'title' => $msg['title'],
+                        'add_time' => date('Y-m-d H:i:s',time())
+                    ];
+                }
+                Db::name('message')->insertAll($data);
             }
-            Db::name('message')->insertAll($data);
+
+            if(!empty($is_square)){
+                $edit_data['is_square'] = $is_square;
+            }
+
+            Db::name('member_evaluate')->where('evaluate_id','in',$share_id)->update($edit_data);
+
             if($examine_status == 2){ //通过审核后,奖励用户元宝数
                 //判断当日所赠送元宝是否已达上限,如果到达上限,提醒后台
                 $day_limit = $this->isDayLimit();
@@ -149,6 +215,7 @@ class Shareorder extends Base
                     return resultArray(['error'=>'奖励元宝总数量']);
                 }
             }
+
             Db::commit();
             $result = [
                 'data' => [
@@ -161,42 +228,6 @@ class Shareorder extends Base
             $result = [
                 'error' => '操作失败'
             ];
-        }
-        return resultArray($result);
-    }
-
-    /**
-     * 晒单规则说明 - 20171117
-     */
-    public function shareBrief()
-    {
-        if(Request::instance()->isGet()){
-            $brief = db('share_config')->where('id',1)->value('value');
-            $result = [
-                'data' => [
-                    'brief' => $brief
-                ]
-            ];
-        }
-        elseif(Request::instance()->isPost()){
-            //晒规则说明'
-            $brief = Request::instance()->post('brief');
-            if(!empty($brief)){
-                return resultArray(['error'=>'请输入晒单规则说明']);
-            }
-            //执行修改
-            $result_edit = db('share_config')->where('type',1)->update(['value'=>$brief]);
-            if($result_edit !== false){
-                $result = [
-                    'data' => [
-                        'message' => '修改成功'
-                    ]
-                ];
-            }else{
-                $result = [
-                    'error' => '修改失败'
-                ];
-            }
         }
         return resultArray($result);
     }

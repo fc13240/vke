@@ -93,10 +93,9 @@ class Fanswelfare extends Base
             $order = ['create_time'=>'desc'];
         }
         $map = [
-            'store_type' => 2,
-            'on_sale' => 1
+            'store_type' => 2
         ];
-        $fields = 'id,pict_url,title,brokerage,reserve_price,zk_final_price,coupon_number,volume,stock,fans_acer';
+        $fields = 'id,pict_url,title,brokerage,reserve_price,zk_final_price,coupon_number,volume,stock,fans_acer,on_sale';
 //        $list = model('Product')->getGoodsList($map,$fields,$path,$page_limit);
         $list = model('Product')->getGoodsList($map,$fields,$order);
         $result = [
@@ -151,8 +150,8 @@ class Fanswelfare extends Base
      */
     public function batchSetAcer()
     {
-        $product_id = input('post.product_id');
-        $acer_num = input('post.acer_num');
+        $product_id = input('post.product_id/a');
+        $acer_num = input('post.acer_number');
         if(empty($product_id)){
             return resultArray(['error'=>'请选择粉丝福利商品']);
         }
@@ -191,21 +190,22 @@ class Fanswelfare extends Base
     {
         $request = Request::instance();
         //接收商品id
-        $product_id = $request->post('product_id');
+        $product_id = $request->post('product_id/a');
+        $on_sale = $request->post('on_sale');
         auto_validate('Goods',['goods_id'=>$product_id],'fans');
         //执行修改
         $map['id'] = ['in',$product_id];
-        $data['on_sale'] = 2;
+        $data['on_sale'] = $on_sale;
         $result_edit = model('Product')->editData($map,$data);
         if($result_edit !== false){
             $result = [
                 'data' => [
-                    'message' => '下架成功'
+                    'message' => '操作成功'
                 ]
             ];
         }else{
             $result = [
-                'error' => '下架失败'
+                'error' => '操作失败'
             ];
         }
 

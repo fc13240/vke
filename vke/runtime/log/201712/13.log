@@ -1,0 +1,1710 @@
+---------------------------------------------------------------
+[ 2017-12-13T17:25:49+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.177735s][吞吐率：5.63req/s] [内存消耗：2,149.93kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.027343s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:25:48') [ RunTime:0.000977s ]
+---------------------------------------------------------------
+[ 2017-12-13T17:30:40+08:00 ] 192.168.1.101 192.168.1.104 POST /api/c_index_discount
+[ info ] 192.168.1.101/api/c_index_discount [运行时间：0.469727s][吞吐率：2.13req/s] [内存消耗：2,354.63kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Affordable',
+    2 => 'indexDiscount',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/c_index_discount' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Affordable->indexDiscount[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Affordable.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.018555s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:30:40') [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_store_type` [ RunTime:0.148438s ]
+[ sql ] [ SQL ] SELECT `store_name`,`image` FROM `vke_store_type` WHERE  `status` = 1  AND `id` = 5 LIMIT 1 [ RunTime:0.034180s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_store_type',
+  'type' => 'const',
+  'possible_keys' => 'PRIMARY',
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 1,
+  'extra' => '',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_product` [ RunTime:0.032226s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`pict_url`,`small_images`,`reserve_price`,`zk_final_price` FROM `vke_product` WHERE  `on_sale` = 1  AND `store_type` = 5 ORDER BY `id`  asc LIMIT 3 [ RunTime:0.108398s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_product',
+  'type' => 'index',
+  'possible_keys' => NULL,
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => NULL,
+  'rows' => 3,
+  'extra' => 'Using where',
+) ]
+---------------------------------------------------------------
+[ 2017-12-13T17:30:40+08:00 ] 192.168.1.101 192.168.1.104 POST /api/c_index_nineteen
+[ info ] 192.168.1.101/api/c_index_nineteen [运行时间：0.104492s][吞吐率：9.57req/s] [内存消耗：2,354.70kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Affordable',
+    2 => 'indexNineteen',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/c_index_nineteen' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Affordable->indexNineteen[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Affordable.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:30:40') [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_store_type` [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT `store_name`,`image` FROM `vke_store_type` WHERE  `status` = 1  AND `id` = 7 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_store_type',
+  'type' => 'const',
+  'possible_keys' => 'PRIMARY',
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 1,
+  'extra' => '',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_product` [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`pict_url`,`small_images`,`reserve_price`,`zk_final_price` FROM `vke_product` WHERE  `on_sale` = 1  AND `store_type` = 7 ORDER BY `id`  asc LIMIT 3 [ RunTime:0.000977s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_product',
+  'type' => 'index',
+  'possible_keys' => NULL,
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => NULL,
+  'rows' => 3,
+  'extra' => 'Using where',
+) ]
+---------------------------------------------------------------
+[ 2017-12-13T17:30:41+08:00 ] 192.168.1.101 192.168.1.104 POST /api/c_index_season
+[ info ] 192.168.1.101/api/c_index_season [运行时间：0.159180s][吞吐率：6.28req/s] [内存消耗：2,358.27kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Affordable',
+    2 => 'indexSeason',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/c_index_season' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Affordable->indexSeason[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Affordable.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.030274s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:30:40') [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_store_type` [ RunTime:0.018555s ]
+[ sql ] [ SQL ] SELECT `store_name`,`image` FROM `vke_store_type` WHERE  `status` = 1  AND `id` = 6 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_store_type',
+  'type' => 'const',
+  'possible_keys' => 'PRIMARY',
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 1,
+  'extra' => '',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_product` [ RunTime:0.030274s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`pict_url`,`small_images`,`reserve_price`,`volume`,`zk_final_price` FROM `vke_product` WHERE  `on_sale` = 1  AND `store_type` = 6 ORDER BY `id`  asc [ RunTime:0.001954s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_product',
+  'type' => 'ALL',
+  'possible_keys' => NULL,
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 100,
+  'extra' => 'Using where; Using filesort',
+) ]
+[ warn ] SQL:SELECT `id`,`title`,`pict_url`,`small_images`,`reserve_price`,`volume`,`zk_final_price` FROM `vke_product` WHERE  `on_sale` = :where_on_sale  AND `store_type` = :where_store_type ORDER BY `id`  asc [Using where; Using filesort]
+---------------------------------------------------------------
+[ 2017-12-13T17:30:41+08:00 ] 192.168.1.101 192.168.1.104 POST /api/c_index_nine
+[ info ] 192.168.1.101/api/c_index_nine [运行时间：0.159180s][吞吐率：6.28req/s] [内存消耗：2,355.28kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Affordable',
+    2 => 'indexNine',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/c_index_nine' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Affordable->indexNine[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Affordable.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.029297s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:30:41') [ RunTime:0.001953s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_store_type` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `store_name`,`image` FROM `vke_store_type` WHERE  `status` = 1  AND `id` = 4 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_store_type',
+  'type' => 'const',
+  'possible_keys' => 'PRIMARY',
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 1,
+  'extra' => '',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_product` [ RunTime:0.029297s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`pict_url`,`small_images`,`reserve_price`,`zk_final_price` FROM `vke_product` WHERE  `on_sale` = 1  AND `store_type` = 4 ORDER BY `id`  asc LIMIT 3 [ RunTime:0.000977s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_product',
+  'type' => 'index',
+  'possible_keys' => NULL,
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => NULL,
+  'rows' => 3,
+  'extra' => 'Using where',
+) ]
+---------------------------------------------------------------
+[ 2017-12-13T17:31:47+08:00 ] 192.168.1.101 192.168.1.101 GET /manager/Sdkproduct/zhuanlian
+[ info ] 192.168.1.101/manager/Sdkproduct/zhuanlian [运行时间：0.365234s][吞吐率：2.74req/s] [内存消耗：2,453.40kb] [文件加载：60]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Sdkproduct',
+    2 => 'zhuanlian',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; multitransbubbletip=false; SULang=zh%2CCN; themename=vista; multitrans=0; PHPSESSID=jhnobh7u5n39lvlaoh2t4arvk0; thinkphp_show_page_trace=0|0',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => '192.168.1.101',
+)
+[ info ] [ PARAM ] array (
+  '/manager/Sdkproduct/zhuanlian' => '',
+  'c' => 'Sdkproduct',
+  'a' => 'zhuanlian',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\admin\controller\Sdkproduct->zhuanlian[ E:\phpStudy\PHPTutorial\WWW\vke\application\admin\controller\Sdkproduct.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_admin_menu` [ RunTime:0.063477s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [ RunTime:0.000977s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_admin_menu',
+  'type' => 'ALL',
+  'possible_keys' => NULL,
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 27,
+  'extra' => 'Using filesort',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_group_access` [ RunTime:0.012696s ]
+[ sql ] [ SQL ] SELECT `uid`,`group_id`,`title`,`rules` FROM `vke_auth_group_access` `a` INNER JOIN `vke_auth_group` `g` ON `a`.`group_id`=`g`.`id` WHERE  `a`.`uid` = 1  AND `g`.`status` = '1' [ RunTime:0.000976s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'a',
+  'type' => 'ref',
+  'possible_keys' => 'uid_group_id,uid,group_id',
+  'key' => 'uid_group_id',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 2,
+  'extra' => 'Using index',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_rule` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `vke_auth_rule` WHERE  `id` IN (1,2,3,4,5,6,9,10,11,12,13,14,15,16,17,18,20,22,24,26,27,7,21,19,28,44,45,56,53,54,55,58,61,60,57,62,71,72,63,64,65,66,67,68,69,70,73,52)  AND `type` = 1  AND `status` = 1 [ RunTime:0.000000s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_auth_rule',
+  'type' => 'ALL',
+  'possible_keys' => 'PRIMARY',
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 48,
+  'extra' => 'Using where',
+) ]
+[ warn ] SQL:SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [Using filesort]
+---------------------------------------------------------------
+[ 2017-12-13T17:33:05+08:00 ] 192.168.1.101 192.168.1.101 GET /manager/Sdkproduct/zhuanlian
+[ info ] 192.168.1.101/manager/Sdkproduct/zhuanlian [运行时间：0.168945s][吞吐率：5.92req/s] [内存消耗：2,454.36kb] [文件加载：60]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Sdkproduct',
+    2 => 'zhuanlian',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; multitransbubbletip=false; SULang=zh%2CCN; themename=vista; multitrans=0; PHPSESSID=jhnobh7u5n39lvlaoh2t4arvk0; thinkphp_show_page_trace=0|0',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'host' => '192.168.1.101',
+)
+[ info ] [ PARAM ] array (
+  '/manager/Sdkproduct/zhuanlian' => '',
+  'c' => 'Sdkproduct',
+  'a' => 'zhuanlian',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\admin\controller\Sdkproduct->zhuanlian[ E:\phpStudy\PHPTutorial\WWW\vke\application\admin\controller\Sdkproduct.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010742s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_admin_menu` [ RunTime:0.029297s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [ RunTime:0.000000s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_admin_menu',
+  'type' => 'ALL',
+  'possible_keys' => NULL,
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 27,
+  'extra' => 'Using filesort',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_group_access` [ RunTime:0.026367s ]
+[ sql ] [ SQL ] SELECT `uid`,`group_id`,`title`,`rules` FROM `vke_auth_group_access` `a` INNER JOIN `vke_auth_group` `g` ON `a`.`group_id`=`g`.`id` WHERE  `a`.`uid` = 1  AND `g`.`status` = '1' [ RunTime:0.000976s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'a',
+  'type' => 'ref',
+  'possible_keys' => 'uid_group_id,uid,group_id',
+  'key' => 'uid_group_id',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 2,
+  'extra' => 'Using index',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_rule` [ RunTime:0.017578s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `vke_auth_rule` WHERE  `id` IN (1,2,3,4,5,6,9,10,11,12,13,14,15,16,17,18,20,22,24,26,27,7,21,19,28,44,45,56,53,54,55,58,61,60,57,62,71,72,63,64,65,66,67,68,69,70,73,52)  AND `type` = 1  AND `status` = 1 [ RunTime:0.000000s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_auth_rule',
+  'type' => 'ALL',
+  'possible_keys' => 'PRIMARY',
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 48,
+  'extra' => 'Using where',
+) ]
+[ warn ] SQL:SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [Using filesort]
+---------------------------------------------------------------
+[ 2017-12-13T17:33:57+08:00 ] 192.168.1.101 192.168.1.101 GET /manager/Sdkproduct/zhuanlian
+[ info ] 192.168.1.101/manager/Sdkproduct/zhuanlian [运行时间：0.169922s][吞吐率：5.89req/s] [内存消耗：2,453.70kb] [文件加载：60]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Sdkproduct',
+    2 => 'zhuanlian',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; multitransbubbletip=false; SULang=zh%2CCN; themename=vista; multitrans=0; PHPSESSID=jhnobh7u5n39lvlaoh2t4arvk0; thinkphp_show_page_trace=0|0',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'host' => '192.168.1.101',
+)
+[ info ] [ PARAM ] array (
+  '/manager/Sdkproduct/zhuanlian' => '',
+  'c' => 'Sdkproduct',
+  'a' => 'zhuanlian',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\admin\controller\Sdkproduct->zhuanlian[ E:\phpStudy\PHPTutorial\WWW\vke\application\admin\controller\Sdkproduct.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_admin_menu` [ RunTime:0.033203s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [ RunTime:0.000976s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_admin_menu',
+  'type' => 'ALL',
+  'possible_keys' => NULL,
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 27,
+  'extra' => 'Using filesort',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_group_access` [ RunTime:0.010743s ]
+[ sql ] [ SQL ] SELECT `uid`,`group_id`,`title`,`rules` FROM `vke_auth_group_access` `a` INNER JOIN `vke_auth_group` `g` ON `a`.`group_id`=`g`.`id` WHERE  `a`.`uid` = 1  AND `g`.`status` = '1' [ RunTime:0.000976s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'a',
+  'type' => 'ref',
+  'possible_keys' => 'uid_group_id,uid,group_id',
+  'key' => 'uid_group_id',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 2,
+  'extra' => 'Using index',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_rule` [ RunTime:0.017578s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `vke_auth_rule` WHERE  `id` IN (1,2,3,4,5,6,9,10,11,12,13,14,15,16,17,18,20,22,24,26,27,7,21,19,28,44,45,56,53,54,55,58,61,60,57,62,71,72,63,64,65,66,67,68,69,70,73,52)  AND `type` = 1  AND `status` = 1 [ RunTime:0.000976s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_auth_rule',
+  'type' => 'ALL',
+  'possible_keys' => 'PRIMARY',
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 48,
+  'extra' => 'Using where',
+) ]
+[ warn ] SQL:SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [Using filesort]
+---------------------------------------------------------------
+[ 2017-12-13T17:34:07+08:00 ] 192.168.1.101 192.168.1.101 GET /manager/Sdkproduct/zhuanlian
+[ info ] 192.168.1.101/manager/Sdkproduct/zhuanlian [运行时间：0.219727s][吞吐率：4.55req/s] [内存消耗：2,453.68kb] [文件加载：60]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Sdkproduct',
+    2 => 'zhuanlian',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; multitransbubbletip=false; SULang=zh%2CCN; themename=vista; multitrans=0; PHPSESSID=jhnobh7u5n39lvlaoh2t4arvk0; thinkphp_show_page_trace=0|0',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'host' => '192.168.1.101',
+)
+[ info ] [ PARAM ] array (
+  '/manager/Sdkproduct/zhuanlian' => '',
+  'c' => 'Sdkproduct',
+  'a' => 'zhuanlian',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\admin\controller\Sdkproduct->zhuanlian[ E:\phpStudy\PHPTutorial\WWW\vke\application\admin\controller\Sdkproduct.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010742s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_admin_menu` [ RunTime:0.033203s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [ RunTime:0.000000s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_admin_menu',
+  'type' => 'ALL',
+  'possible_keys' => NULL,
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 27,
+  'extra' => 'Using filesort',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_group_access` [ RunTime:0.028320s ]
+[ sql ] [ SQL ] SELECT `uid`,`group_id`,`title`,`rules` FROM `vke_auth_group_access` `a` INNER JOIN `vke_auth_group` `g` ON `a`.`group_id`=`g`.`id` WHERE  `a`.`uid` = 1  AND `g`.`status` = '1' [ RunTime:0.000000s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'a',
+  'type' => 'ref',
+  'possible_keys' => 'uid_group_id,uid,group_id',
+  'key' => 'uid_group_id',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 2,
+  'extra' => 'Using index',
+) ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_auth_rule` [ RunTime:0.031250s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `vke_auth_rule` WHERE  `id` IN (1,2,3,4,5,6,9,10,11,12,13,14,15,16,17,18,20,22,24,26,27,7,21,19,28,44,45,56,53,54,55,58,61,60,57,62,71,72,63,64,65,66,67,68,69,70,73,52)  AND `type` = 1  AND `status` = 1 [ RunTime:0.000977s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_auth_rule',
+  'type' => 'ALL',
+  'possible_keys' => 'PRIMARY',
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 48,
+  'extra' => 'Using where',
+) ]
+[ warn ] SQL:SELECT `id`,`pid`,`name`,`mca` FROM `vke_admin_menu` ORDER BY sorts,id  desc [Using filesort]
+---------------------------------------------------------------
+[ 2017-12-13T17:43:27+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.221679s][吞吐率：4.51req/s] [内存消耗：2,330.48kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0',
+  'accept' => 'application/json, text/plain, */*',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://localhost:8888/',
+  'connection' => 'close',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'content-length' => '0',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.153320s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:43:27') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T17:43:27+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.225586s][吞吐率：4.43req/s] [内存消耗：2,083.33kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0',
+  'accept' => 'application/json, text/plain, */*',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://localhost:8888/',
+  'connection' => 'close',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'content-length' => '0',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.019531s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.143554s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:43:27') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T17:43:27+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.259765s][吞吐率：3.85req/s] [内存消耗：2,149.39kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0',
+  'accept' => 'application/json, text/plain, */*',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://localhost:8888/',
+  'connection' => 'close',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'content-length' => '0',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.160157s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 17:43:27') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:02:23+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.161132s][吞吐率：6.21req/s] [内存消耗：2,149.82kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.067383s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:02:23') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:02:23+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.098633s][吞吐率：10.14req/s] [内存消耗：2,083.77kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.028321s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:02:23') [ RunTime:0.000977s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:02:23+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.264648s][吞吐率：3.78req/s] [内存消耗：2,342.98kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.033203s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:02:23') [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_banner` [ RunTime:0.084961s ]
+[ sql ] [ SQL ] SELECT `banner_id`,`banner_image`,`banner_url` FROM `vke_banner` WHERE  `type_id` = 1  AND `status` = 1 ORDER BY `sorts`  desc [ RunTime:0.033203s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'vke_banner',
+  'type' => 'ALL',
+  'possible_keys' => NULL,
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 10,
+  'extra' => 'Using where; Using filesort',
+) ]
+[ warn ] SQL:SELECT `banner_id`,`banner_image`,`banner_url` FROM `vke_banner` WHERE  `type_id` = :where_type_id  AND `status` = :where_status ORDER BY `sorts`  desc [Using where; Using filesort]
+---------------------------------------------------------------
+[ 2017-12-13T18:02:35+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.068360s][吞吐率：14.63req/s] [内存消耗：2,330.84kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.017578s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:02:35') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:02:35+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.111329s][吞吐率：8.98req/s] [内存消耗：2,083.56kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.026367s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.040039s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:02:35') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:02:35+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.090820s][吞吐率：11.01req/s] [内存消耗：2,149.75kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.028320s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:02:35') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:08:47+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.083985s][吞吐率：11.91req/s] [内存消耗：2,149.75kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012695s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:08:47') [ RunTime:0.000976s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:08:48+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.083008s][吞吐率：12.05req/s] [内存消耗：2,083.56kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.019532s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:08:48') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:08:48+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.074219s][吞吐率：13.47req/s] [内存消耗：2,330.84kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.016602s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:08:48') [ RunTime:0.000977s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:17:50+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.085938s][吞吐率：11.64req/s] [内存消耗：2,330.91kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.027344s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:17:50') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:17:50+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.076172s][吞吐率：13.13req/s] [内存消耗：2,083.56kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.030273s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:17:50') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:17:50+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.087891s][吞吐率：11.38req/s] [内存消耗：2,149.82kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.028320s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:17:50') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:17:51+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.071289s][吞吐率：14.03req/s] [内存消耗：2,083.56kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.027344s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:17:51') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:17:51+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.078125s][吞吐率：12.80req/s] [内存消耗：2,330.84kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.027344s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:17:51') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:17:52+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.075195s][吞吐率：13.30req/s] [内存消耗：2,149.75kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.028320s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:17:52') [ RunTime:0.000976s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:18:00+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.075195s][吞吐率：13.30req/s] [内存消耗：2,330.84kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.028320s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:18:00') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:18:00+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.074219s][吞吐率：13.47req/s] [内存消耗：2,083.56kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.030273s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:18:00') [ RunTime:0.000977s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:18:01+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.075195s][吞吐率：13.30req/s] [内存消耗：2,149.75kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.027344s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:18:01') [ RunTime:0.000976s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:19:15+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_banner
+[ info ] 192.168.1.101/api/index_banner [运行时间：0.068360s][吞吐率：14.63req/s] [内存消耗：2,330.84kb] [文件加载：57]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_banner',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_banner' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_banner[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:19:15') [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:19:15+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_goods
+[ info ] 192.168.1.101/api/index_goods [运行时间：0.081055s][吞吐率：12.34req/s] [内存消耗：2,149.75kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_goods',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_goods' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_goods[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.018554s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:19:15') [ RunTime:0.000977s ]
+---------------------------------------------------------------
+[ 2017-12-13T18:19:16+08:00 ] 192.168.1.101 192.168.1.104 POST /api/index_type
+[ info ] 192.168.1.101/api/index_type [运行时间：0.070312s][吞吐率：14.22req/s] [内存消耗：2,083.56kb] [文件加载：55]
+[ info ] [ LANG ] E:\phpStudy\PHPTutorial\WWW\vke\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'vke',
+    1 => 'Index',
+    2 => 'index_type',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => '192.168.1.101',
+  'connection' => 'close',
+  'content-length' => '0',
+  'accept' => 'application/json, text/plain, */*',
+  'origin' => 'http://localhost:8888',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.01.171013 MicroMessenger/6.5.7 Language/zh_CN webview/{{webviewID}} webdebugger port/9974',
+  'referer' => 'http://localhost:8888/',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=nmeg31p3buf04vsbh6lposm6a2',
+)
+[ info ] [ PARAM ] array (
+  '/api/index_type' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] app\vke\controller\Index->index_type[ E:\phpStudy\PHPTutorial\WWW\vke\application\vke\controller\Index.php ]
+[ info ] [ CACHE ] INIT Memcache
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:host=127.0.0.1;dbname=vke;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vke_notes` [ RunTime:0.018555s ]
+[ sql ] [ SQL ] INSERT INTO `vke_notes` (`ip` , `create_time`) VALUES ('192.168.1.104' , '2017-12-13 18:19:16') [ RunTime:0.000000s ]

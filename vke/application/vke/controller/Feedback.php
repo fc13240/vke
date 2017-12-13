@@ -8,6 +8,7 @@
 
 namespace app\vke\controller;
 use app\vke\controller\Common;
+use think\Request;
 
 class Feedback extends Common
 {
@@ -17,7 +18,9 @@ class Feedback extends Common
     public function feedback()
     {
         //接受并验证数据
-        $msg = input('msg');
+        $msg = Request::instance()->post('msg');
+        $msg = trim($msg);
+        $msg = strip_tags($msg);
         $telephone = input('telephone');
         $data = [
             'telephone' => $telephone,

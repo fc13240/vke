@@ -25,12 +25,12 @@ class Address extends Common
         }
         //验证数据
         $data = [
-            'person_name' => trim(input('post.person_name')),
-            'telephone' => trim(input('post.telephone')),
-            'province' => $address[0],
-            'country' => $address[1],
-            'district' => $address[2],
-            'address' => trim(input('post.detail')),
+            'person_name' => strip_tags(trim(input('post.person_name'))),
+            'telephone' => strip_tags(trim(input('post.telephone'))),
+            'province' => strip_tags(trim($address[0])),
+            'country' => strip_tags(trim($address[1])),
+            'district' => strip_tags(trim($address[2])),
+            'address' => strip_tags(trim(input('post.detail'))),
             'is_default' => input('is_default') ? trim(input('is_default')) : '2'
         ];
         $validate = validate('Address');
@@ -116,12 +116,12 @@ class Address extends Common
                 return resultArray(['error'=>'请选择省市区']);
             }
             $data = [
-                'person_name' => input('post.person_name'),
-                'telephone' => input('post.telephone'),
-                'province' => $address[0],
-                'country' => $address[1],
-                'district' => $address[2],
-                'address' => input('post.detail'),
+                'person_name' => strip_tags(trim(input('post.person_name'))),
+                'telephone' => strip_tags(trim(input('post.telephone'))),
+                'province' => strip_tags(trim($address[0])),
+                'country' => strip_tags(trim($address[1])),
+                'district' => strip_tags(trim($address[2])),
+                'address' => strip_tags(trim(input('post.detail'))),
                 'is_default' => input('is_default') ? input('is_default') : '2',
             ];
             $validate = validate('Address');

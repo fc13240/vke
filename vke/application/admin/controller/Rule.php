@@ -17,7 +17,7 @@ use think\Db;
 
 class Rule extends Base
 {
-/*****************************************权限start**********************************************************/
+/*****************************************权限start******************************************************/
     /**
      * 权限列表-20171108
      */
@@ -308,7 +308,9 @@ class Rule extends Base
            $group_id = \think\Request::instance()->post('group_id');
            auto_validate('Group',['id_allot'=>$group_id],'allot');
            //权限id
-           $rule_id = \think\Request::instance()->post('rule_id/a');
+           $rule_id = \think\Request::instance()->post('rule_id/a');//全部为最后一级id,查找所有父级id
+
+           //递归查询父级id
            if(is_array($rule_id)){
                $rules = implode(',',$rule_id);
            }else{
@@ -429,7 +431,7 @@ class Rule extends Base
                        'create_time' => date('Y-m-d H:i:s',time()),
                        'update_time' => date('Y-m-d H:i:s',time()),
                    ];
-                    Db::name('auth_group_access')->insert($add_data);
+                    Db::name('auth_group_access')->add($add_data);
                }
                Db::commit();
                $result = [

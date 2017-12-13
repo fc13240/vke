@@ -50,4 +50,18 @@ class MemberEvaluate extends Base
         }
         return array_keys($member_id);
     }
+
+    /**
+     * 获得晒单列表 - 20171211
+     */
+    public function getShareList($map)
+    {
+        $map['is_del'] = 2;
+        $list = Db::view('MemberEvaluate','evaluate_id,evaluate_url,evaluate_detail,order_num,create_time,is_square,examine_status,is_del')
+            ->view('Member','wechat_nickname','MemberEvaluate.member_id = Member.member_id')
+            ->where($map)
+            ->order('create_time','desc')
+            ->select();
+        return $list;
+    }
 }

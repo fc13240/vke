@@ -84,9 +84,9 @@ class Acerstore extends Common
         //验证用户登录状态
         $this->checkLogin();
         $user_id = $this->user_id;
-        $number = input('post.number');
-        $productId = input('post.product_id');
-        $telephone = input('post.telephone');
+        $number = strip_tags(trim(input('post.number')));
+        $productId = strip_tags(trim(input('post.product_id')));
+        $telephone = strip_tags(trim(input('post.telephone')));
         $address_id = input('post.address_id');
 //        //*****测试数据*****
 //        $number = 1;

@@ -23,9 +23,19 @@ class Goodsdata extends Base
             $month = date('Y-m');
         }
         $sortType = $this->searchData1($month);
+        $name = [];
+        $count = [];
+        foreach($sortType as $key => $value){
+            $name[] = $value['cate_name'];
+            $count[] = (int)$value['total_number'];
+        }
         $result = [
             'data' => [
-                'more_data' => $sortType
+                'left' => [
+                    'cate_name' => $name,
+                    'total_number' => $count
+                ],
+               'right' =>$sortType
             ]
         ];
         return resultArray($result);
@@ -83,7 +93,7 @@ class Goodsdata extends Base
     public function export1()
     {
         //接收年月
-        $month = Request::instance()->post('month');
+        $month = Request::instance()->get('month');
         if(empty($month)){
             $month = date('Y-m');
         }

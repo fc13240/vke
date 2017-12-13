@@ -12,13 +12,37 @@ use think\Request;
 
 class Summarydata extends Base
 {
+    public function summaryData()
+    {
+        $type = Request::instance()->post('type');//1访问数据 2用户数据 3搜索数据 4元宝消耗
+        $date_type = Request::instance()->post('date_type');//1昨日 2周 3月
+        if(empty($type) || empty($date_type)){
+            return resultArray(['error'=>'参数错误']);
+        }
+        switch($type)
+        {
+            case 1:
+                return $this->visitData($date_type);
+                break;
+            case 2:
+                return $this->memberData($date_type);
+                break;
+            case 3:
+                return $this->searchData($date_type);
+                break;
+            case 4:
+                return $this->acerData($date_type);
+                break;
+        }
+    }
+
+
     /**
      * 首页-总数据-访问数据 - 20171116
      */
-    public function visitData()
+    public function visitData($date_type)
     {
         //接收时间
-        $date_type = Request::instance()->get('date_type');
         if(empty($date_type)){
             return resultArray(['error'=>'请选择查看时间']);
         }
@@ -35,7 +59,9 @@ class Summarydata extends Base
         }
         $result = [
             'data'=>[
-                'login_list' => $login_arr
+                'time' => $login_arr[0],
+                'count' => $login_arr[1],
+                'total_count' => (string)$login_arr[2]
             ]
         ];
         return resultArray($result);
@@ -47,18 +73,18 @@ class Summarydata extends Base
     protected function yesterdayLogin()
     {
         $date = date('Y-m-d',strtotime('-1 days'));
+        $total_count = 0;
         for($i=0;$i<=22;$i+=2){
             $startDate = $date.' '.$i.':00:00';
             $endDate = $date.' '.($i+1).':59:59';
             //查询这期间登录过的人数
             $map['last_login_time'] = ['between',[$startDate,$endDate]];
             $count = model('Member')->getLoginCount($map);
-            $login_arr[] = [
-                'time' => $i,
-                'count' => $count
-            ];
+            $time[] = (string)$i;
+            $count_arr[] = $count;
+            $total_count += $count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -68,15 +94,18 @@ class Summarydata extends Base
     {
         //获取本周日期
         $week =  getWeekTime();
+        $total_count = 0;
         foreach($week as $key => $value){
             //查询每天的登录人数
             $map['last_login_time'] = ['between',[$value['start'],$value['end']]];
             $count = model('Member')->getLoginCount($map);
-            $login_arr[] = [
-                'time' => $value['week'] == 0 ? 7 : $value['week'],
-                'count' => $count
-            ];
+            $time[] = $value['week'] == "0" ? "7" : $value['week'];
+            $count_arr[] = (string)$count;
+            $total_count += $count;
         }
+
+
+        $login_arr = [$time,$count_arr,$total_count];
         return $login_arr;
     }
 
@@ -87,17 +116,18 @@ class Summarydata extends Base
     {
         $month = date('Y-m');
         $month_week = month($month);
+        $total_count = 0;
         foreach($month_week as $key => $value){
             $startDate = reset($value).' 00:00:00';
             $endDate = end($value).' 23:59:59';
             $map['last_login_time'] = ['between',[$startDate,$endDate]];
             $count = model('Member')->getLoginCount($map);
-            $login_arr[] = [
-                'time' => $key+1,
-                'count' => $count
-            ];
+
+            $time[] = (string)($key+1);
+            $count_arr[] = (string)$count;
+            $total_count += $count;
         }
-        return $login_arr;
+        return [$time,$count_arr];
     }
 
     /**
@@ -150,9 +180,8 @@ class Summarydata extends Base
     /**
      *用户数据(新增人数) - 20171122
      */
-    public function memberData()
+    public function memberData($data_type)
     {
-        $data_type = input('post.type');
         if(empty($data_type)){
             return resultArray(['error'=>'请选择查看时间']);
         }
@@ -168,7 +197,11 @@ class Summarydata extends Base
                 break;
         }
         $result = [
-            'data' => $data
+            'data' =>[
+                'time' => $data[0],
+                'count' => $data[1],
+                'total_count' => (string)$data[2]
+            ]
         ];
         return resultArray($result);
     }
@@ -178,18 +211,18 @@ class Summarydata extends Base
     public function yesterdayMember()
     {
         $date = date('Y-m-d',strtotime('-1 days'));
+        $total_count = 0;
         for($i=0;$i<=22;$i+=2){
             $startDate = $date.' '.$i.':00:00';
             $endDate = $date.' '.($i+1).':59:59';
             //查询这期间新增人数
             $map['create_time'] = ['between',[$startDate,$endDate]];
             $count = model('Member')->getLoginCount($map);
-            $login_arr[] = [
-                'time' => $i,
-                'count' => $count
-            ];
+            $time[] = (string)$i;
+            $count_arr[] = (string)$count;
+            $total_count += $count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -199,16 +232,16 @@ class Summarydata extends Base
     {
         //获取本周日期
         $week =  getWeekTime();
+        $total_count = 0;
         foreach($week as $key => $value){
             //查询每天的登录人数
             $map['create_time'] = ['between',[$value['start'],$value['end']]];
             $count = model('Member')->getLoginCount($map);
-            $login_arr[] = [
-                'time' => $value['week'] == 0 ? 7 : $value['week'],
-                'count' => $count
-            ];
+            $time[] = $value['week'] == 0 ? '7' : $value['week'];
+            $count_arr[] = $count;
+            $total_count += $count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -218,25 +251,25 @@ class Summarydata extends Base
     {
         $month = date('Y-m');
         $month_week = month($month);
+        $total_count = 0;
         foreach($month_week as $key => $value){
             $startDate = reset($value).' 00:00:00';
             $endDate = end($value).' 23:59:59';
             $map['create_time'] = ['between',[$startDate,$endDate]];
             $count = model('Member')->getLoginCount($map);
-            $login_arr[] = [
-                'time' => $key+1,
-                'count' => $count
-            ];
+            $time[] = (string)($key+1);
+            $count[] = (string)$count;
+            $total_count += $count;
         }
-        return $login_arr;
+        $login_arr['total_count'] = $total_count;
+        return [$time,$count,$total_count];
     }
 
     /**
      * 搜索数据(搜索词) - 20171122
      */
-    public function searchData()
+    public function searchData($data_type)
     {
-        $data_type = input('post.type');
         if(empty($data_type)){
             return resultArray(['error'=>'请选择查看时间']);
         }
@@ -252,7 +285,11 @@ class Summarydata extends Base
                 break;
         }
         $result = [
-            'data' => $data
+            'data' => [
+                'time' => $data[0],
+                'count' => $data[1],
+                'total_count' => (string)$data[2]
+            ]
         ];
         return resultArray($result);
     }
@@ -263,18 +300,19 @@ class Summarydata extends Base
     public function yesterdaySearch()
     {
         $date = date('Y-m-d',strtotime('-1 days'));
+        $total_count = 0;
         for($i=0;$i<=22;$i+=2){
             $startDate = $date.' '.$i.':00:00';
             $endDate = $date.' '.($i+1).':59:59';
             //查询这期间新增人数
             $map['create_time'] = ['between',[$startDate,$endDate]];
             $count = model('SearchHistory')->getSerachCount($map);
-            $login_arr[] = [
-                'time' => $i,
-                'count' => $count
-            ];
+            $total_count += $count;
+            $time[] = (string)$i;
+            $count_arr[] = (string)$count;
         }
-        return $login_arr;
+
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -284,16 +322,16 @@ class Summarydata extends Base
     {
         //获取本周日期
         $week =  getWeekTime();
+        $total_count = 0;
         foreach($week as $key => $value){
             //查询每天的登录人数
             $map['create_time'] = ['between',[$value['start'],$value['end']]];
             $count = model('SearchHistory')->getSerachCount($map);
-            $login_arr[] = [
-                'time' => $value['week'] == 0 ? 7 : $value['week'],
-                'count' => $count
-            ];
+            $total_count += $count;
+            $time[] = $value['week'] == 0 ? "7" : $value['week'];
+            $count_arr[] = (string)$count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -303,17 +341,17 @@ class Summarydata extends Base
     {
         $month = date('Y-m');
         $month_week = month($month);
+        $total_count = 0;
         foreach($month_week as $key => $value){
             $startDate = reset($value).' 00:00:00';
             $endDate = end($value).' 23:59:59';
             $map['create_time'] = ['between',[$startDate,$endDate]];
             $count = model('SearchHistory')->getSerachCount($map);
-            $login_arr[] = [
-                'time' => $key+1,
-                'count' => $count
-            ];
+            $total_count += $count;
+            $time[] = (string)($key+1);
+            $count_arr[] = (string)$count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -321,7 +359,7 @@ class Summarydata extends Base
      */
     public function acerData()
     {
-        $data_type = input('post.type');
+        $data_type = input('post.date_type');
         if(empty($data_type)){
             return resultArray(['error'=>'请选择查看日期']);
         }
@@ -337,7 +375,11 @@ class Summarydata extends Base
                 break;
         }
         $result = [
-            'data' => $data
+            'data' => [
+                'time' => $data[0],
+                'count' => $data[1],
+                'total_count' => $data[2]
+            ]
         ];
         return resultArray($result);
     }
@@ -348,18 +390,18 @@ class Summarydata extends Base
     public function yesterdayAcer()
     {
         $date = date('Y-m-d',strtotime('-1 days'));
+        $total_count = 0;
         for($i=0;$i<=22;$i+=2){
             $startDate = $date.' '.$i.':00:00';
             $endDate = $date.' '.($i+1).':59:59';
             //查询这期间新增人数
             $map['add_time'] = ['between',[$startDate,$endDate]];
             $count = model('AcerNotes')->getAcerNumber($map);
-            $login_arr[] = [
-                'time' => $i,
-                'count' => $count
-            ];
+            $total_count += $count;
+            $time[] = (string)$i;
+            $count_arr[] = (string)$count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -369,16 +411,16 @@ class Summarydata extends Base
     {
         //获取本周日期
         $week =  getWeekTime();
+        $total_count = 0;
         foreach($week as $key => $value){
             //查询每天的登录人数
             $map['add_time'] = ['between',[$value['start'],$value['end']]];
             $count = model('AcerNotes')->getAcerNumber($map);
-            $login_arr[] = [
-                'time' => $value['week'] == 0 ? 7 : $value['week'],
-                'count' => $count
-            ];
+            $total_count += $count;
+            $time[] = $value['week'] == 0 ? '7' : $value['week'];
+            $count_arr[] = (string)$count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
     /**
@@ -388,17 +430,17 @@ class Summarydata extends Base
     {
         $month = date('Y-m');
         $month_week = month($month);
+        $total_count = 0;
         foreach($month_week as $key => $value){
             $startDate = reset($value).' 00:00:00';
             $endDate = end($value).' 23:59:59';
             $map['add_time'] = ['between',[$startDate,$endDate]];
             $count = model('AcerNotes')->getAcerNumber($map);
-            $login_arr[] = [
-                'time' => $key+1,
-                'count' => $count
-            ];
+            $total_count += $count;
+            $time[] = (string)($key+1);
+            $count_arr[] = (string)$count;
         }
-        return $login_arr;
+        return [$time,$count_arr,$total_count];
     }
 
 

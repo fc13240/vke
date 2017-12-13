@@ -101,9 +101,13 @@ class User extends Controller
         $user->last_login_time = date('Y-m-d H:i:s',time());
         $user->last_login_ip = Request::instance()->ip();
         if($user->save()){
+
+            $fields = 'nickname,head_image';
+            $user_info = model('AdminUsers')->getUserInfo($this->admin_id,$fields);
             $result = [
                 'data' => [
                     'message' => '登录成功',
+                    'user_info' => $user_info,
                     'url' => 'manager/Index/user'
                 ]
             ];
@@ -143,21 +147,19 @@ class User extends Controller
     public function editNickName()
     {
         $nickname = Request::instance()->post('nickname');
+        $image_url = Request::instance()->post('head_image');
         $nickname = trim($nickname);
         if(empty($nickname)){
             return resultArray(['error'=>'请输入用户名']);
         }
-        //检查该昵称是否已经存在
-        $check_nickname = model('AdminUsers')
-            ->where('username',$nickname)
-            ->where('status',1)
-            ->value('id');
-        if($check_nickname){
-            return resultArray(['error'=>'该昵称已经存在']);
-        }
+
         //执行修改
         $map['id'] = session('user')['id'];
-        $data['username'] = $nickname;
+        $data['nickname'] = $nickname;
+        if(!empty($image_url)){
+            $data['head_image'] = $image_url;
+        }
+
         $result_edit = model('AdminUsers')->editData($map,$data);
         if($result_edit !== false){
             $result = [
@@ -180,6 +182,7 @@ class User extends Controller
     {
         //原密码
         $old_password = Request::instance()->post('old_password');
+
         //新密码
         $new_password = Request::instance()->post('new_password');
         //确认密码
@@ -191,9 +194,9 @@ class User extends Controller
         ];
        $this->checkPassword($data);
        //执行修改
-        $map['id'] = $this->admin_id;
+        $map['id'] = session('user')['id'];
         $data_edit = [
-            'password' => password_hash($data['new_word'],PASSWORD_DEFAULT)
+            'password' => password_hash($data['new_password'],PASSWORD_DEFAULT)
         ];
         $result_edit = model('AdminUsers')->editData($map,$data_edit);
         if($result_edit !== false){
@@ -215,12 +218,11 @@ class User extends Controller
      */
     public function checkPassword($data)
     {
-        auto_validate($data,'edit_password');
-        $id = model('AdminUsers')
-            ->where('password',password_hash($data['old_password'],PASSWORD_DEFAULT))
-            ->where('id',$this->admin_id)
-            ->value('id');
-        if(empty($id)){
+        auto_validate('Password',$data,'edit_password');
+        $id = session('user')['id'];
+        $password = model('AdminUsers')->where('id',$id)->value('password');
+        $password = password_verify($data['old_password'],$password);
+        if(!$password){
             ajaxReturn(['error'=>'原密码不正确']);
         }
         if($data['new_password'] != $data['sure_password']){
@@ -260,4 +262,5 @@ class User extends Controller
         $captcha = new \think\captcha\Captcha();
         return $captcha->entry();
     }
+
 }

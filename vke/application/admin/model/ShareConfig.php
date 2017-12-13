@@ -20,7 +20,33 @@ class ShareConfig extends Base
         $map['id'] = ['gt',1];
         $message = Db::name('share_config')
             ->where($map)
-            ->select();
-        return $message;
+            ->column('id,value');
+        $message_arr = [];
+        foreach($message as $key => $value){
+            switch($key){
+                case 2:
+                    $message_arr['share_agree'] = $value;
+                    break;
+                case 3:
+                    $message_arr['share_refuse'] = $value;
+                    break;
+                case 4:
+                    $message_arr['express'] = $value;
+                    break;
+                case 5:
+                    $message_arr['withdraw'] = $value;
+                    break;
+                case 6:
+                    $message_arr['recharge'] = $value;
+                    break;
+                case 7:
+                    $message_arr['examine_agree'] = $value;
+                    break;
+                case 8:
+                    $message_arr['examine_refuse'] = $value;
+                    break;
+            }
+        }
+        return $message_arr;
     }
 }

@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 use app\common\controller\Base;
 use think\Request;
+use think\Db;
 
 
 class Goods extends Base
@@ -32,29 +33,19 @@ class Goods extends Base
         foreach ($brokerage as $key => $value) {
             if (!empty($value['condition_min']) && !empty($value['condition_max'])) {
                 $condition3[] = [
+                    'id' => $value['id'],
                     'key' => $value['condition_min'] . '%--' . $value['condition_max'] . '%',
-                    'value' => [
-                        'condition3_min' => $value['condition_min'],
-                        'condition3_max' => $value['condition_max']
-                    ]
-
                 ];
             } elseif (!empty($value['condition_min'])) {
                 $condition3[] = [
                     'key' => $value['condition_min'] . '%以上',
-                    'value' => [
-                        'condition3_min' => $value['condition_min'],
-                        'condition3_max' => $value['condition_max']
-                    ]
+                    'id' => $value['id'],
 
                 ];
             } elseif (!empty($value['condition_max'])) {
                 $condition3[] = [
                     'key' => $value['condition_max'] . '%以下',
-                    'value' => [
-                        'condition3_min' => $value['condition_min'],
-                        'condition3_max' => $value['condition_max']
-                    ]
+                    'id' => $value['id'],
 
                 ];
             }
@@ -66,27 +57,18 @@ class Goods extends Base
             if (!empty($value['condition_min']) && !empty($value['condition_max'])) {
                 $condition4[] = [
                     'key' => $value['condition_min'] . '元--' . $value['condition_max'] . '元',
-                    'value' => [
-                        'condition4_min' => $value['condition_min'],
-                        'condition4_max' => $value['condition_max']
-                    ]
+                    'id' => $value['id'],
 
                 ];
             } elseif (!empty($value['condition_min'])) {
                 $condition4[] = [
                     'key' => $value['condition_min'] . '元以上',
-                    'value' => [
-                        'condition4_min' => $value['condition_min'],
-                        'condition4_max' => $value['condition_max']
-                    ]
+                    'id' => $value['id'],
                 ];
             } elseif (!empty($value['condition_max'])) {
                 $condition4[] = [
                     'key' => $value['condition_min'] . '元以下',
-                    'value' => [
-                        'condition4_min' => $value['condition_min'],
-                        'condition4_max' => $value['condition_max']
-                    ]
+                    'id' => $value['id'],
 
                 ];
             }
@@ -115,19 +97,22 @@ class Goods extends Base
                 'value' => '2'
             ]
         ];
-        $condition5 = [
-            [
-                'key' => '即将领完',
-                'value' => '2'
-            ]
+
+        //专场
+        $condition5 = [];
+
+        $map = [
+            'id' => ['in',[2,4,5,6,7]]
         ];
+        $store_type = model('StoreType')->getSomeStore($map);
+
         $result = [
             'data' => [
                 'condition1' => $condition1,
                 'condition2' => $condition2,
                 'condition3' => $condition3,
                 'condition4' => $condition4,
-                'condition5' => $condition5
+                'condition5' => $store_type
             ]
         ];
 
@@ -154,8 +139,11 @@ class Goods extends Base
             $map['on_sale'] = $condition2;
         }
         //查询条件3:佣金定位
-        $condition3_min = $request->post('condition3_min');
-        $condition3_max = $request->post('condition3_max');
+        $condition3 = $request->post('condition3');
+        $condition3_arr = Db::name('search_condition')->field('condition_min,condition_max')->find($condition3);
+
+        $condition3_min = $condition3_arr['condition_min'];
+        $condition3_max = $condition3_arr['condition_max'];
         if (!empty($condition3_min) && !empty($condition3_max)) {
             $map['brokerage'] = ['between', [$condition3_min, $condition3_max]];
         } elseif (!empty($condition3_min)) {
@@ -163,9 +151,13 @@ class Goods extends Base
         } elseif (!empty($condition3_max)) {
             $map['brokerage'] = ['lt', $condition3_max];
         }
+
+
         //查询条件4:券额
-        $condition4_min = $request->post('condition4_min');
-        $condition4_max = $request->post('condition4_max');
+        $condition4 = $request->post('condition4');
+        $condition4_arr = Db::name('search_condition')->field('condition_min,condition_max')->find($condition4);
+        $condition4_min = $condition4_arr['condition_min'];
+        $condition4_max = $condition4_arr['condition_max'];
         if (!empty($condition4_min) && !empty($condition4_max)) {
             $map['coupon_number'] = ['between', [$condition4_min, $condition4_max]];
         } elseif (!empty($condition4_min)) {

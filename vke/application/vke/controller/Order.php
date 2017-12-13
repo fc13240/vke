@@ -34,7 +34,9 @@ class Order extends Common
         elseif(Request::instance()->isPost()){
             $user_id = $this->user_id;
             //接收订单号
-            $order_num = input('order_num');
+            $order_num = Request::instance()->post('order_num');
+            $order_num = strip_tags(trim($order_num));
+
             $validate = auto_validate('Order',['order_num'=>$order_num]);
             if($validate){
                 return $validate;

@@ -19,8 +19,8 @@ class Message extends Base
     {
         //查询member_id为0的消息
         $map['is_del'] = 1;
-
-        $message_list = model('AdminMessage')->getMessageList($map);
+        $page_list = input('per_page');
+        $message_list = model('AdminMessage')->getMessageListPage($map,$page_list);
         $result = [
             'data' => [
                 'message_list' => $message_list
@@ -36,20 +36,7 @@ class Message extends Base
     {
         if(Request::instance()->isGet()){
             //查询消息模板
-            $message = model('ShareConfig')->getMessageDefault();
-            $message_arr = [];
-            foreach($message as $key => $value){
-                if($value['type'] == 2){
-                    $message_arr['share'][]=$value;
-                }
-                elseif($value['type'] == 3){
-                    $message_arr['store'][]=$value;
-                }
-                elseif($value['type'] == 4){
-                    $message_arr['order'][]=$value;
-                }
-
-            }
+            $message_arr = model('ShareConfig')->getMessageDefault();
             $result = [
                 'data' => [
                     'message' => $message_arr
@@ -58,7 +45,66 @@ class Message extends Base
         }
         elseif(Request::instance()->isPost()){
             //修改
-
+            $message = Request::instance()->post();
+            $message_arr = [];
+            foreach($message as $key => $value){
+                switch($key){
+                    case 'share_agree':
+                        $message_arr[] = [
+                            'id' => 2,
+                            'value' => $value
+                        ];
+                        break;
+                    case 'share_refuse':
+                        $message_arr[] = [
+                            'id' => 3,
+                            'value' => $value
+                        ];
+                        break;
+                    case 'express':
+                        $message_arr[] = [
+                            'id' => 4,
+                            'value' => $value
+                        ];
+                        break;
+                    case 'withdraw':
+                        $message_arr[] = [
+                            'id' => 5,
+                            'value' => $value
+                        ];
+                        break;
+                    case 'recharge':
+                        $message_arr[] = [
+                            'id' => 6,
+                            'value' => $value
+                        ];
+                        break;
+                    case 'examine_agree':
+                        $message_arr[] = [
+                            'id' => 7,
+                            'value' => $value
+                        ];
+                        break;
+                    case 'examine_refuse':
+                        $message_arr[] = [
+                            'id' => 8,
+                            'value' => $value
+                        ];
+                        break;
+                }
+            }
+            $result_edit = model('ShareConfig')->saveAll($message_arr);
+            if($result_edit !== false){
+                $result = [
+                    'data' => [
+                        'message' => '设置成功'
+                    ]
+                ];
+            }else{
+                $result = [
+                    'error' => '设置失败'
+                ];
+            }
         }
         return resultArray($result);
     }
@@ -107,8 +153,12 @@ class Message extends Base
         if(empty($message_id)){
             return resultArray(['error'=>'请选择消息']);
         }
-
-        $result_edit = Db::name('admin_message')->where('id',$message_id)->update(['status'=>2]);
+        //检查该id是否存在
+        $id = \think\Db::name('admin_message')->where('id',$message_id)->value('id');
+        if(empty($id)){
+            return resultArray(['error'=>'该消息不存在']);
+        }
+        $result_edit = \think\Db::name('admin_message')->where('id',$message_id)->update(['status'=>2]);
         if($result_edit !== false){
             $result = [
                 'data' => [

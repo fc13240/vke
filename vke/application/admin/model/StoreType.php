@@ -39,4 +39,18 @@ class StoreType extends Base
             ->value('number');
         return $acer;
     }
+
+    /**
+     * 获取部分商店分类 - 20171208
+     */
+    public function getSomeStore($map)
+    {
+        $map['status'] = 1;
+        $list = Db::name('store_type')
+            ->where($map)
+            ->order('sorts','desc')
+            ->field('id,store_name')
+            ->select();
+        return $list;
+    }
 }

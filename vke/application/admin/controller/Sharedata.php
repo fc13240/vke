@@ -20,6 +20,11 @@ class Sharedata extends Base
         //接收开始日期和结束日期
         $start_day = Request::instance()->post('start');
         $end_day = Request::instance()->post('end');
+
+        if(empty($start_day) || empty($end_day)){
+            $start_day = date('Y-m',time());
+            $end_day = date('Y-m',time()-7*86400);
+        }
         auto_validate('ShareData',['start'=>$start_day,'end'=>$end_day],'select');
         //根据开始结束日期,查询这期间每天的晒单情况
         $dateArray = getDateFromRange($start_day,$end_day);
@@ -27,23 +32,34 @@ class Sharedata extends Base
         //dump($dateArray);
         $detail_data = [];
         //晒单个数
+        $left = [];
+        $week = [];
+        $count_arr = [];
         foreach($dateArray as $key => $value){
             $start = $value['date'].' 00:00:00';
             $end = $value['date'].' 23:59:59';
             $map['create_time'] = ['between',[$start,$end]];
             $map['examine_status'] = 1;
             $count = model('MemberEvaluate')->getEvaluateCount($map);
-            $dateArray[$key]['count'] = $count/100;
             $detail_data[] = [
                 'week' => $value['week'],
-                'count' => $count
+                'count' => (string)$count
             ];
+            $week[] = $value['week'];
+            $count_arr[] = (string)$count;
         }
+
+        $left = [
+            'week' => $week,
+            'count' => $count_arr
+        ];
         $detail = wpjam_array_multisort($detail_data,'count');
         $result = [
             'data' => [
-                'week_data' => $dateArray,
-                'detail' => $detail
+                'left' => $left,
+                'right' => $detail,
+                'start' => $start_day,
+                'end' => $end_day
             ]
         ];
         return resultArray($result);
@@ -57,7 +73,9 @@ class Sharedata extends Base
         $year = [];
         //查询当年所有月份的星期情况
         for($i = 1; $i <= 12; $i++){
-            $date = date('Y-m',time());
+            $date_year = date('Y',time());
+            $month = strlen($i) == 1 ? '0'.$i : $i;
+            $date = $date_year.'-'.$month;
             $month = month($date);
             foreach($month as $key => $value){
                 $week = [
@@ -93,7 +111,6 @@ class Sharedata extends Base
         $month_new = [];
         $total_count = 0;
         foreach($month_week as $key => $value){
-            $value_month = [];
             $week_count = 0;
             //查询每天的签到数量
             foreach($value as $k => $v){
@@ -101,28 +118,30 @@ class Sharedata extends Base
                 $end = $v.' 23:59:59';
                 $map['create_time'] = ['between',[$start,$end]];
                 $count = model('MemberEvaluate')->getEvaluateCount($map);
-                $value_day = [
-                    'week' => $k,
-                    'time' => $v,
-                    'count' =>$count
-                ];
                 $week_count += $count;
-                $value_month['week_list'][] = $value_day;
-                $value_month['week_count'] = $week_count;
-                $month_new[$key] = $value_month;
             }
             $total_count += $week_count;
-        }
-
-        //计算每周签到数占总数的百分比
-        foreach($month_new as $key => $value){
-           if(!empty($total_count)){
-               $percent = round($value['week_count']/$total_count*100,1);
-           }else{
-               $percent = 0;
-           }
-
-            $month_new[$key]['week_percent'] = $percent;
+            switch($key){
+                case 0:
+                    $name = '第一周';
+                    break;
+                case 1:
+                    $name = '第二周';
+                    break;
+                case 2:
+                    $name = '第三周';
+                    break;
+                case 3:
+                    $name = '第四周';
+                    break;
+                case 4:
+                    $name = '第五周';
+                    break;
+            }
+            $month_new[] = [
+                'value' => $week_count,
+                'name' => $name
+            ];
         }
         $result = [
             'data' => [

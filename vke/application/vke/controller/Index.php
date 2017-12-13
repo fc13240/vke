@@ -50,7 +50,7 @@ class Index extends Common
             //查询商品分类名称
             $fields = 'id,cate_name,image_url';
             $goodsType = model('CateType')->getGoodsType($fields);
-            cache('goods_type', $goodsType);
+            cache('goods_type', $goodsType,86400);
         }
         $result = [
             'data' => [
@@ -63,10 +63,10 @@ class Index extends Common
     public function index_store_type()
     {
         //商店分类(应季必备,粉丝福利,超值线报)
-        //$storeType = cache('store_type');
+        $storeType = cache('store_type');
         if (empty($storeType)) {
             $storeType = model('CateType')->getIndexStoreList();
-            cache('store_type', $storeType);
+            cache('store_type', $storeType,86400);
         }
         $result = [
             'data' => [
@@ -78,12 +78,17 @@ class Index extends Common
     public function index_goods()
     {
         //商品列表,查询属于普通商品的 store_type = 1;
-        $fields = "id,title,pict_url,small_images,reserve_price,volume,zk_final_price";
-        $goods = model('Product')->getIndexGoods('',1,$fields);
+		$goods_cache = cache('goods_cache');
+		if(empty($goods_cache)){
+			$fields = "id,title,pict_url,reserve_price,coupon_number,volume,zk_final_price";
+			$goods_cache = model('Product')->getIndexGoods('',1,$fields);
+			cache('goods_cache',$goods_cache,86400);
+		}
+        
 
         $result = [
             'data' => [
-                'goods'=>$goods
+                'goods'=>$goods_cache
             ]
         ];
         return resultArray($result);

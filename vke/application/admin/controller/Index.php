@@ -41,19 +41,36 @@ class Index extends Base
         }
         elseif(Request::instance()->isPost()){
             //修改后的banner图
-            $banner_list = Request::instance()->post('banner_list');
+            $banner_list = Request::instance()->post();
+            if(!empty($banner_list)){
+                //删除首页下所有banner
+                $del_result = model('Banner')->where('type_id',1)->delete();
+                if(!$del_result){
+                    return resultArray(['error'=>'操作失败']);
+                }
+            }
+
+            //去掉banner_id
+            foreach($banner_list as $key => $value){
+                if(!empty($value['banner_id'])){
+                    unset($banner_list[$key]['banner_id']);
+                }
+                $banner_list[$key]['type_id'] = 1;
+
+            }
             //执行修改
-            $result_edit = model('Banner')->updateAll($banner_list);
-            if($result_edit !== false){
+            $result_edit = model('Banner')->saveAll($banner_list);
+            if($result_edit){
                 $result = [
                     'data' => [
-                        'message' => '修改成功'
+                        'message' => '操作成功'
                     ]
                 ];
                 cache('index_banner',null);
-            }else{
+            }
+            else{
                 $result = [
-                    'error'=>'修改失败'
+                    'error' => '操作失败'
                 ];
             }
             return resultArray($result);
@@ -63,34 +80,19 @@ class Index extends Base
     /**
      * 添加首页banner图 - 20171120
      */
-    public function addBanner()
+    public function addBanner($data)
     {
-        $banner_image = Request::instance()->post('banner_image');
-        if(empty($banner_image)){
-            return resultArray(['error'=>'请上传图片']);
+        foreach($data as $key => $value){
+            $data[$key]['create_time'] = date('Y-m-d H:i:s',time());
+            $data[$key]['type_id'] = 1;
         }
-        $banner_url = Request::instance()->post('banner_url');
-        $data = [
-            'banner_image' => $banner_image,
-            'banner_url' => $banner_url,
-            'create_time' => date('Y-m-d H:i:s',time()),
-            'type_id' => 1,
-        ];
         //执行添加
-        $result_add = model('Banner')->addData($data);
+        $result_add = model('Banner')->saveAll($data);
         if($result_add){
-            $result = [
-                'data' => [
-                    'message' => '添加成功'
-                ]
-            ];
-            cache('index_banner',null);
+            return true;
         }else{
-            $result = [
-                'error' => '添加失败'
-            ];
+            return false;
         }
-        return resultArray($result);
     }
 
     /**
@@ -188,7 +190,9 @@ class Index extends Base
             $allBanner = model('CateUs')->getAllType();
             cache('allType',$allBanner);
         }
-
+        foreach($allBanner as $key => $value){
+            $allBanner[$key]['checked'] = false;
+        }
         $result = [
             'data' => [
                 'all_type' => $allBanner
@@ -205,12 +209,9 @@ class Index extends Base
     {
 
         if(Request::instance()->isGet()){
-            $cate_id = Request::instance()->get('cate_id');
-            if(empty($cate_id)){
-                return resultArray(['error'=>'请选择一级分类']);
-            }
-            //一级菜单id,根据id查询二级菜单
-            $cate_list = model('CateType')->getChildCate($cate_id);
+            //查询当前全部分类
+            $us_cate = Db::name('cate_type')->where('type',1)->field('id,pid,cate_name')->select();
+            $cate_list = $this->regroup($us_cate);
             $result = [
                 'data' => [
                     'child_cate' => $cate_list
@@ -219,33 +220,38 @@ class Index extends Base
             return resultArray($result);
         }
         elseif(Request::instance()->isPost()){
+            $request = Request::instance()->post();
+
             //一级分类id
-            $cate_id = Request::instance()->post('cate_id');
+            $cate_id = $request['cate_id'];
             if(empty($cate_id)){
                 return resultArray(['error'=>'请选择一级分类']);
             }
-            //原二级分类
-            $child_cate = Request::instance()->post('child_cate');
-            //取出原二级分类id
-            //新二级分类
-            $new_child = Request::instance()->post('new_cate');
-            if(empty($child_cate) || empty($new_child)){
-                return resultArray(['error'=>'修改失败']);
-            }
-            $insert_arr = [];
-            foreach($new_child as $key => $value){
-                $insert_arr[] = [
-                    'cate_name' => $value['cate_name'],
-                    'pid' => $cate_id,
-                    'type' => 1
-                ];
+            //二级分类数组
+            $child_cate = $request['child_cate'];
+
+            $add_arr = [];
+            if(!empty($child_cate)){
+                foreach($child_cate as $key => $value){
+                    $arr = [
+                        'pid' => $cate_id,
+                        'cate_name' => $value['cate_name'],
+                        'status' => 1,
+                        'type' => 1,
+                        'edit_time' => date('Y-m-d',time())
+                    ];
+                    if(!empty($value['id'])){
+                        $arr['id'] = $value['id'];
+                    }
+                }
             }
             Db::startTrans();
             try{
-                //修改原二级分类名
-                Db::name('cate_type')->update($child_cate);
-                //新增二级分类
-                Db::name('cate_type')->insertAll($insert_arr);
+                if(!empty($add_arr)){
+                    //新增二级分类
+                    Db::name('cate_type')->insertAll($add_arr);
+                }
+
                 Db::commit();
                 $result = [
                     'data'=>[
@@ -254,7 +260,7 @@ class Index extends Base
                 ];
             }catch(\Exception $exception){
                 $result = [
-                    'error' => '操作失败'
+                    'error' => $exception->getMessage()
                 ];
             }
             return resultArray($result);
@@ -299,4 +305,27 @@ class Index extends Base
         return resultArray($result);
     }
 
+
+    /**
+     * 重组数组 - 20171213
+     */
+    public function regroup($cate_list)
+    {
+        $group = [];
+        foreach($cate_list as $key => $value){
+            if($value['pid'] == 0){
+                $group[] = $value;
+                unset($cate_list[$key]);
+            }
+        }
+        foreach($group as $key => $value){
+            $group[$key]['child'] = [];
+            foreach($cate_list as $k => $v){
+                if($value['id'] == $v['pid']){
+                    $group[$key]['child'][] = $v;
+                }
+            }
+        }
+        return $group;
+    }
 }

@@ -34,6 +34,8 @@ class Acerstore extends Base
         if(!empty($product_type)){
             $map['product_type'] = $product_type;
         }
+
+
         /*if(!empty($type)){
             $map['type'] = $type;
         }*/
@@ -43,11 +45,9 @@ class Acerstore extends Base
 
         //查询积分商城商品
         $acerList = model('ProductAcer')->getProductAcer($map);
-        $page = $acerList->render();
         $result = [
             'data' => [
                 'acer_list' => $acerList,
-                'page' => $page
             ]
         ];
         return resultArray($result);
@@ -60,7 +60,7 @@ class Acerstore extends Base
     {
         $request = $this->request;
         //接受元宝商品id
-        $goods_id = $request -> post('product_id');
+        $goods_id = Request::instance() -> post('product_id/a');
 
         //接受上下架
         $is_sale = $request -> post('is_sale');
@@ -71,7 +71,7 @@ class Acerstore extends Base
         auto_validate('AcerStore',$data,'is_sale');
         $map['product_id'] = ['in',$goods_id];
         //执行修改
-        $result_edit = model('ProductAcer')->editData($map,$data);
+        $result_edit = model('ProductAcer')->where($map)->update($data);
         if($result_edit !== false){
             $result = [
                 'data' => [
@@ -95,6 +95,22 @@ class Acerstore extends Base
         //接收添加的数据
         $post = $request->post();
         auto_validate('AcerStore',$post,'add');
+
+        if($post['goods_type'] == 1){
+            $post['product_type'] = 1;
+            $post['type'] = 1;
+        }
+        elseif($post['goods_type'] == 2){
+            $post['product_type'] = 1;
+            $post['type'] = 2;
+        }
+        elseif($post['goods_type'] == 3){
+            $post['product_type'] = 2;
+            $post['type'] = 0;
+        }
+        unset($post['goods_type']);
+        $post['small_images'] = trim(implode(',',$post['small_images']),',');
+
         //执行添加
         $post['add_time'] = date('Y-m-d H:i:s',time());
         $result_id = model('ProductAcer')->addData($post);
@@ -133,16 +149,33 @@ class Acerstore extends Base
         }
         elseif(Request::instance()->isPost()) {
             //接收修改的元宝数据
-            $product_info = Request::instance()->post('product');
+            $product_info = Request::instance()->post();
+            if(empty($product_info['product_id'])){
+                $this->addProductAcer();
+            }
             if(empty($product_info)){
                 return resultArray(['error'=>'请输入商品信息']);
             }
-            $id = $product_info['product_id'];
+
+            if($product_info['goods_type'] == 1){
+                $product_info['product_type'] = 1;
+                $product_info['type'] = 1;
+            }
+            elseif($product_info['goods_type'] == 2){
+                $product_info['product_type'] = 1;
+                $product_info['type'] = 2;
+            }
+            elseif($product_info['goods_type'] == 3){
+                $product_info['product_type'] = 2;
+                $product_info['type'] = 0;
+            }
+            unset($product_info['goods_type']);
+
             //修改小图格式
             $product_info['small_images'] = implode(',',$product_info['small_images']);
             //执行修改
-            $map['product_id'] = $id;
-            $result_edit = model('Producct_acer')->editData($map,$product_info);
+            $map['product_id'] = $product_info['product_id'];
+            $result_edit = model('ProductAcer')->editData($map,$product_info);
             if($result_edit !== false){
                 $result = [
                     'data' => [
